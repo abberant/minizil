@@ -6,7 +6,7 @@
 #    By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/24 08:21:48 by aanouari          #+#    #+#              #
-#    Updated: 2023/04/28 11:35:30 by aanouari         ###   ########.fr        #
+#    Updated: 2023/04/28 16:17:23 by aanouari         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ CC 	=		cc
 CFLAGS =	-Wall -Wextra -Werror
 RM =		rm -rf
 
+`;
 _SRCS =		minishell.c parsing_utils.c token_structure.c aesthetic.c \
 			joiners.c utils.c type_casters.c parsing.c
 SRCS =		$(addprefix parsing/, $(_SRCS))
