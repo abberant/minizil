@@ -6,24 +6,46 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 17:38:12 by aanouari          #+#    #+#             */
-/*   Updated: 2023/04/28 14:53:51 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/04/30 11:28:37 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	init_tree(char **stack, t_token **shaft)
+int	get_separator(char **stack, int i)
 {
-	int		i;
-	t_token	*cast;
+	int	separator;
 
-	i = -1;
-	cast = (*shaft);
-	if (!stack)
-		return ;
-	while (stack[++i])
-		token_addback(shaft, token_new(ft_strdup(stack[i])));
+	separator = -1;
+	if (!stack[i])
+		separator = 0;
+	else if (!ft_strcmp(stack[i], "|"))
+		separator = PIPE;
+	return (separator);
 }
+
+void	init_tree(char **stack)
+{
+	t_vdata	*cast;
+	char	**buffer;
+	int		i;
+
+	cast = NULL;
+	i = 0;
+	while (stack[i])
+	{
+		buffer = NULL;
+		while (stack[i] && (ft_strcmp(stack[i], PIPE)))
+			buffer = a_concatinate(buffer, stack[i++]);
+		vdata_addback(cast, vdata_new(buffer, get_separator(stack, i)));
+			i++;
+	}
+}
+
+// void	init_redir()
+// {
+	
+// }
 
 void	casting(t_token **shaft)
 {

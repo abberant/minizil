@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 12:34:45 by aanouari          #+#    #+#             */
-/*   Updated: 2023/04/28 14:56:45 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/04/30 11:14:49 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int main(void)
 		if (ft_strlen(load) != 0)
 			add_history(load);
 		posi = lexer(load);
-		init_tree(posi, &tokens);
+		init_tree(posi);
 		casting(&tokens);
 		while (tokens)
 		{

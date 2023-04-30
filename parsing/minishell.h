@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 08:21:35 by aanouari          #+#    #+#             */
-/*   Updated: 2023/04/28 14:48:35 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/04/30 11:25:38 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,16 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
-// typedef struct s_rop
-// {
-// 	char	**stack;
-// 	t_token	*shaft;
-// }	t_rop;
+typedef struct s_vdata
+{
+	char	**stack;
+	char	*cmd;
+	int		sep;
+	int		error;
+	struct s_vdata *head;
+	struct s_vdata *previous;
+	struct s_vdata *next;
+}	t_vdata;
 
 enum e_token
 {
@@ -54,15 +59,12 @@ enum e_token
 	QUESTION_MARK = '?',
 };
 
-enum e_type
+enum e_redirection
 {
-	KEYWORD,
-	LITERAL,
-	OPERATOR,
 	HEREDOC,
 	REDIR_IN,
 	REDIR_OUT,
-	
+	APPEND,
 };
 
 enum e_status
@@ -83,11 +85,11 @@ void	banner(void);
 void	skip_spaces(char *str, int *i);
 int		metachar_check(char c);
 void	reset_pivot(char *pivot);
-int		d_quote_cast(char *stack);
+int		quote_cast(char *stack);
 int		set_type(int status, char *shaft);
 
 char	**lexer(char *load);
-void	init_tree(char **stack, t_token **shaft);
+void	init_tree(char **stack);
 void	casting(t_token **shaft);
 void	rl_replace_line(const char *s, int comp);
 
