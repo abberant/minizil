@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 12:34:45 by aanouari          #+#    #+#             */
-/*   Updated: 2023/04/30 11:14:49 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/04/30 14:10:49 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 int main(void)
 {
 	char	*load;
-	t_token	*tokens;
+	// t_token	*tokens;
 	char **posi;
 
-	tokens = NULL;
+	// tokens = NULL;
 	banner();
 	while (1)
 	{
@@ -30,13 +30,13 @@ int main(void)
 			add_history(load);
 		posi = lexer(load);
 		init_tree(posi);
-		casting(&tokens);
-		while (tokens)
-		{
-			printf("STATUS--> %d\nTYPE--> %d\n", tokens->status, tokens->type);
-			printf("CONTENT--> %s\n", tokens->content);
-			printf("________________________________________________\n");
-			tokens = tokens->next;
-		}
+		// casting(&tokens);
+		// while (tokens)
+		// {
+		// 	printf("STATUS--> %d\nTYPE--> %d\n", tokens->status, tokens->type);
+		// 	printf("CONTENT--> %s\n", tokens->content);
+		// 	printf("________________________________________________\n");
+		// 	tokens = tokens->next;
+		// }
 	}
 }

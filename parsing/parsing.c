@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 17:38:12 by aanouari          #+#    #+#             */
-/*   Updated: 2023/04/30 11:28:37 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/04/30 14:12:23 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,21 @@ void	init_tree(char **stack)
 	t_vdata	*cast;
 	char	**buffer;
 	int		i;
+	int d;
 
 	cast = NULL;
 	i = 0;
-	while (stack[i])
+	while (stack && stack[i])
 	{
+		d = -1;
 		buffer = NULL;
-		while (stack[i] && (ft_strcmp(stack[i], PIPE)))
+		while (stack[i] && (ft_strcmp(stack[i], "|")))
 			buffer = a_concatinate(buffer, stack[i++]);
-		vdata_addback(cast, vdata_new(buffer, get_separator(stack, i)));
+		while (buffer[++d])
+			printf("--> [%s]\n", buffer[d]);
+		printf("____________________________\n");
+		vdata_addback(&cast, vdata_new(buffer, get_separator(stack, i)));
+		if (stack[i])
 			i++;
 	}
 }
@@ -47,15 +53,15 @@ void	init_tree(char **stack)
 	
 // }
 
-void	casting(t_token **shaft)
-{
-	t_token	*cast;
+// void	casting(t_token **shaft)
+// {
+// 	t_token	*cast;
 
-	cast = *shaft;
-	while (cast)
-	{
-		cast->status = d_quote_cast(cast->content);
-		cast->type = set_type(cast->status, cast->content);
-		cast = cast->next;
-	}
-}
+// 	cast = *shaft;
+// 	while (cast)
+// 	{
+// 		cast->status = d_quote_cast(cast->content);
+// 		cast->type = set_type(cast->status, cast->content);
+// 		cast = cast->next;
+// 	}
+// }

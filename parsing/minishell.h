@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 08:21:35 by aanouari          #+#    #+#             */
-/*   Updated: 2023/04/30 11:25:38 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/04/30 14:03:08 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,10 @@ int		clear_tokens(t_token **token);
 void	token_addback(t_token **token, t_token *_new);
 void	token_addfront(t_token **token, t_token *_new);
 
+
+t_vdata	*vdata_new(char **stack, int separator);
+int		clear_vdatas(t_vdata **vdata);
+void	vdata_addback(t_vdata **vdata, t_vdata *_new);
+void	vdata_addfront(t_vdata **vdata, t_vdata *_new);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/24 08:21:48 by aanouari          #+#    #+#              #
-#    Updated: 2023/04/29 12:04:12 by aanouari         ###   ########.fr        #
+#    Updated: 2023/04/30 14:09:15 by aanouari         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ RM =		rm -rf
 
 
 _SRCS =		minishell.c parsing_utils.c token_structure.c aesthetic.c \
-			joiners.c utils.c type_casters.c parsing.c
+			joiners.c utils.c type_casters.c parsing.c vdata_structure.c
 SRCS =		$(addprefix parsing/, $(_SRCS))
 OBJS =		$(SRCS:.c=.o)
 
