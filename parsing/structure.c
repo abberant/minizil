@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vdata_structure.c                                  :+:      :+:    :+:   */
+/*   structure.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:27:01 by aanouari          #+#    #+#             */
-/*   Updated: 2023/04/30 11:29:00 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/05/03 19:45:09 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,57 +21,64 @@ t_vdata	*vdata_new(char **stack, int separator)
 	tab->cmd = NULL;
 	tab->sep = separator;
 	tab->error = 0;
-	tab->head = NULL;
+	tab->rd = NULL;
 	tab->previous = NULL; 
 	tab->next = NULL;
 	return (tab);
 }
 
-int	clear_vdatas(t_vdata **vdata)
+t_vdata	*v_last(t_vdata *lst)
 {
-	t_vdata	*current;
-	t_vdata	*next;
-
-	if (!vdata)
-		return (1);
-	current = (*vdata);
-	next = (*vdata);
-	while (current)
-	{
-		next = next->next;
-		free(current);
-		current = next;
-	}
-	*vdata = NULL;
-	return (1);
+	if (!lst)
+		return (NULL);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
 }
 
 void	vdata_addback(t_vdata **vdata, t_vdata *_new)
 {
-	t_vdata	*current;
+	t_vdata	*tmp;
 
+	tmp = *vdata;
 	if (!vdata || !_new)
 		return ;
-	current = (*vdata);
+	if (*vdata)
+	{
+		tmp = v_last(tmp);
+		tmp->next = _new;
+		_new->previous = tmp;
+	}
+	else
+		*vdata = _new;
+}
+
+t_redir	*redir_new(char *file, int type)
+{
+	t_redir	*tab;
+
+	tab = (t_redir *) ft_calloc(1, sizeof(t_redir));
+	tab->file = ft_strdup(file);
+	tab->fd = -1;
+	tab->type = type;
+	tab->next = NULL;
+	tab->previous = NULL;
+	return (tab);
+}
+
+void	redir_addback(t_redir **redir, t_redir *_new)
+{
+	t_redir	*current;
+
+	if (!redir || !_new)
+		return ;
+	current = (*redir);
 	if (!current)
 	{
-		*vdata = _new;
+		*redir = _new;
 		return ;
 	}
 	while (current->next)
 		current = current->next;
 	current->next = _new;
-}
-
-void	vdata_addfront(t_vdata **vdata, t_vdata *_new)
-{
-	if (!_new)
-		return ;
-	if (!vdata)
-	{
-		*vdata = _new;
-		return ;
-	}
-	_new->next = (*vdata);
-	(*vdata) = _new;
 }

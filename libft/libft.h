@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 21:38:00 by aanouari          #+#    #+#             */
-/*   Updated: 2023/04/30 13:56:20 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/05/04 17:56:41 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,13 @@ char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strtrim(char *s1, char *set);
 char	**ft_split(char *s, char c);
 char	*ft_itoa(int n);
-int		ft_strcmp(char *s1, char *s2);
 int		ft_hex(char *str);
 char	*ft_strmapi(char *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
+int		ft_strcmp(char *s1, char *s2);
 void	ft_putendl(char *s);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_kill(char *reason);

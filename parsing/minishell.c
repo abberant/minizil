@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 12:34:45 by aanouari          #+#    #+#             */
-/*   Updated: 2023/04/30 14:10:49 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/05/05 02:31:58 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,28 @@
 int main(void)
 {
 	char	*load;
-	// t_token	*tokens;
-	char **posi;
+	char 	**posi;
+	t_vdata	*ms;
 
-	// tokens = NULL;
 	banner();
+	ms = NULL;
 	while (1)
 	{
+		signal(SIGQUIT, SIG_IGN);
+		signal(SIGINT, sig_handler);
 		load = readline(RED "dkhol 3lia$ " RESET);
 		if (!load)
 			exit(EXIT_FAILURE);
 		if (ft_strlen(load) != 0)
 			add_history(load);
 		posi = lexer(load);
-		init_tree(posi);
-		// casting(&tokens);
-		// while (tokens)
-		// {
-		// 	printf("STATUS--> %d\nTYPE--> %d\n", tokens->status, tokens->type);
-		// 	printf("CONTENT--> %s\n", tokens->content);
-		// 	printf("________________________________________________\n");
-		// 	tokens = tokens->next;
-		// }
+		if (token_error(posi))
+		{
+			free(load);
+			ft_free2d(posi);
+			continue ;
+		}
+		init_tree(posi, &ms);
+		init_redir(&ms);
 	}
 }

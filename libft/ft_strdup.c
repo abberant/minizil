@@ -6,26 +6,25 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:57:47 by aanouari          #+#    #+#             */
-/*   Updated: 2023/02/15 16:43:17 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/05/04 18:56:26 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(char *s1)
+char	*ft_strdup(char *str)
 {
-	char	*ptr;
-	size_t	i;
+	char	*dup;
+	int		i;
 
+	dup = ft_calloc(sizeof(char), (ft_strlen(str) + 1));
+	if (!dup)
+		exit(EXIT_FAILURE);
 	i = 0;
-	ptr = malloc(ft_strlen(s1) + 1);
-	if (!ptr)
-		return (NULL);
-	while (s1[i])
+	while (str && str[i])
 	{
-		ptr[i] = s1[i];
+		dup[i] = str[i];
 		i++;
 	}
-	ptr[i] = '\0';
-	return (ptr);
+	return (dup);
 }
