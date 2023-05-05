@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 01:49:28 by aanouari          #+#    #+#             */
-/*   Updated: 2023/05/05 02:28:45 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/05/05 13:59:10 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ int	separator_error(char **stack, int i)
 		{
 			if (!stack[i + 1])
 				dprintf(2, UNEXPECTED_TOKEN, stack[i]);
-			else
-				dprintf(2, UNEXPECTED_TOKEN, stack[i + 1]);
+			else if (!ft_strcmp(stack[i + 1], "|"))
+				dprintf(2, UNEXPECTED_TOKEN_2);
 			return (1);
 		}
 	}
@@ -55,14 +55,9 @@ int	separator_error(char **stack, int i)
 
 int	invalid_separator(char **stack, int i)
 {
-	if (!ft_strcmp(stack[0], "|") && ft_strcmp(stack[1], "|"))
+	if (!ft_strcmp(stack[0], "|") || !ft_strcmp(stack[0], "||"))
 	{
 		dprintf(2, UNEXPECTED_TOKEN, stack[i]);
-		return (1);
-	}
-	else if (!ft_strcmp(stack[0], "|") && !ft_strcmp(stack[1], "|"))
-	{
-		dprintf(2, UNEXPECTED_TOKEN_2);
 		return (1);
 	}
 	return (0);
@@ -77,7 +72,8 @@ int	redirection_error(char **stack, int i)
 			dprintf(2, UNEXPECTED_TOKEN, "newline");
 			return (1);
 		}
-		else if (arrow_check(stack[i + 1]) != -1 || !ft_strcmp(stack[i + 1], "|"))
+		else if (arrow_check(stack[i + 1]) != -1
+			|| !ft_strcmp(stack[i + 1], "|") || !ft_strcmp(stack[i + 1], "||"))
 		{
 			dprintf(2, UNEXPECTED_TOKEN, stack[i + 1]);
 			return (1);

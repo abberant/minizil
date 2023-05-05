@@ -6,17 +6,16 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 12:34:45 by aanouari          #+#    #+#             */
-/*   Updated: 2023/05/05 02:31:58 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/05/05 21:07:29 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <readline/readline.h>
 #include "minishell.h"
 
 int main(void)
 {
 	char	*load;
-	char 	**posi;
+	char 	**full;
 	t_vdata	*ms;
 
 	banner();
@@ -30,14 +29,14 @@ int main(void)
 			exit(EXIT_FAILURE);
 		if (ft_strlen(load) != 0)
 			add_history(load);
-		posi = lexer(load);
-		if (token_error(posi))
+		full = lexer(load);
+		if (token_error(full))
 		{
 			free(load);
-			ft_free2d(posi);
+			ft_free2d(full);
 			continue ;
 		}
-		init_tree(posi, &ms);
+		init_tree(full, &ms);
 		init_redir(&ms);
 	}
 }

@@ -42,7 +42,8 @@ void	quotes_managing(char **pivot, char *load, int *i)
 void	separator_managing(char **pivot, char *load, int *i)
 {
 	*pivot = s_concatinate(*pivot, load[*i]);
-	if (load[(*i) + 1] == load[*i])
+	if ((load[*i] != PIPE && load[(*i) + 1] != PIPE)
+			&& (load[(*i) + 1] == load[*i]))
 		*pivot = s_concatinate(*pivot, load[++(*i)]);
 	(*i)++;
 }

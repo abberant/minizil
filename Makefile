@@ -6,7 +6,7 @@
 #    By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/24 08:21:48 by aanouari          #+#    #+#              #
-#    Updated: 2023/05/05 02:05:41 by aanouari         ###   ########.fr        #
+#    Updated: 2023/05/05 20:19:05 by aanouari         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ ITALIC		=	'\033[3m'
 
 
 CC 	=		cc
-CFLAGS =	-Wall -Wextra -Werror -fsanitize=address -g
+CFLAGS =	-Wall -Wextra -Werror
+#-fsanitize=address -g
 RM =		rm -rf
 
 _SRCS =		minishell.c parsing_utils.c structure.c aesthetic.c \
@@ -52,7 +53,7 @@ get_brew	:
 				@chmod -R go-w "$$(brew --prefix)/share/zsh"
 
 get_readline:
-				@printf "$(ITALIC)$(GRAY)     Installing readline...$(NO_COLOR)""
+				@printf "$(ITALIC)$(GRAY)     Installing readline...$(NO_COLOR)"
 				@brew install -q readline
 
 install		:	get_brew get_readline

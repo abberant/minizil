@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 08:21:35 by aanouari          #+#    #+#             */
-/*   Updated: 2023/05/05 02:24:21 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/05/05 14:09:56 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,13 +84,6 @@ enum e_redir
 	REDIR_IN,
 	REDIR_OUT,	
 	APPEND,
-};
-
-enum e_status
-{
-	DEFAULTED,
-	BETWIXT_SQ,
-	BETWIXT_DQ,
 };
 
 
