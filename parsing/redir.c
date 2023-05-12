@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 18:20:27 by aanouari          #+#    #+#             */
-/*   Updated: 2023/05/05 02:15:40 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/05/12 04:54:57 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	redir_check(char **stack)
 	return (0);
 }
 
-void	set_redir_ll(t_vdata *tmp, char **buffer)
+void	set_redir_ll(t_vdata *tmp, char ***buffer)
 {
 	int	i;
 
@@ -53,28 +53,45 @@ void	set_redir_ll(t_vdata *tmp, char **buffer)
 			i++;
 		}
 		else
-			buffer = a_concatinate(buffer, tmp->stack[i]);
+			*buffer = a_concatinate(*buffer, tmp->stack[i]);
+		if(!tmp->stack[i])
+			return ;
 		i++;
 	}
 }
 
-void	init_redir(t_vdata **ms)
+void	file_expansion(t_posay *tsr)
+{
+	t_redir	*v_base;
+
+	v_base = tsr->ms->rd;
+	while (v_base)
+	{
+		v_base->file = expand(tsr, v_base->file);
+		if (ft_strchr(v_base->file, '\'') || ft_strchr(v_base->file, '"'))
+			v_base->file = cancel_quotes(v_base->file);
+		v_base = v_base->next;
+	}
+}
+
+void	init_redir(t_posay *tsr)
 {
 	t_vdata	*tmp;
 	char	**wc;
 
-	tmp = *ms;
+	tmp = tsr->ms;
 	while (tmp)
 	{
 		wc = NULL;
 		if (redir_check(tmp->stack))
 		{
-			set_redir_ll(tmp, wc);
+			set_redir_ll(tmp, &wc);
 			ft_free2d(tmp->stack);
 			tmp->stack = wc;
 		}
 		else
 			tmp->rd = NULL;
+		file_expansion(tsr);	
 		tmp = tmp->next;
 	}	
 }

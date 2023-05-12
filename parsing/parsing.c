@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 17:38:12 by aanouari          #+#    #+#             */
-/*   Updated: 2023/05/05 01:38:09 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/05/08 22:26:50 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	get_separator(char **stack, int i)
 	return (separator);
 }
 
-void	init_tree(char **stack, t_vdata **ms)
+void	init_tree(char **stack, t_posay *tsr)
 {
 	char	**buffer;
 	int		i;
@@ -37,7 +37,7 @@ void	init_tree(char **stack, t_vdata **ms)
 			buffer = a_concatinate(buffer, "");
 		while (stack[i] && (ft_strcmp(stack[i], "|")))
 			buffer = a_concatinate(buffer, stack[i++]);
-		vdata_addback(ms, vdata_new(buffer, get_separator(stack, i)));
+		vdata_addback(&tsr->ms, vdata_new(buffer, get_separator(stack, i)));
 		if (stack[i])
 			i++;
 	}

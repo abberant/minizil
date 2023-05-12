@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 01:49:28 by aanouari          #+#    #+#             */
-/*   Updated: 2023/05/05 13:59:10 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/05/12 00:19:35 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	separator_error(char **stack, int i)
 
 int	invalid_separator(char **stack, int i)
 {
-	if (!ft_strcmp(stack[0], "|") || !ft_strcmp(stack[0], "||"))
+	if (!ft_strcmp(stack[0], "|"))
 	{
 		dprintf(2, UNEXPECTED_TOKEN, stack[i]);
 		return (1);
@@ -73,7 +73,7 @@ int	redirection_error(char **stack, int i)
 			return (1);
 		}
 		else if (arrow_check(stack[i + 1]) != -1
-			|| !ft_strcmp(stack[i + 1], "|") || !ft_strcmp(stack[i + 1], "||"))
+			|| !ft_strcmp(stack[i + 1], "|"))
 		{
 			dprintf(2, UNEXPECTED_TOKEN, stack[i + 1]);
 			return (1);
@@ -83,7 +83,7 @@ int	redirection_error(char **stack, int i)
 }
 
 
-int	token_error(char **stack)
+int	token_error(t_posay *tsr, char **stack)
 {
 	int	i;
 
@@ -91,13 +91,13 @@ int	token_error(char **stack)
 	while (stack && stack[i])
 	{
 		if (quote_error(stack[i]))
-			return (1);
+			return (tsr->exit_s = 258, 1);
 		else if (separator_error(stack, i))
-			return (1);
+			return (tsr->exit_s = 258, 1);
 		else if (invalid_separator(stack, i))
-			return (1);
+			return (tsr->exit_s = 258, 1);
 		else if (redirection_error(stack, i))
-			return (1);
+			return (tsr->exit_s = 258, 1);
 		i++;
 	}
 	return (0);

@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+ /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
@@ -36,16 +36,6 @@
 # define UNEXPECTED_TOKEN_2 "minishell: syntax error near unexpected token `||'\n"
 # define UNCLOSED_QUOTE "minishell: syntax error near unclosed quotation mark\n"
 
-
-
-typedef struct s_token
-{
-	char			*content;
-	int				type;
-	int				status;
-	struct s_token	*next;
-}	t_token;
-
 typedef struct s_redir
 {
 	int				type;
@@ -65,6 +55,13 @@ typedef struct s_vdata
 	struct s_vdata *previous;
 	struct s_vdata *next;
 }	t_vdata;
+
+typedef struct s_posay
+{
+	char			**env;
+	int				exit_s;
+	struct s_vdata	*ms;
+}	t_posay;
 
 enum e_token
 {
@@ -90,23 +87,24 @@ enum e_redir
 char	*s_concatinate(char *s, char c);
 char	**a_concatinate(char **s, char *c);
 
-
 void	banner(void);
-
 
 void	skip_spaces(char *str, int *i);
 int		metachar_check(char c);
 int		arrow_check(char *str);
 void	sig_handler(int sig);
 
-int		token_error(char **stack);
+int		token_error(t_posay *tsr, char **stack);
+int		unspecial(char c);
 
 char	**lexer(char *load);
-void	init_tree(char **stack, t_vdata **ms);
-void	init_redir(t_vdata **ms);
-void	casting(t_token **shaft);
+void	init_tree(char **stack, t_posay *tsr);
+void	init_redir(t_posay *tsr);
 void	rl_replace_line(const char *s, int comp);
 
+char	*expand(t_posay *tsr, char *str);
+char	*cancel_quotes(char	*file);
+void	quote_expansion(t_posay *tsr, t_vdata *ms);
 
 t_vdata	*vdata_new(char **stack, int separator);
 void	vdata_addback(t_vdata **vdata, t_vdata *_new);
