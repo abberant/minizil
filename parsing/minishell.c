@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 12:34:45 by aanouari          #+#    #+#             */
-/*   Updated: 2023/05/12 05:25:55 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/05/12 17:09:55 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int main(int argc, char **argv, char **env)
 	(void) argc, (void) argv;
 	ft_bzero(&tsr, sizeof(t_posay));
 	tsr.env = env;
-	int i;
+	// int i;
 	while (1)
 	{
 		signal(SIGQUIT, SIG_IGN);
@@ -62,15 +62,15 @@ int main(int argc, char **argv, char **env)
 		// 	printf("______________________\n");
 		// 	tsr.ms = tsr.ms->next;
 		// }
-		// while (tsr.ms)
-		// {
-		// 	while (tsr.ms->rd)
-		// 	{
-		// 		printf("FILE NAME [%s]\n", tsr.ms->rd->file);
-		// 		tsr.ms->rd = tsr.ms->rd->next;
-		// 	}
-		// 	printf("____________________\n");
-		// 	tsr.ms = tsr.ms->next;
-		// }
+		while (tsr.ms)
+		{
+			while (tsr.ms->rd)
+			{
+				printf("FILE NAME [%s]\n", tsr.ms->rd->file);
+				tsr.ms->rd = tsr.ms->rd->next;
+			}
+			printf("____________________\n");
+			tsr.ms = tsr.ms->next;
+		}
 	}
 }

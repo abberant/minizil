@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:27:01 by aanouari          #+#    #+#             */
-/*   Updated: 2023/05/12 00:32:02 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/05/12 17:05:25 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_vdata	*vdata_new(char **stack, int separator)
 
 t_vdata	*v_last(t_vdata *lst)
 {
-	if (!lst  || !lst->next)
+	if (!lst)
 		return (NULL);
 	while (lst->next)
 		lst = lst->next;
@@ -46,15 +46,11 @@ void	vdata_addback(t_vdata **vdata, t_vdata *_new)
 	if (*vdata)
 	{
 		tmp = v_last(tmp);
-		if (tmp)
-		{
-			tmp->next = _new;
-			_new->previous = tmp;
-		}
+		tmp->next = _new;
+		_new->previous = tmp;
 	}
 	else
 		*vdata = _new;
-	free(tmp);
 }
 
 t_redir	*redir_new(char *file, int type)
