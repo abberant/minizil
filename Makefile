@@ -6,11 +6,11 @@
 #    By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/24 08:21:48 by aanouari          #+#    #+#              #
-#    Updated: 2023/05/12 05:16:54 by aanouari         ###   ########.fr        #
+#    Updated: 2023/05/13 17:14:16 by aanouari         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	Minishell
+NAME		=	minishell
 
 NO_COLOR	=	\033[0m
 GREEN		=	\033[0;1;92m

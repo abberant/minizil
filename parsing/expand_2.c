@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 05:09:00 by aanouari          #+#    #+#             */
-/*   Updated: 2023/05/12 05:15:39 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/05/13 17:12:53 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ char	*cancel_quotes(char	*file)
 	return (buffer);
 }
 
-void	quote_expansion(t_posay *tsr, t_vdata *ms)
+void	quote_expansion(t_vdata *ms)
 {
 	int	i;
 
 	i = 0;
 	while (ms->stack && ms->stack[i])
 	{
-		ms->stack[i] = expand(tsr, ms->stack[i]);
+		ms->stack[i] = expand(ms->stack[i]);
 		if (ft_strchr(ms->stack[i], '\'') || ft_strchr(ms->stack[i], '"'))
 			ms->stack[i] = cancel_quotes(ms->stack[i]);
 		i++;

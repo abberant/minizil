@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 18:20:27 by aanouari          #+#    #+#             */
-/*   Updated: 2023/05/12 16:59:34 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/05/13 17:09:57 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,26 +60,26 @@ void	set_redir_ll(t_vdata *tmp, char ***buffer)
 	}
 }
 
-void	file_expansion(t_posay *tsr)
+void	file_expansion(void)
 {
 	t_redir	*v_base;
 
-	v_base = tsr->ms->rd;
+	v_base = data.ms->rd;
 	while (v_base)
 	{
-		v_base->file = expand(tsr, v_base->file);
+		v_base->file = expand(v_base->file);
 		if (ft_strchr(v_base->file, '\'') || ft_strchr(v_base->file, '"'))
 			v_base->file = cancel_quotes(v_base->file);
 		v_base = v_base->next;
 	}
 }
 
-void	init_redir(t_posay *tsr)
+void	init_redir(void)
 {
 	t_vdata	*tmp;
 	char	**wc;
 
-	tmp = tsr->ms;
+	tmp = data.ms;
 	while (tmp)
 	{
 		wc = NULL;
@@ -91,7 +91,7 @@ void	init_redir(t_posay *tsr)
 		}
 		else
 			tmp->rd = NULL;
-		file_expansion(tsr);	
+		file_expansion();	
 		tmp = tmp->next;
 	}	
 }

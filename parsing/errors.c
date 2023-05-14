@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 01:49:28 by aanouari          #+#    #+#             */
-/*   Updated: 2023/05/12 00:19:35 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/05/13 17:06:21 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	redirection_error(char **stack, int i)
 }
 
 
-int	token_error(t_posay *tsr, char **stack)
+int	token_error(char **stack)
 {
 	int	i;
 
@@ -91,13 +91,13 @@ int	token_error(t_posay *tsr, char **stack)
 	while (stack && stack[i])
 	{
 		if (quote_error(stack[i]))
-			return (tsr->exit_s = 258, 1);
+			return (data.exit_s = 258, 1);
 		else if (separator_error(stack, i))
-			return (tsr->exit_s = 258, 1);
+			return (data.exit_s = 258, 1);
 		else if (invalid_separator(stack, i))
-			return (tsr->exit_s = 258, 1);
+			return (data.exit_s = 258, 1);
 		else if (redirection_error(stack, i))
-			return (tsr->exit_s = 258, 1);
+			return (data.exit_s = 258, 1);
 		i++;
 	}
 	return (0);

@@ -63,6 +63,8 @@ typedef struct s_posay
 	struct s_vdata	*ms;
 }	t_posay;
 
+t_posay data;
+
 enum e_token
 {
 	GREAT= '>',
@@ -94,17 +96,17 @@ int		metachar_check(char c);
 int		arrow_check(char *str);
 void	sig_handler(int sig);
 
-int		token_error(t_posay *tsr, char **stack);
+int		token_error(char **stack);
 int		unspecial(char c);
 
 char	**lexer(char *load);
-void	init_tree(char **stack, t_posay *tsr);
-void	init_redir(t_posay *tsr);
+void	init_tree(char **stack);
+void	init_redir(void);
 void	rl_replace_line(const char *s, int comp);
 
-char	*expand(t_posay *tsr, char *str);
+char	*expand(char *str);
 char	*cancel_quotes(char	*file);
-void	quote_expansion(t_posay *tsr, t_vdata *ms);
+void	quote_expansion(t_vdata *ms);
 
 t_vdata	*vdata_new(char **stack, int separator);
 void	vdata_addback(t_vdata **vdata, t_vdata *_new);
