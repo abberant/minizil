@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 18:20:27 by aanouari          #+#    #+#             */
-/*   Updated: 2023/05/13 17:09:57 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/05/15 01:40:39 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ void	set_redir_ll(t_vdata *tmp, char ***buffer)
 		if (arrow_check(tmp->stack[i]) != -1)
 		{
 			redir_addback(&tmp->rd, redir_new(tmp->stack[i + 1],
-				arrow_check(tmp->stack[i])));
+					arrow_check(tmp->stack[i])));
 			i++;
 		}
 		else
 			*buffer = a_concatinate(*buffer, tmp->stack[i]);
-		if(!tmp->stack[i])
+		if (!tmp->stack[i])
 			return ;
 		i++;
 	}
@@ -64,7 +64,7 @@ void	file_expansion(void)
 {
 	t_redir	*v_base;
 
-	v_base = data.ms->rd;
+	v_base = g_data.ms->rd;
 	while (v_base)
 	{
 		v_base->file = expand(v_base->file);
@@ -79,7 +79,7 @@ void	init_redir(void)
 	t_vdata	*tmp;
 	char	**wc;
 
-	tmp = data.ms;
+	tmp = g_data.ms;
 	while (tmp)
 	{
 		wc = NULL;
@@ -91,7 +91,7 @@ void	init_redir(void)
 		}
 		else
 			tmp->rd = NULL;
-		file_expansion();	
+		file_expansion();
 		tmp = tmp->next;
 	}	
 }

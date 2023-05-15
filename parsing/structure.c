@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:27:01 by aanouari          #+#    #+#             */
-/*   Updated: 2023/05/12 17:05:25 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/05/15 00:20:49 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_vdata	*vdata_new(char **stack, int separator)
 	tab->sep = separator;
 	tab->error = 0;
 	tab->rd = NULL;
-	tab->previous = NULL; 
+	tab->previous = NULL;
 	tab->next = NULL;
 	return (tab);
 }

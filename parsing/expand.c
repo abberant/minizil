@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 01:21:25 by aanouari          #+#    #+#             */
-/*   Updated: 2023/05/13 17:12:09 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/05/15 01:41:27 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	non_env(char *str, char **forum)
 {
 	if (*str == '?')
 	{
-		*forum = ft_itoa(data.exit_s);
+		*forum = ft_itoa(g_data.exit_s);
 		*forum = ft_strjoin(*forum, str + 1);
 	}
 	else if (!unspecial(*str) && *str)
@@ -31,14 +31,14 @@ char	*env_variable(char *str)
 	int		i;
 
 	i = 0;
-	while (data.env && data.env[i])
+	while (g_data.env && g_data.env[i])
 	{
-		forum = ft_strstr(data.env[i], str);
+		forum = ft_strstr(g_data.env[i], str);
 		if (forum)
 		{
-			if (*(forum + ft_strlen(str)) == '=' && *str == *data.env[i])
+			if (*(forum + ft_strlen(str)) == '=' && *str == *g_data.env[i])
 			{
-				forum = ft_strdup(data.env[i] + (ft_strlen(str) + 1));
+				forum = ft_strdup(g_data.env[i] + (ft_strlen(str) + 1));
 				free(str);
 				return (forum);
 			}
@@ -73,7 +73,7 @@ void	do_quotes(char *str, int i, int *index)
 	{
 		if (*index == 2)
 			*index = 1;
-		else 
+		else
 			*index = 2;
 	}
 	if (str[i] == SINGLE_QUOTE && *index != 2)
@@ -81,7 +81,7 @@ void	do_quotes(char *str, int i, int *index)
 		if (*index == 3)
 			*index = 1;
 		else
-			*index =3;
+			*index = 3;
 	}
 }
 

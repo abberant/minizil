@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 17:38:12 by aanouari          #+#    #+#             */
-/*   Updated: 2023/05/13 17:13:19 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/05/15 01:40:07 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	init_tree(char **stack)
 			buffer = a_concatinate(buffer, "");
 		while (stack[i] && (ft_strcmp(stack[i], "|")))
 			buffer = a_concatinate(buffer, stack[i++]);
-		vdata_addback(&data.ms, vdata_new(buffer, get_separator(stack, i)));
+		vdata_addback(&g_data.ms, vdata_new(buffer, get_separator(stack, i)));
 		if (stack[i])
 			i++;
 	}

@@ -6,69 +6,61 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 12:34:45 by aanouari          #+#    #+#             */
-/*   Updated: 2023/05/13 17:16:51 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/05/15 02:56:51 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_parse(char **full, t_posay *data)
+void	initialize_shell(int argc, char **argv, char **env)
+{
+	(void) argc, (void) argv;
+	banner();
+	ft_bzero(&g_data, sizeof(t_shell));
+	g_data.env = env;
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, sig_handler);
+}
+
+void	ft_parse(char **full)
 {
 	t_vdata	*tmp;
 
 	init_tree(full);
 	init_redir();
-	tmp = data->ms;
+	tmp = g_data.ms;
 	while (tmp)
 	{
 		quote_expansion(tmp);
+		tmp->cmd = tmp->stack[0];
 		tmp = tmp->next;
 	}
 }
 
-int main(int argc, char **argv, char **env)
+int	main(int argc, char **argv, char **env)
 {
+	char	**full;
 	char	*load;
-	char 	**full;
 
-	// banner();
-	(void) argc, (void) argv;
-	ft_bzero(&data, sizeof(t_posay));
-	data.env = env;
+	int i= -1;
+	initialize_shell(argc, argv, env);
 	while (1)
 	{
-		signal(SIGQUIT, SIG_IGN);
-		signal(SIGINT, sig_handler);
 		load = readline(RED "dkhol 3lia$ " RESET);
 		if (!load)
 			exit(EXIT_FAILURE);
-		if (ft_strlen(load) != 0)
+		if (ft_strlen(load))
 			add_history(load);
 		full = lexer(load);
+		// while (full[++i])
+		// 	printf("Lexer[%d] is : [%s]\n", i, full[i]);
 		if (token_error(full))
 		{
 			free(load);
 			ft_free2d(full);
 			continue ;
 		}
-		ft_parse(full, &data);
-		// while (data.ms)
-		// {
-		// 	int i = -1;
-		// 	while (data.ms->stack[++i])
-		// 		printf("---> [%s]\n", data.ms->stack[i]);
-		// 	printf("______________________\n");
-		// 	data.ms = data.ms->next;
-		// }
-		// while (data.ms)
-		// {
-		// 	while (data.ms->rd)
-		// 	{
-		// 		printf("FILE NAME [%s]\n", data.ms->rd->file);
-		// 		data.ms->rd = data.ms->rd->next;
-		// 	}
-		// 	printf("____________________\n");
-		// 	data.ms = data.ms->next;
-		// }
+		ft_parse(full);
+		// debug_struct();
 	}
 }
