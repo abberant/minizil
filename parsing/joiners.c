@@ -6,11 +6,17 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 16:36:47 by aanouari          #+#    #+#             */
-/*   Updated: 2023/04/26 13:44:00 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/05/15 00:30:43 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	unspecial(char c)
+{
+	return ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'z')
+		|| (c >= 'A' && c <= 'Z') || c == '?');
+}
 
 char	**alloc_one(void)
 {

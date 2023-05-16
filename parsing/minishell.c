@@ -6,37 +6,61 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 12:34:45 by aanouari          #+#    #+#             */
-/*   Updated: 2023/04/28 14:56:45 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/05/15 02:56:51 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <readline/readline.h>
 #include "minishell.h"
 
-int main(void)
+void	initialize_shell(int argc, char **argv, char **env)
 {
-	char	*load;
-	t_token	*tokens;
-	char **posi;
-
-	tokens = NULL;
+	(void) argc, (void) argv;
 	banner();
+	ft_bzero(&g_data, sizeof(t_shell));
+	g_data.env = env;
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, sig_handler);
+}
+
+void	ft_parse(char **full)
+{
+	t_vdata	*tmp;
+
+	init_tree(full);
+	init_redir();
+	tmp = g_data.ms;
+	while (tmp)
+	{
+		quote_expansion(tmp);
+		tmp->cmd = tmp->stack[0];
+		tmp = tmp->next;
+	}
+}
+
+int	main(int argc, char **argv, char **env)
+{
+	char	**full;
+	char	*load;
+
+	int i= -1;
+	initialize_shell(argc, argv, env);
 	while (1)
 	{
 		load = readline(RED "dkhol 3lia$ " RESET);
 		if (!load)
 			exit(EXIT_FAILURE);
-		if (ft_strlen(load) != 0)
+		if (ft_strlen(load))
 			add_history(load);
-		posi = lexer(load);
-		init_tree(posi, &tokens);
-		casting(&tokens);
-		while (tokens)
+		full = lexer(load);
+		// while (full[++i])
+		// 	printf("Lexer[%d] is : [%s]\n", i, full[i]);
+		if (token_error(full))
 		{
-			printf("STATUS--> %d\nTYPE--> %d\n", tokens->status, tokens->type);
-			printf("CONTENT--> %s\n", tokens->content);
-			printf("________________________________________________\n");
-			tokens = tokens->next;
+			free(load);
+			ft_free2d(full);
+			continue ;
 		}
+		ft_parse(full);
+		// debug_struct();
 	}
 }

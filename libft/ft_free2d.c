@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 13:15:12 by aanouari          #+#    #+#             */
-/*   Updated: 2023/04/26 13:17:29 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/05/15 01:45:59 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	ft_free2d(char **tab)
 	int	i;
 
 	i = 0;
+	if (!tab)
+		return ;
 	while (tab[i])
 		free(tab[i++]);
 	free(tab);

@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 21:38:00 by aanouari          #+#    #+#             */
-/*   Updated: 2023/04/26 13:19:09 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/05/12 02:09:12 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int		ft_strncmp(char *s1, char *s2, int n);
 void	*ft_memchr(void *s, int c, size_t n);
 int		ft_memcmp(void *s1, void *s2, size_t n);
 int		ft_strnstr(char *haystack, char *needle, size_t len);
+char	*ft_strstr(char *haystack, char *needle);
 int		ft_atoi(char *str);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strdup(char *s1);
@@ -76,6 +77,7 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
+int		ft_strcmp(char *s1, char *s2);
 void	ft_putendl(char *s);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_kill(char *reason);

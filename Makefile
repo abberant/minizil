@@ -1,16 +1,4 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/04/24 08:21:48 by aanouari          #+#    #+#              #
-#    Updated: 2023/04/28 16:14:11 by aanouari         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-NAME		=	Minishell
+NAME		=	minishell
 
 
 NO_COLOR	=	\033[0m
@@ -22,11 +10,12 @@ ITALIC		=	'\033[3m'
 
 
 CC 	=		cc
-CFLAGS =	-Wall -Wextra -Werror
+CFLAGS =	-Wall -Wextra -Werror -fsanitize=address -g3
 RM =		rm -rf
 
-_SRCS =		minishell.c parsing_utils.c token_structure.c aesthetic.c \
-			joiners.c utils.c type_casters.c parsing.c
+_SRCS =		minishell.c parsing_utils.c structure.c aesthetic.c \
+			joiners.c utils.c parsing.c redir.c errors.c expand.c \
+			expand_2.c debug.c
 SRCS =		$(addprefix parsing/, $(_SRCS))
 OBJS =		$(SRCS:.c=.o)
 
@@ -41,7 +30,7 @@ all:		$(NAME)
 
 
 get_brew	:
-				@printf "$(ITALIC)$(GRAY)     Installing Homebrew...$(NO_COLOR)"
+				@printf "$(ITALIC)$(GRAY) Installing Homebrew...$(NO_COLOR)"
 				@cd ~/goinfre/ && \
 				if [ -d homebrew ]; then \
 					printf "$(GREEN)- Homebrew already installed -$(NO_COLOR)"; \
@@ -53,7 +42,7 @@ get_brew	:
 				@chmod -R go-w "$$(brew --prefix)/share/zsh"
 
 get_readline:
-				@printf "$(ITALIC)$(GRAY)     Installing readline...$(NO_COLOR)""
+				@printf "$(ITALIC)$(GRAY) Installing readline...$(NO_COLOR)"
 				@brew install -q readline
 
 install		:	get_brew get_readline

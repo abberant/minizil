@@ -6,34 +6,39 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 17:38:12 by aanouari          #+#    #+#             */
-/*   Updated: 2023/04/28 14:53:51 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/05/15 01:40:07 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	init_tree(char **stack, t_token **shaft)
+int	get_separator(char **stack, int i)
 {
-	int		i;
-	t_token	*cast;
+	int	separator;
 
-	i = -1;
-	cast = (*shaft);
-	if (!stack)
-		return ;
-	while (stack[++i])
-		token_addback(shaft, token_new(ft_strdup(stack[i])));
+	separator = -1;
+	if (!stack[i])
+		separator = 0;
+	else if (!ft_strcmp(stack[i], "|"))
+		separator = PIPE;
+	return (separator);
 }
 
-void	casting(t_token **shaft)
+void	init_tree(char **stack)
 {
-	t_token	*cast;
+	char	**buffer;
+	int		i;
 
-	cast = *shaft;
-	while (cast)
+	i = 0;
+	while (stack && stack[i])
 	{
-		cast->status = d_quote_cast(cast->content);
-		cast->type = set_type(cast->status, cast->content);
-		cast = cast->next;
+		buffer = NULL;
+		if (!(ft_strcmp(stack[i], "|")))
+			buffer = a_concatinate(buffer, "");
+		while (stack[i] && (ft_strcmp(stack[i], "|")))
+			buffer = a_concatinate(buffer, stack[i++]);
+		vdata_addback(&g_data.ms, vdata_new(buffer, get_separator(stack, i)));
+		if (stack[i])
+			i++;
 	}
 }

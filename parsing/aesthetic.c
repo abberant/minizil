@@ -6,11 +6,22 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 12:23:21 by aanouari          #+#    #+#             */
-/*   Updated: 2023/04/26 10:38:08 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/05/15 00:32:27 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	sig_handler(int sig)
+{
+	if (sig == SIGINT)
+	{
+		printf("\n");
+		rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_redisplay();
+	}
+}
 
 void	banner(void)
 {
