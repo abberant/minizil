@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 01:48:10 by aanouari          #+#    #+#             */
-/*   Updated: 2023/05/15 02:32:59 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/05/24 05:38:38 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,9 @@ void	debug_struct()
 
 	while (g_data.ms)
 	{
-		i = 0;
-		while (g_data.ms->stack[i])
-		{
+		i = -1;
+		while (g_data.ms->stack[++i])
 			printf("Stack[%d] is : [%s]\n", i, g_data.ms->stack[i]);
-			i++;
-		}
 		printf("\n");
 		printf("Command is : [%s]\n", g_data.ms->cmd);
 		printf("\n");
@@ -31,7 +28,7 @@ void	debug_struct()
 		printf("\n");
 		if (g_data.ms->rd)
 		{
-			printf("Redirection found!\n");
+			printf(GREEN"Redirection found!\n"RESET);
 			printf("\n");
 			while (g_data.ms->rd)
 			{
@@ -47,7 +44,7 @@ void	debug_struct()
 			}
 		}
 		else
-			printf("No redirection found!\n");
+			printf(RED"No redirection found!\n"RESET);
 		printf("_______________________________________________________________________\n");
 		g_data.ms =g_data.ms->next;
 	}

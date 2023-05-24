@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 12:44:34 by aanouari          #+#    #+#             */
-/*   Updated: 2023/05/15 00:24:43 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/05/24 05:23:49 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	quotes_managing(char **pivot, char *load, int *i)
 		d_quote++;
 	while (load[*i])
 	{
-		if (load[*i] == SINGLE_QUOTE)
+		if (load[*i] == SINGLE_QUOTE && d_quote % 2 == 0)
 			s_quote++;
-		else if (load[*i] == DOUBLE_QUOTE)
+		else if (load[*i] == DOUBLE_QUOTE && s_quote % 2 == 0)
 			d_quote++;
 		if (s_quote % 2 == 0 && d_quote % 2 == 0
 			&& (!metachar_check(load[*i + 1]) || !load[(*i) + 1]))
@@ -82,6 +82,7 @@ char	**lexer(char *load)
 			word_managing(&pivot, load, &i);
 		if (pivot)
 			stack = a_concatinate(stack, pivot);
+		// reset_pivot(pivot);
 	}
 	return (stack);
 }

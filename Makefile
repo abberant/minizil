@@ -6,7 +6,7 @@
 #    By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/24 08:21:48 by aanouari          #+#    #+#              #
-#    Updated: 2023/05/15 01:48:07 by aanouari         ###   ########.fr        #
+#    Updated: 2023/05/24 01:56:49 by aanouari         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ ITALIC		=	'\033[3m'
 
 
 CC 	=		cc
-CFLAGS =	-Wall -Wextra -Werror -fsanitize=address -g3
+CFLAGS =	-Wall -Wextra -Werror 
+#-fsanitize=address -g3
 RM =		rm -rf
 
 _SRCS =		minishell.c parsing_utils.c structure.c aesthetic.c \

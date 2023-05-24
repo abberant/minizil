@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 08:21:35 by aanouari          #+#    #+#             */
-/*   Updated: 2023/05/15 02:22:57 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/05/24 05:41:31 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include "../libft/libft.h"
 
 # define RED	"\x1B[31m"
+# define GREEN	"\e[01;32m"
 # define RESET	"\x1B[0m"
 
 # define ERR_PERMISSION "minishell: %s: Permission denied\n"
@@ -93,6 +94,7 @@ int		metachar_check(char c);
 int		arrow_check(char *str);
 void	sig_handler(int sig);
 
+void	reset_pivot(char *pivot);
 int		token_error(char **stack);
 int		unspecial(char c);
 
