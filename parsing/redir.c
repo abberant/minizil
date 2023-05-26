@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 18:20:27 by aanouari          #+#    #+#             */
-/*   Updated: 2023/05/24 05:35:59 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/05/24 17:39:56 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	init_redir(void)
 		if (redir_check(tmp->stack))
 		{
 			set_redir_ll(tmp, &wc);
-			// ft_free2d(tmp->stack);
+			ft_free2d(tmp->stack);
 			tmp->stack = wc;
 		}
 		else

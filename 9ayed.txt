@@ -1,3 +1,0 @@
-export empty string
-in case of syntax error in pipeline the syntax error should be displayed before not like redirection error 
-
