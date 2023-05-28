@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 01:49:28 by aanouari          #+#    #+#             */
-/*   Updated: 2023/05/15 02:23:49 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/05/26 22:53:30 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	quote_error(char *stack)
 				i++;
 			if (!stack[i])
 			{
-				ft_putstr_fd(UNCLOSED_QUOTE, 2);
+				ft_dprintf(2, UNCLOSED_QUOTE);
 				return (1);
 			}
 		}
@@ -43,9 +43,9 @@ int	separator_error(char **stack, int i)
 		if (!stack[i + 1] || !ft_strcmp(stack[i + 1], "|"))
 		{
 			if (!stack[i + 1])
-				dprintf(2, UNEXPECTED_TOKEN, stack[i]);
+				ft_dprintf(2, UNEXPECTED_TOKEN, stack[i]);
 			else if (!ft_strcmp(stack[i + 1], "|"))
-				dprintf(2, UNEXPECTED_TOKEN, stack[i + 1]);
+				ft_dprintf(2, UNEXPECTED_TOKEN, stack[i + 1]);
 			return (1);
 		}
 	}
@@ -56,7 +56,7 @@ int	invalid_separator(char **stack, int i)
 {
 	if (!ft_strcmp(stack[0], "|"))
 	{
-		dprintf(2, UNEXPECTED_TOKEN, stack[i]);
+		ft_dprintf(2, UNEXPECTED_TOKEN, stack[i]);
 		return (1);
 	}
 	return (0);
@@ -68,13 +68,13 @@ int	redirection_error(char **stack, int i)
 	{
 		if (!stack[i + 1])
 		{
-			dprintf(2, UNEXPECTED_TOKEN, "newline");
+			ft_dprintf(2, UNEXPECTED_TOKEN, "newline");
 			return (1);
 		}
 		else if (arrow_check(stack[i + 1]) != -1
 			|| !ft_strcmp(stack[i + 1], "|"))
 		{
-			dprintf(2, UNEXPECTED_TOKEN, stack[i + 1]);
+			ft_dprintf(2, UNEXPECTED_TOKEN, stack[i + 1]);
 			return (1);
 		}
 	}

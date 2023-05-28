@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 12:34:45 by aanouari          #+#    #+#             */
-/*   Updated: 2023/05/24 18:28:58 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/05/26 20:55:33 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ int	main(int argc, char **argv, char **env)
 	char	**full;
 	char	*load;
 
-	int i ;
-	i = -1;
+	// int i ;
 	initialize_shell(argc, argv, env);
 	while (1)
 	{
@@ -53,8 +52,9 @@ int	main(int argc, char **argv, char **env)
 		if (ft_strlen(load))
 			add_history(load);
 		full = lexer(load);
-		while (full[++i])
-			printf("Lexer[%d] is : [%s]\n", i, full[i]);
+		// i = -1;
+		// while (full[++i])
+		// 	printf("Lexer[%d] is : [%s]\n", i, full[i]);
 		if (token_error(full))
 		{
 			free(load);

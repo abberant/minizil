@@ -6,16 +6,25 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 01:10:41 by aanouari          #+#    #+#             */
-/*   Updated: 2023/04/24 08:25:24 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/05/26 22:58:51 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+void	ft_kill(char *reason)
+{
+	ft_dprintf(2, reason);
+	exit(0);
+}
+
 void	norm(char s)
 {
 	if (s)
-		ft_kill("Error");
+	{
+		ft_dprintf(2, "Error");
+		exit (1);
+	}
 }
 
 int	ft_atoi(char *str)

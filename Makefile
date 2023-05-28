@@ -6,7 +6,7 @@
 #    By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/24 08:21:48 by aanouari          #+#    #+#              #
-#    Updated: 2023/05/26 18:47:05 by aanouari         ###   ########.fr        #
+#    Updated: 2023/05/26 23:04:03 by aanouari         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,45 +22,23 @@ ITALIC		=	'\033[3m'
 
 CC 	=		cc
 CFLAGS =	-Wall -Wextra -Werror 
-#-fsanitize=address -g3
+# -fsanitize=address -g3
 RM =		rm -rf
 
-_SRCS =		minishell.c parsing_utils.c structure.c aesthetic.c \
+_SRCS =		minishell.c lexical_analysis.c structure.c aesthetic.c \
 			joiners.c utils.c parsing.c redir.c errors.c expand.c \
 			expand_2.c debug.c
 SRCS =		$(addprefix parsing/, $(_SRCS))
 OBJS =		$(SRCS:.c=.o)
 
 
-
-
-
-# READLINE =	/goinfre/aanouari/homebrew/opt/readline/lib
+READLINE =	${HOME}/Desktop/brew/opt/readline/lib
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@printf "$(RED)\r LOADING...⏳$(NO_COLOR)"
 	
 all:		$(NAME)
-
-
-# get_brew	:
-# 				@printf "$(ITALIC)$(GRAY) Installing Homebrew...$(NO_COLOR)"
-# 				@cd ~/goinfre/ && \
-# 				if [ -d homebrew ]; then \
-# 					printf "$(GREEN)- Homebrew already installed -$(NO_COLOR)"; \
-# 					exit 0; \
-# 				fi
-# 				@cd ~/goinfre/ && mkdir homebrew && curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C homebrew
-# 				@cd ~/goinfre/ && eval "$$(homebrew/bin/brew shellenv)"
-# 				@brew update --force --quiet
-# 				@chmod -R go-w "$$(brew --prefix)/share/zsh"
-
-# get_readline:
-# 				@printf "$(ITALIC)$(GRAY) Installing readline...$(NO_COLOR)"
-# 				@brew install -q readline
-
-# install		:	get_brew get_readline
 
 
 $(NAME):$(OBJS)
