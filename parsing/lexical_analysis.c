@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 12:44:34 by aanouari          #+#    #+#             */
-/*   Updated: 2023/05/26 23:03:14 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/01 14:22:14 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ char	**lexer(char *load)
 			word_managing(&pivot, load, &i);
 		if (pivot)
 			stack = a_concatinate(stack, pivot);
+		free(pivot);
 	}
 	return (stack);
 }
