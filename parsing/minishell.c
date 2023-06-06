@@ -6,7 +6,7 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 12:34:45 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/06 09:54:09 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/06 10:16:35 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	initialize_shell(int argc, char **argv, char **env)
 {
 	(void) argc, (void) argv;
-	banner();
+	// banner();
 	ft_bzero(&g_data, sizeof(t_shell));
 	g_data.env = env;
 	signal(SIGQUIT, SIG_IGN);
@@ -42,7 +42,7 @@ int	main(int argc, char **argv, char **env)
 	char	**full;
 	char	*load;
 
-	// int i= -1;
+	// int i ;
 	initialize_shell(argc, argv, env);
 	while (1)
 	{
@@ -52,6 +52,7 @@ int	main(int argc, char **argv, char **env)
 		if (ft_strlen(load))
 			add_history(load);
 		full = lexer(load);
+		// i = -1;
 		// while (full[++i])
 		// 	printf("Lexer[%d] is : [%s]\n", i, full[i]);
 		if (token_error(full))
@@ -61,6 +62,6 @@ int	main(int argc, char **argv, char **env)
 			continue ;
 		}
 		ft_parse(full);
-		// debug_struct();
+		debug_struct();
 	}
 }

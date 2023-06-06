@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 16:47:05 by aanouari          #+#    #+#             */
-/*   Updated: 2023/05/14 19:20:53 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/05/28 01:41:33 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,3 @@ int	metachar_check(char c)
 	return (0);
 }
 
-void	reset_pivot(char *pivot)
-{
-	free(pivot);
-	pivot = NULL;
-}

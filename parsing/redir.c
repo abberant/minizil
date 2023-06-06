@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 18:20:27 by aanouari          #+#    #+#             */
-/*   Updated: 2023/05/15 01:40:39 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/05 13:54:18 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,16 +82,15 @@ void	init_redir(void)
 	tmp = g_data.ms;
 	while (tmp)
 	{
-		wc = NULL;
 		if (redir_check(tmp->stack))
 		{
 			set_redir_ll(tmp, &wc);
-			ft_free2d(tmp->stack);
+			// ft_free2d(tmp->stack);
 			tmp->stack = wc;
 		}
 		else
 			tmp->rd = NULL;
 		file_expansion();
 		tmp = tmp->next;
-	}	
+	}
 }
