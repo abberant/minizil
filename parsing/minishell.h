@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 08:21:35 by aanouari          #+#    #+#             */
-/*   Updated: 2023/05/24 05:41:31 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/06 16:42:42 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,13 @@ typedef struct s_vdata
 
 typedef struct s_shell
 {
-	char			**env;
-	int				exit_s;
-	struct s_vdata	*ms;
-}	t_shell;
+	int		flag;
+	char	**env;
+	char	**exp;
+	char	**new_env;
+	int		exit_s;
+	struct	s_vdata *ms;
+} t_shell;
 
 t_shell	g_data;
 
@@ -113,5 +116,21 @@ t_redir	*redir_new(char *file, int type);
 void	redir_addback(t_redir **redir, t_redir *_new);
 
 void	debug_struct();
+
+//------------------------------------------------------Execution----------------------------------------------------------
+void exec_command();
+char *split_path(char *path, char *argv);
+char *get_path(char **envp);
+void execute(t_shell *shell);
+int ft_lentab(char *tab);
+int 	ft_alpha(char c);
+int ft_len_env(char **str);
+void ft_cd(t_shell *shell);
+void ft_pwd();
+void ft_export(t_shell *shell);
+void ft_env(t_shell *g_data);
+void ft_echo(t_shell *shell);
+void ft_unset(t_shell *shell);
+void ft_exit(t_shell *shell);
 
 #endif

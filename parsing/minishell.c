@@ -6,7 +6,7 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 12:34:45 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/06 10:16:35 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/06 16:23:04 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,13 @@ int	main(int argc, char **argv, char **env)
 {
 	char	**full;
 	char	*load;
+	// t_shell *shell= NULL;
 
-	// int i ;
+	// int i = 1;
 	initialize_shell(argc, argv, env);
 	while (1)
 	{
-		load = readline(RED "dkhol 3lia$ " RESET);
+		load = readline(RED "Minishell$ " RESET);
 		if (!load)
 			exit(EXIT_FAILURE);
 		if (ft_strlen(load))
@@ -63,5 +64,7 @@ int	main(int argc, char **argv, char **env)
 		}
 		ft_parse(full);
 		debug_struct();
+		execute(&g_data);
+		// exec_command();
 	}
 }

@@ -1,37 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/18 01:18:21 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/06 11:45:59 by lsadiq           ###   ########.fr       */
+/*   Created: 2023/06/06 16:21:49 by lsadiq            #+#    #+#             */
+/*   Updated: 2023/06/06 16:26:32 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-char *ft_strjoin(char *s1, char *s2)
+void ft_pwd()
 {
-	int i;
-	int j;
-	char *s;
+    char *holder;
 
-	i = -1;
-	j = 0;
-	if (!s1 || !s2)
-		return (0);
-	if (!s1)
-		s1 = (char *)ft_calloc(1, sizeof(char));
-	s = (char *)ft_calloc(ft_strlen(s1) + ft_strlen(s2) + 1, sizeof(char));
-	if (!s)
-		return (0);
-	if (s1)
-		while (s1[++i])
-			s[i] = s1[i];
-	while (s2[j])
-		s[i++] = s2[j++];
-	// free(s1);
-	return (s);
+    holder = getcwd(NULL, 0);
+    printf("%s\n", holder);
+    free(holder);
 }

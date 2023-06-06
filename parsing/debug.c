@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 01:48:10 by aanouari          #+#    #+#             */
-/*   Updated: 2023/05/24 05:38:38 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/06 15:04:13 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,37 +15,40 @@
 void	debug_struct()
 {
 	int	i;
+	t_shell tmp;
 
-	while (g_data.ms)
+	tmp = g_data;
+
+	while (tmp.ms)
 	{
 		i = -1;
-		while (g_data.ms->stack[++i])
-			printf("Stack[%d] is : [%s]\n", i, g_data.ms->stack[i]);
+		while (tmp.ms->stack[++i])
+			printf("Stack[%d] is : [%s]\n", i, tmp.ms->stack[i]);
 		printf("\n");
-		printf("Command is : [%s]\n", g_data.ms->cmd);
+		printf("Command is : [%s]\n", tmp.ms->cmd);
 		printf("\n");
-		printf("Separator is : [%d]\n", g_data.ms->sep);
+		printf("Separator is : [%d]\n", tmp.ms->sep);
 		printf("\n");
-		if (g_data.ms->rd)
+		if (tmp.ms->rd)
 		{
 			printf(GREEN"Redirection found!\n"RESET);
 			printf("\n");
-			while (g_data.ms->rd)
+			while (tmp.ms->rd)
 			{
-				printf("Type is : [%d]\n", g_data.ms->rd->type);
+				printf("Type is : [%d]\n", tmp.ms->rd->type);
 				printf("\n");
-				printf("FD is : [%d]\n", g_data.ms->rd->fd);
+				printf("FD is : [%d]\n", tmp.ms->rd->fd);
 				printf("\n");
-				printf("File name is : [%s]\n", g_data.ms->rd->file);
+				printf("File name is : [%s]\n", tmp.ms->rd->file);
 				printf("\n");
 				printf("---------------------------------------------\n");
 				printf("\n");
-				g_data.ms->rd = g_data.ms->rd->next;
+				tmp.ms->rd = tmp.ms->rd->next;
 			}
 		}
 		else
 			printf(RED"No redirection found!\n"RESET);
 		printf("_______________________________________________________________________\n");
-		g_data.ms =g_data.ms->next;
+		tmp.ms =tmp.ms->next;
 	}
 }
