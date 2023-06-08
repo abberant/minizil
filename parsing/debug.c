@@ -6,24 +6,28 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 01:48:10 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/08 12:20:03 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/08 22:45:09 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "minishell.h"
 
 void	debug_struct()
 {
-	int	i;
+	// int	i;
 	t_shell tmp;
 
 	tmp = g_data;
-
+	// printf("%s\n", g_data.ms->stack[0]);
 	while (tmp.ms)
 	{
-		i = -1;
-		while (tmp.ms->stack[++i])
-			printf("Stack[%d] is : [%s]\n", i, tmp.ms->stack[i]);
+		// i = -1;
+		// while (tmp.ms->stack[++i]){
+
+		// 	printf("is here\n");
+		// 	printf("Stack[%d] is : [%s]\n", i, tmp.ms->stack[i]);
+		// }
 		printf("\n");
 		printf("Command is : [%s]\n", tmp.ms->cmd);
 		printf("\n");

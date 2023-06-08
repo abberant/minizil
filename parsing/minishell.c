@@ -6,9 +6,10 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 12:34:45 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/08 13:00:58 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/08 22:27:46 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "minishell.h"
 
@@ -47,7 +48,7 @@ int	main(int argc, char **argv, char **env)
 	initialize_shell(argc, argv, env);
 	while (1)
 	{
-		load = readline(RED "Minishell$ " RESET);
+		load = readline(RED "dkhol 3lia$ " RESET);
 		if (!load)
 			exit(EXIT_FAILURE);
 		if (ft_strlen(load))

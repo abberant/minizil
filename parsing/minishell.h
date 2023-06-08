@@ -6,7 +6,7 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 08:21:35 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/08 11:59:44 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/08 22:29:45 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ t_redir	*redir_new(char *file, int type);
 void	redir_addback(t_redir **redir, t_redir *_new);
 
 void	debug_struct();
+void	ft_cleanse();
 
 //------------------------------------------------------Execution----------------------------------------------------------
 void	exec_command();
