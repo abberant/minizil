@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 01:48:10 by aanouari          #+#    #+#             */
-/*   Updated: 2023/05/24 05:38:38 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/08 13:55:37 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,17 @@ void	debug_struct()
 
 	while (g_data.ms)
 	{
-		i = -1;
-		while (g_data.ms->stack[++i])
-			printf("Stack[%d] is : [%s]\n", i, g_data.ms->stack[i]);
+		i = 0;
+		if (g_data.ms->stack[i])
+		{
+			while (g_data.ms->stack[i])
+			{
+				printf("Stack[%d] is : [%s]\n", i, g_data.ms->stack[i]);
+				i++;
+			}
+		}
+		else
+			printf("Stack is empty!\n");
 		printf("\n");
 		printf("Command is : [%s]\n", g_data.ms->cmd);
 		printf("\n");

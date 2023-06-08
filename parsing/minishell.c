@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 12:34:45 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/05 13:53:30 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/08 16:39:26 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,6 @@ int	main(int argc, char **argv, char **env)
 		}
 		ft_parse(full);
 		debug_struct();
+		ft_cleanse();
 	}
 }

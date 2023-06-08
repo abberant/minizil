@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 01:21:25 by aanouari          #+#    #+#             */
-/*   Updated: 2023/05/15 01:41:27 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/08 16:54:47 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,11 @@ char	*expand(char *str)
 		if (str[i] == '$' && str[i + 1] && index != 3)
 			env_value(&forum, str, &i);
 		else
-			forum = s_concatinate(forum, str[i++]);
+		{
+			forum = s_concatinate(forum, str[i]);
+			i++;
+		}
 	}
-	free(str);
+	// free(str);
 	return (forum);
 }
