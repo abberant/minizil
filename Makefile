@@ -6,7 +6,7 @@
 #    By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/24 08:21:48 by aanouari          #+#    #+#              #
-#    Updated: 2023/06/08 22:25:28 by lsadiq           ###   ########.fr        #
+#    Updated: 2023/06/08 22:53:38 by lsadiq           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ _SRCS =		minishell.c lexical_analysis.c structure.c aesthetic.c \
 			joiners.c utils.c parsing.c redir.c errors.c expand.c \
 			expand_2.c debug.c exec_cmd.c builtins.c ft_cd.c ft_pwd.c \
 			ft_export.c ft_env.c ft_echo.c ft_unset.c ft_exit.c here_doc.c \
-			get_next_line.c get_next_line_utils.c  
+			get_next_line.c get_next_line_utils.c clean.c  
 SRCS =		$(addprefix parsing/, $(_SRCS))
 OBJS =		$(SRCS:.c=.o)
 
