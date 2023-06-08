@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+         #
+#    By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/24 08:21:48 by aanouari          #+#    #+#              #
-#    Updated: 2023/06/06 16:42:50 by lsadiq           ###   ########.fr        #
+#    Updated: 2023/06/08 13:20:47 by aanouari         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,13 +21,13 @@ ITALIC		=	'\033[3m'
 
 
 CC 	=		cc
-CFLAGS =	-Wall -Wextra -Werror #-fsanitize=address -g3
+CFLAGS =	-Wall -Wextra -Werror -fsanitize=address -g3
 RM =		rm -rf
 
 _SRCS =		minishell.c lexical_analysis.c structure.c aesthetic.c \
 			joiners.c utils.c parsing.c redir.c errors.c expand.c \
 			expand_2.c debug.c exec_cmd.c builtins.c ft_cd.c ft_pwd.c \
-			ft_export.c ft_env.c ft_echo.c ft_unset.c ft_exit.c
+			ft_export.c ft_env.c ft_echo.c ft_unset.c ft_exit.c clean.c
 SRCS =		$(addprefix parsing/, $(_SRCS))
 OBJS =		$(SRCS:.c=.o)
 

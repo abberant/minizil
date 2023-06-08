@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 12:34:45 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/06 16:23:04 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/07 16:55:50 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	main(int argc, char **argv, char **env)
 	initialize_shell(argc, argv, env);
 	while (1)
 	{
-		load = readline(RED "Minishell$ " RESET);
+		load = readline(RED "dkhol 3lia$ " RESET);
 		if (!load)
 			exit(EXIT_FAILURE);
 		if (ft_strlen(load))
@@ -64,7 +64,8 @@ int	main(int argc, char **argv, char **env)
 		}
 		ft_parse(full);
 		debug_struct();
-		execute(&g_data);
+		// execute(&g_data);
 		// exec_command();
+		// ft_cleanse();
 	}
 }
