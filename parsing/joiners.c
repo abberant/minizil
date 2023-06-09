@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 16:36:47 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/07 16:58:03 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/10 00:50:27 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	*s_concatinate(char *s, char c)
 	}
 	str[i++] = c;
 	str[i] = '\0';
-	// free(s);
+	free(s);
 	return (str);
 }
 
@@ -67,5 +67,6 @@ char	**a_concatinate(char **s, char *c)
 	}
 	arr[i++] = ft_strdup(c);
 	arr[i] = NULL;
+	ft_free2d(s);
 	return (arr);
 }
