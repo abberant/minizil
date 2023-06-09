@@ -68,16 +68,9 @@ int	main(int argc, char **argv, char **env)
 			continue ;
 		}
 		ft_parse(full);
-		// debug_struct();
-		execute(&g_data);
-		g_data.ms = NULL;
+		debug_struct();
+		// execute(&g_data);
 		// exec_command();
-<<<<<<< HEAD
 		ft_cleanse();
-=======
-		// here_doc(g_data.ms->stack[1]);
-		// heredoc_six(g_data.ms->stack, g_data.env);
-		// ft_cleanse();
->>>>>>> f3718a0d002011c1500c847ea9722b5a8ccce268
 	}
 }
