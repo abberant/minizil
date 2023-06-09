@@ -6,7 +6,7 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 12:34:45 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/08 22:55:56 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/09 01:38:01 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,12 @@ int	main(int argc, char **argv, char **env)
 			continue ;
 		}
 		ft_parse(full);
-		debug_struct();
-		// execute(&g_data);
+		// debug_struct();
+		execute(&g_data);
+		g_data.ms = NULL;
 		// exec_command();
 		// here_doc(g_data.ms->stack[1]);
 		// heredoc_six(g_data.ms->stack, g_data.env);
-		ft_cleanse();
+		// ft_cleanse();
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 14:37:53 by aanouari          #+#    #+#             */
-/*   Updated: 2022/12/21 20:17:57 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/09 01:21:24 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,6 @@ char	*ft_strjoin(char *s1, char *s2)
 			s[i] = s1[i];
 	while (s2[j])
 		s[i++] = s2[j++];
-	free(s1);
+	// free(s1);
 	return (s);
 }
