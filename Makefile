@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+         #
+#    By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/24 08:21:48 by aanouari          #+#    #+#              #
-#    Updated: 2023/06/08 13:20:47 by aanouari         ###   ########.fr        #
+#    Updated: 2023/06/09 02:02:44 by lsadiq           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,8 @@ RM =		rm -rf
 _SRCS =		minishell.c lexical_analysis.c structure.c aesthetic.c \
 			joiners.c utils.c parsing.c redir.c errors.c expand.c \
 			expand_2.c debug.c exec_cmd.c builtins.c ft_cd.c ft_pwd.c \
-			ft_export.c ft_env.c ft_echo.c ft_unset.c ft_exit.c clean.c
+			ft_export.c ft_env.c ft_echo.c ft_unset.c ft_exit.c here_doc.c \
+			get_next_line.c get_next_line_utils.c clean.c  
 SRCS =		$(addprefix parsing/, $(_SRCS))
 OBJS =		$(SRCS:.c=.o)
 

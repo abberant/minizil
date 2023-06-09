@@ -3,12 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 12:34:45 by aanouari          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/06/10 00:51:14 by aanouari         ###   ########.fr       */
+=======
+/*   Updated: 2023/06/09 01:38:01 by lsadiq           ###   ########.fr       */
+>>>>>>> f3718a0d002011c1500c847ea9722b5a8ccce268
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "minishell.h"
 
@@ -41,7 +46,7 @@ int	main(int argc, char **argv, char **env)
 {
 	char	**full;
 	char	*load;
-	// t_shell *shell= NULL;
+	// int outfile;
 
 	// int i = 1;
 	initialize_shell(argc, argv, env);
@@ -63,9 +68,16 @@ int	main(int argc, char **argv, char **env)
 			continue ;
 		}
 		ft_parse(full);
-		debug_struct();
-		// execute(&g_data);
+		// debug_struct();
+		execute(&g_data);
+		g_data.ms = NULL;
 		// exec_command();
+<<<<<<< HEAD
 		ft_cleanse();
+=======
+		// here_doc(g_data.ms->stack[1]);
+		// heredoc_six(g_data.ms->stack, g_data.env);
+		// ft_cleanse();
+>>>>>>> f3718a0d002011c1500c847ea9722b5a8ccce268
 	}
 }

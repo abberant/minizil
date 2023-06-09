@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 08:21:35 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/08 13:21:03 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/08 22:29:45 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
+# include <fcntl.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "../libft/libft.h"
@@ -119,19 +120,22 @@ void	debug_struct();
 void	ft_cleanse();
 
 //------------------------------------------------------Execution----------------------------------------------------------
-void exec_command();
-char *split_path(char *path, char *argv);
-char *get_path(char **envp);
-void execute(t_shell *shell);
-int ft_lentab(char *tab);
+void	exec_command();
+char	*split_path(char *path, char *argv);
+char	*get_path(char **envp);
+void	execute(t_shell *shell);
+int		ft_lentab(char *tab);
 int 	ft_alpha(char c);
-int ft_len_env(char **str);
-void ft_cd(t_shell *shell);
-void ft_pwd();
-void ft_export(t_shell *shell);
-void ft_env(t_shell *g_data);
-void ft_echo(t_shell *shell);
-void ft_unset(t_shell *shell);
-void ft_exit(t_shell *shell);
+int		ft_len_env(char **str);
+void	ft_cd(t_shell *shell);
+void	ft_pwd();
+void	ft_export(t_shell *shell);
+void	ft_env(t_shell *g_data);
+void	ft_echo(t_shell *shell);
+void	ft_unset(t_shell *shell);
+void	ft_exit(t_shell *shell);
+int		here_doc(char *delimiter);
+char	*get_next_line(int fd);
+void	heredoc_six(char **argv, char **envp);
 
 #endif

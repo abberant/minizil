@@ -6,7 +6,7 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 10:23:08 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/06 15:48:20 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/08 12:48:09 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ char *split_path(char *path, char *argv)
     {
         tmp = minipath[i];
         minipath[i] = ft_strjoin(tmp, "/");
-        free(tmp);
+        // free(tmp);
         tmp = minipath[i];
         minipath[i] = ft_strjoin(tmp, argv);
         if (access(minipath[i], F_OK) == 0)
             return (minipath[i]);
-        free(tmp);
+        // free(tmp);
         i++;
     }
     return (0);
@@ -74,6 +74,5 @@ void exec_command()
         ft_putstrr_fd(*g_data.ms->stack, 2);
         ft_putchar_fd('\n', 2);
         g_data.exit_s = 127;
-        // exit(g_data.exit_s);
     }
 }
