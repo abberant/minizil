@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 18:20:27 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/09 00:44:39 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/10 00:32:55 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ int	redir_check(char **stack)
 
 void	set_redir_ll(t_vdata *tmp, char ***buffer)
 {
-	int	i;
+	t_redir	*rd;
+	int		i;
 
 	i = 0;
 	while (tmp->stack[i])
@@ -49,8 +50,9 @@ void	set_redir_ll(t_vdata *tmp, char ***buffer)
 		// printf("stack[%d] = %s\n", i, tmp->stack[i]);
 		if (arrow_check(tmp->stack[i]) != -1)
 		{
-			redir_addback(&tmp->rd, redir_new(tmp->stack[i + 1],
-					arrow_check(tmp->stack[i])));
+			rd = redir_new(tmp->stack[i + 1],
+					arrow_check(tmp->stack[i]));
+			redir_addback(&tmp->rd, rd);
 			i++;
 		}
 		else
@@ -83,11 +85,11 @@ void	init_redir(void)
 	tmp = g_data.ms;
 	while (tmp)
 	{
-		// wc = NULL;
+		wc = NULL;
 		if (redir_check(tmp->stack))
 		{
 			set_redir_ll(tmp, &wc);
-			ft_free2d(tmp->stack);
+			ft_bzero(tmp->stack, ft_arrsize(tmp->stack));
 			tmp->stack = wc;
 		}
 		else
