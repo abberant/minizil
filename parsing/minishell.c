@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 00:51:14 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/10 16:08:56 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/10 16:24:29 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,17 @@ void	initialize_shell(int argc, char **argv, char **env)
 
 void	ft_parse(char **full)
 {
-	t_vdata	*tmp;
+	// t_vdata	*tmp;
 
 	init_tree(full);
 	init_redir();
-	tmp = g_data.ms;
-	while (tmp)
-	{
-		quote_expansion(tmp);
-		tmp->cmd = tmp->stack[0];
-		tmp = tmp->next;
-	}
+	// tmp = g_data.ms;
+	// while (tmp)
+	// {
+	// 	quote_expansion(tmp);
+	// 	tmp->cmd = tmp->stack[0];
+	// 	tmp = tmp->next;
+	// }
 }
 
 int	main(int argc, char **argv, char **env)
@@ -64,7 +64,7 @@ int	main(int argc, char **argv, char **env)
 			continue ;
 		}
 		ft_parse(full);
-		execute(&g_data);
+		// execute(&g_data);
 		// exec_command();
 		debug_struct();
 		ft_cleanse();

@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 18:20:27 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/10 16:09:51 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/10 16:29:10 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,16 @@ int	redir_check(char **stack)
 
 void	set_redir_ll(t_vdata *tmp, char ***buffer)
 {
-	int	i;
+	t_redir	*rd;
+	int		i;
 
 	i = 0;
 	while (tmp->stack[i])
 	{
 		if (arrow_check(tmp->stack[i]) != -1)
 		{
-			redir_addback(&tmp->rd, redir_new(tmp->stack[i + 1],
-					arrow_check(tmp->stack[i])));
+			rd = redir_new(tmp->stack[i + 1], arrow_check(tmp->stack[i]));
+			redir_addback(&tmp->rd, rd);
 			i++;
 		}
 		else
