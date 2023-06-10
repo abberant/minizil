@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 01:48:10 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/10 00:56:29 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/10 16:05:43 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,42 +17,49 @@
 void	debug_struct()
 {
 	int	i;
-	t_shell *tmp;
+	t_vdata *tmp;
+	t_redir *new;
 
-	tmp = &g_data;
-	while (tmp->ms)
+	tmp = g_data.ms;
+	while (tmp)
 	{
-		i = -1;
-		if (!tmp->ms->stack)
+		if (!tmp->stack)
 			printf("Stack is empty\n");
 		else
-			while (tmp->ms->stack[++i])
-				printf("Stack[%d] is : [%s]\n", i, tmp->ms->stack[i]);
+		{
+			i = 0;
+			while (tmp->stack[i])
+			{
+				printf("Stack[%d] is : [%s]\n", i, tmp->stack[i]);
+				i++;
+			}
+		}
 		printf("\n");
-		printf("Command is : [%s]\n", tmp->ms->cmd);
+		printf("Command is : [%s]\n", tmp->cmd);
 		printf("\n");
-		printf("Separator is : [%d]\n", tmp->ms->sep);
+		printf("Separator is : [%d]\n", tmp->sep);
 		printf("\n");
-		if (tmp->ms->rd)
+		new = tmp->rd;
+		if (new)
 		{
 			printf(GREEN"Redirection found!\n"RESET);
 			printf("\n");
-			while (tmp->ms->rd)
+			while (new)
 			{
-				printf("Type is : [%d]\n", tmp->ms->rd->type);
+				printf("Type is : [%d]\n", new->type);
 				printf("\n");
-				printf("FD is : [%d]\n", tmp->ms->rd->fd);
+				printf("FD is : [%d]\n", new->fd);
 				printf("\n");
-				printf("File name is : [%s]\n", tmp->ms->rd->file);
+				printf("File name is : [%s]\n", new->file);
 				printf("\n");
 				printf("---------------------------------------------\n");
 				printf("\n");
-				tmp->ms->rd = tmp->ms->rd->next;
+				new = new->next;
 			}
 		}
 		else
 			printf(RED"No redirection found!\n"RESET);
 		printf("_______________________________________________________________________\n");
-		tmp->ms =tmp->ms->next;
+		tmp =tmp->next;
 	}
 }

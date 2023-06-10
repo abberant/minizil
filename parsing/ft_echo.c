@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 02:51:27 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/06 16:33:31 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/10 16:06:25 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,6 @@ void ft_echo(t_shell *shell)
     // printf("%d", g_data.flag);
     if (g_data.flag)
         printf("\n");
-    free(tmp->ms->stack);
+    // free(tmp->ms->stack);
     // printf("HelloNewLine!\n");
 }

@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 16:41:00 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/08 13:19:41 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/10 16:01:46 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ void	ft_cleanse(void)
 			free(tmp2->file);
 			tmp2 = tmp2->next;
 		}
-		free(tmp->cmd);
-		if (tmp->stack)
-			ft_free2d(tmp->stack);
+		// free(tmp->cmd);
+		// if (tmp->stack)
+		// 	ft_free2d(tmp->stack);
 		tmp = tmp->next;
 	}
 	clear_lists();

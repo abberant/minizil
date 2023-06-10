@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:17:46 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/09 01:31:16 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/10 15:52:48 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void execute(t_shell *shell)
 {
     int i;
     t_shell temp = *shell;
-    while (temp.ms)
+    while (temp.ms && temp.ms->cmd)
     {
         i = 0;
         if (!ft_strcmp(temp.ms->cmd, "pwd"))
