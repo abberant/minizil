@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 18:20:27 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/10 16:29:10 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/10 16:34:10 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	init_redir(void)
 	tmp = g_data.ms;
 	while (tmp)
 	{
+		wc = NULL;
 		if (redir_check(tmp->stack))
 		{
 			set_redir_ll(tmp, &wc);

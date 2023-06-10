@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:17:46 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/10 15:52:48 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/10 16:38:26 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void execute(t_shell *shell)
 {
     int i;
     t_shell temp = *shell;
+    puts("here");
+    printf("%s\n", temp.ms->cmd);
     while (temp.ms && temp.ms->cmd)
     {
         i = 0;
