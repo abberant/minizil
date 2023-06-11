@@ -6,7 +6,7 @@
 #    By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/24 08:21:48 by aanouari          #+#    #+#              #
-#    Updated: 2023/06/11 21:34:31 by aanouari         ###   ########.fr        #
+#    Updated: 2023/06/11 21:56:56 by aanouari         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ RM =		rm -rf
 
 _SRCS =		minishell.c lexical_analysis.c structure.c aesthetic.c \
 			joiners.c utils.c parsing.c redir.c errors.c expand.c \
-			expand_2.c debug.c clear.c
+			expand_2.c debug.c clear.c command.c
 SRCS =		$(addprefix parsing/, $(_SRCS))
 OBJS =		$(SRCS:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 12:34:45 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/11 21:32:25 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/11 22:07:04 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 
 void	initialize_shell(int argc, char **argv, char **env)
 {
+	int		i = -1;
 	(void) argc, (void) argv;
 	// banner();
 	ft_bzero(&g_data, sizeof(t_shell));
 	g_data.env = env;
+	while(g_data.env[++i])
+		printf("%s\n", g_data.env[i]);
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, sig_handler);
 }
@@ -32,10 +35,12 @@ void	ft_parse(char **full)
 	while (tmp)
 	{
 		quote_expansion(tmp);
-		if (!tmp->cmd)
-			tmp->cmd = ft_strdup("");
-		else
-			tmp->cmd = tmp->stack[0];
+		// if (!tmp->stack[0])
+		// 	tmp->cmd = ft_strdup("");
+		// else
+		// 	tmp->cmd = cmd_path(tmp->stack[0]);
+		// // else
+		// // 	tmp->cmd = ft_strdup(tmp->stack[0]);
 		tmp = tmp->next;
 	}
 }
@@ -67,5 +72,7 @@ int	main(int argc, char **argv, char **env)
 		ft_parse(full);
 		debug_struct();
 		ft_cleanse();
+		ft_free2d(full);
+		free(load);
 	}
 }
