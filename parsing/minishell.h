@@ -6,7 +6,7 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 08:21:35 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/08 22:29:45 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/11 18:24:25 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # define RED	"\x1B[31m"
 # define GREEN	"\e[01;32m"
 # define RESET	"\x1B[0m"
+#define YELLOW "\033[0;33m"
+#define BUFFER_SIZE 1024
 
 # define ERR_PERMISSION "minishell: %s: Permission denied\n"
 # define ERR_NO_SUCH_FILE "minishell: %s: No such file or directory\n"
@@ -134,8 +136,8 @@ void	ft_env(t_shell *g_data);
 void	ft_echo(t_shell *shell);
 void	ft_unset(t_shell *shell);
 void	ft_exit(t_shell *shell);
-int		here_doc(char *delimiter);
+void	here_doc();
+int		open_here_doc(); 
 char	*get_next_line(int fd);
-void	heredoc_six(char **argv, char **envp);
 
 #endif

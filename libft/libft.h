@@ -6,7 +6,7 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 21:38:00 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/06 11:44:03 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/11 18:21:53 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <string.h>
 # include <stdio.h>
 
-# define BUFFER_SIZE 1
+# define BUFFER_SIZE 1024
 
 void	ft_putchar(char c);
 void	ft_putnbr(int n);
