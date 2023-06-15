@@ -6,12 +6,27 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 10:23:08 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/08 12:48:09 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/15 06:09:04 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void    fork_function(int fd_in, int fd_out)
+{
+    int pid;
+
+    pid = fork();
+    if(!pid)
+    {
+        dup2(fd_in, 0);
+        dup2(fd_out, 1);
+        if(check_built_in(&g_data))
+            execute(&g_data);
+        else
+            exec_command();
+    }
+}
 
 char *get_path(char **envp)
 {

@@ -6,7 +6,7 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 08:21:35 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/11 18:24:25 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/15 06:11:31 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,5 +139,9 @@ void	ft_exit(t_shell *shell);
 void	here_doc();
 int		open_here_doc(); 
 char	*get_next_line(int fd);
+void	ft_append();
+void	exec_redir();
+void	exec_redir(t_shell g_data, int in_fd, int out_fd);
+void fork_function(int fd_in, int fd_out);
 
 #endif

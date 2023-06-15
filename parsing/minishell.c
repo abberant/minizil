@@ -6,7 +6,7 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 00:51:14 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/11 18:23:05 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/15 06:40:14 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,7 @@ int	main(int argc, char **argv, char **env)
 			continue ;
 		}
 		ft_parse(full);
-		// execute(&g_data);
-		// exec_command();
-		here_doc();
-		// debug_struct();
+		debug_struct();
 		ft_cleanse();
 		ft_free2d(full);
 		free (load);
