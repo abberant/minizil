@@ -6,23 +6,11 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 15:47:54 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/14 16:21:43 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/16 17:04:50 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void here_doc()
-{
-	int pid = fork();
-	if (pid == 0)
-	{
-		open_here_doc();
-		exit(1);
-	}
-	else
-		wait(0);
-}
 
 int open_here_doc()
 {
@@ -48,12 +36,12 @@ int open_here_doc()
 						break;
 					}
 					g_data.ms->rd = g_data.ms->rd->next;
-					free(line);
+						free(line);
 					continue;
 				}
 				else
 				{
-					line_len = strlen(line);
+					line_len = ft_strlen(line);
 					if (buffer_len + line_len >= BUFFER_SIZE)
 					{
 						ft_dprintf(2, "Error: Input exceeds buffer size.\n");
@@ -70,46 +58,7 @@ int open_here_doc()
 		}
 		g_data.ms = g_data.ms->next;
 	}
+	buffer[buffer_len] = '\0';
 	ft_dprintf(1, buffer);
 	return (0);
-}
-
-void ft_append()
-{
-	pid_t pid;
-	int fd[2];
-	t_vdata *tmp;
-	t_redir *new;
-
-	tmp = g_data.ms;
-	new = g_data.ms->rd;
-	while (tmp)
-	{
-		while (new)
-		{
-			if (new &&new->type == APPEND)
-			{
-				new->fd = open(new->file, O_CREAT | O_RDWR | O_APPEND, 0644);
-				pipe(fd);
-				pid = fork();
-				if (pid)
-				{
-					close(fd[1]);
-					wait(0);
-					// dup2(fd[0], 0);
-				}
-				else
-				{
-					close(fd[0]);
-					dup2(new->fd, 1);
-					exec_command();
-				}
-				close(fd[0]);
-				close(fd[1]);
-				close(new->fd);
-			}
-			new = new->next;
-		}
-		tmp = tmp->next;
-	}
 }

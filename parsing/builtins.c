@@ -6,7 +6,7 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:17:46 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/15 06:08:24 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/17 05:54:34 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ int check_built_in(t_shell *shell)
 {
     int i;
     t_shell temp = *shell;
-    
     while (temp.ms && temp.ms->cmd)
     {
+    // puts("dkhelt");
         i = 0;
         if (!ft_strcmp(temp.ms->cmd, "pwd"))
             return (1);

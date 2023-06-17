@@ -6,26 +6,59 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 10:23:08 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/15 06:09:04 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/17 06:20:27 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void    fork_function(int fd_in, int fd_out)
+void dup_2(int fd_1, int fd_2)
+{
+    dup2(fd_1, fd_2);
+    close(fd_1);
+}
+void	dupfd2fd(int fd, int othe_fd)
+{
+	dup2(fd, othe_fd);
+	close(fd);
+}
+
+void	dup_ends(int *ends, int fd_in)
+{
+	if (fd_in != STDIN_FILENO)
+		dupfd2fd(fd_in, STDIN_FILENO);
+	dupfd2fd(ends[1], STDOUT_FILENO);
+	if (ends[0] > 2)
+		close(ends[0]);
+}
+void    fork_exec(int fd_in, int fd_out)
 {
     int pid;
+    int end[2];
+    (void)fd_in;
+    (void)fd_out;
 
+    fd_in = STDIN_FILENO;
+    if (pipe(end) == -1)
+        perror("pipe");
     pid = fork();
-    if(!pid)
+    if (!pid)
     {
-        dup2(fd_in, 0);
-        dup2(fd_out, 1);
-        if(check_built_in(&g_data))
-            execute(&g_data);
-        else
-            exec_command();
+        if (g_data.ms)
+        {
+		    exec_redir(fd_in, fd_out);
+            if (!check_built_in(&g_data))
+                exec_command();
+        }
+		exit (0);
     }
+    else
+	{
+        if(check_built_in(&g_data))
+	    	execute(&g_data);
+		wait(0);
+		// dup_2(end[0], 0);
+	}
 }
 
 char *get_path(char **envp)
@@ -35,7 +68,7 @@ char *get_path(char **envp)
     i = 0;
     while (envp && envp[i])
     {
-        if (ft_strncmp("PATH=", envp[i], 5) == 0)
+        if (!ft_strncmp("PATH=", envp[i], 5))
             return (envp[i] + 5);
         i++;
     }
@@ -49,7 +82,7 @@ char *split_path(char *path, char *argv)
     int i;
 
     i = 0;
-    if (access(argv, X_OK) == 0 && argv[0] == '/')
+    if (!access(argv, X_OK))
         return (argv);
     minipath = ft_split(path, ':');
     while (minipath[i])
@@ -59,7 +92,7 @@ char *split_path(char *path, char *argv)
         // free(tmp);
         tmp = minipath[i];
         minipath[i] = ft_strjoin(tmp, argv);
-        if (access(minipath[i], F_OK) == 0)
+        if (!access(minipath[i], F_OK))
             return (minipath[i]);
         // free(tmp);
         i++;
@@ -77,17 +110,18 @@ void exec_command()
     if (!path)
     {
         perror("PATH not found!!");
-        // exit(0);
+		g_data.exit_s = 127;
+        exit(g_data.exit_s);
     }
-    command = ft_split(g_data.ms->stack[0], ' ');
-    tmp = command[0];
-    command[0] = split_path(path, tmp);
+    command = &g_data.ms->stack[0];
+    tmp = split_path(path, command[0]);
+	// printf("%s\n", tmp);
     free(path);
-    if (execve(command[0], command, g_data.env) == -1)
+    if (execve(tmp, command, g_data.env) == -1)
     {
         ft_putstrr_fd("minishell : command not found: ", 2);
         ft_putstrr_fd(*g_data.ms->stack, 2);
         ft_putchar_fd('\n', 2);
         g_data.exit_s = 127;
-    }
+    } 
 }

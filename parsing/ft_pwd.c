@@ -6,7 +6,7 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:21:49 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/06 16:26:32 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/17 02:52:35 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@ void ft_pwd()
     char *holder;
 
     holder = getcwd(NULL, 0);
-    printf("%s\n", holder);
+    printf("%s \n", holder);
     free(holder);
 }

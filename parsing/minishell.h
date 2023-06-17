@@ -6,7 +6,7 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 08:21:35 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/15 06:11:31 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/17 06:16:09 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ typedef struct s_redir
 	int				fd;
 	char			*file;
 	struct s_redir	*next;
+	int				in_fd;
+	int 			out_fd;
 	struct s_redir	*previous;
 }	t_redir;
 
@@ -141,7 +143,8 @@ int		open_here_doc();
 char	*get_next_line(int fd);
 void	ft_append();
 void	exec_redir();
-void	exec_redir(t_shell g_data, int in_fd, int out_fd);
-void fork_function(int fd_in, int fd_out);
+void	exec_redir(int in_fd, int out_fd);
+void	fork_exec(int fd_in, int fd_out);
+int check_built_in(t_shell *shell);
 
 #endif

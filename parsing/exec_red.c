@@ -6,54 +6,57 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 16:09:50 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/15 04:50:39 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/17 06:18:19 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_infile_redir(t_vdata *redir, int in)
+int	ft_infile_redir(t_redir *redir, int in)
 {
-	t_redir	*fl;
-	
 	if (in != 0)
-		close(0);
-	if (redir->rd->type == REDIR_IN)
-		return (open(fl->file, O_RDONLY, 0644));
-	else if (redir->rd->type == HEREDOC)
-		ft_here_doc();
+		close(in);
+	if (redir->type == REDIR_IN)
+		return (open(redir->file, O_RDONLY, 0644));
+	if (redir->type == HEREDOC)
+		open_here_doc();
+	return (in);
 }
 
-int	ft_outfile(t_vdata *redir, int out)
+int	ft_outfile_redir(t_redir *redir, int out)
 {
-	t_redir	*fl;
-
 	if (out != 1)
-		close(1);
-	if (redir->rd->type == REDIR_OUT)
-		return (open(fl->file, O_CREAT | O_WRONLY | O_TRUNC, 0644));
-	else if (redir->rd->type == APPEND)
-		return (open(fl->file, O_CREAT | O_WRONLY | O_APPEND, 0644));
+		close(out);
+	if (redir->type == REDIR_OUT)
+		return (open(redir->file, O_CREAT | O_RDWR | O_TRUNC, 0644));
+	if (redir->type == APPEND)
+			return (open(redir->file, O_CREAT | O_RDWR | O_APPEND, 0644));
+	return (out);
 }
 
-void    exec_redir(t_shell g_data, int in_fd, int out_fd)
+void    exec_redir(int in_fd, int out_fd)
 {
 	t_redir *new;
+	int	in_flag = 0;
+	int	out_flag = 0;
 
-    if(g_data.ms->rd)
+	in_fd = STDIN_FILENO;
+	out_fd = STDOUT_FILENO;
+	if (g_data.ms->rd)
 	{
 		new = g_data.ms->rd;
 		while(new)
 		{
+			printf("%s\n", new->file);
 			if(new->type == HEREDOC || new->type == REDIR_IN)
 			{
-				in_fd = ft_infile_redir();
-				dup2(in_fd, 1);
+				in_fd = ft_infile_redir(new, in_fd);
+				in_flag = 1;
 			}
 			else if(new->type == APPEND || new->type == REDIR_OUT)
 			{
-				out_fd = ft_outfile_redir();
-				dup2(out_fd, 1);
+				out_fd = ft_outfile_redir(new, out_fd);
+				out_flag = 1;
 			}
 			if (in_fd < 0 || out_fd < 0)
 			{
@@ -63,5 +66,10 @@ void    exec_redir(t_shell g_data, int in_fd, int out_fd)
 			}
 			new = new->next;
 		}
+		if (in_flag)
+			dup2(in_fd, 0);
+		if (out_flag)
+			dup2(out_fd, 1);
 	}
+	printf("vetbv\n");
 }

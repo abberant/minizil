@@ -6,7 +6,7 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 00:51:14 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/15 06:40:14 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/17 03:29:47 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,14 @@ int	main(int argc, char **argv, char **env)
 {
 	char	**full;
 	char	*load;
-	// int outfile;
+	int out = 0;
+	int in = 0;
 
 	// int i = 1;
 	initialize_shell(argc, argv, env);
 	while (1)
 	{
-		load = readline(RED "dkhol 3lia$ " RESET);
+		load = readline(RED "dkhol 3lih$ " RESET);
 		if (!load)
 			exit(EXIT_FAILURE);
 		if (ft_strlen(load))
@@ -69,7 +70,11 @@ int	main(int argc, char **argv, char **env)
 			continue ;
 		}
 		ft_parse(full);
-		debug_struct();
+		fork_exec(in, out);
+		// execute(&g_data);
+		// exec_redir(g_data, in, out);
+		// ft_append();
+		// debug_struct();
 		ft_cleanse();
 		ft_free2d(full);
 		free (load);

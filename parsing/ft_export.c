@@ -6,7 +6,7 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 17:04:07 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/06 16:27:46 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/17 06:43:18 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,14 @@ char **ft_add_str_to_tab(char **tab, char *str)
     int i = 0;
     char **tmp;
 
-    // printf("str = %s\n", tab[0]);
-    tmp = malloc(sizeof(char *) * ft_len_env(tab) + 1);
+    tmp = malloc(sizeof(char *) * (ft_len_env(tab) + 2));
     while (tab[i])
     {
         tmp[i] = ft_strdup(tab[i]);
-        // free(tab[i]);
         i++;
     }
-    // free(tab);
-    tmp[i++] = str;
-    tmp[i] = NULL;
+    tmp[i] = ft_strdup(str);
+    tmp[i + 1] = NULL;
     return (tmp);
 }
 
@@ -176,7 +173,7 @@ char **ft_replace_env(char **str, char *new)
     int j = 0;
     char **tmp;
 
-    tmp = malloc(sizeof(char *) * ft_len_env(str) + 1);
+    tmp = malloc(sizeof(char *) * (ft_len_env(str) + 1));
     while (new[i])
     {
         if (new[i] == '=')
@@ -189,7 +186,7 @@ char **ft_replace_env(char **str, char *new)
         {
             tmp[j] = ft_strdup(new);
             free(str[j]);
-            free(new);
+            // free(new);
         }
         else
             tmp[j] = ft_strdup(str[j]);
@@ -228,18 +225,22 @@ void ft_export(t_shell *shell)
     int i = 1;
     t_shell *tmp = shell;
 
-    tmp->new_env = clone_env(tmp->env);
-    sort_env(tmp->new_env);
+    // tmp->new_env = clone_env(tmp->env);
+    sort_env(tmp->env);
     if (!tmp->ms->stack[i])
-        tmp->exp = print_export(tmp->new_env);
+        tmp->exp = print_export(tmp->env);
     while (tmp->ms->stack[i])
     {
         if (ft_alpha(tmp->ms->stack[i][0]))
         {
-            if (!ft_does_it_exist(tmp->new_env, tmp->ms->stack[i]))
-                tmp->env = ft_add_str_to_tab(tmp->new_env, tmp->ms->stack[i]);
+            if (!ft_does_it_exist(tmp->env, tmp->ms->stack[i]))
+            {
+                
+                tmp->env = ft_add_str_to_tab(tmp->env, tmp->ms->stack[i]);
+                
+            }
             else
-                tmp->env = ft_replace_env(tmp->new_env, tmp->ms->stack[i]);
+                tmp->env = ft_replace_env(tmp->env, tmp->ms->stack[i]);
         }
         else
             printf("minishell: export: `%s': not a valid identifier\n", tmp->ms->stack[i]);
