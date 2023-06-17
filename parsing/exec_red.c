@@ -6,7 +6,7 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 16:09:50 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/17 06:18:19 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/17 22:03:00 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void    exec_redir(int in_fd, int out_fd)
 		new = g_data.ms->rd;
 		while(new)
 		{
-			printf("%s\n", new->file);
 			if(new->type == HEREDOC || new->type == REDIR_IN)
 			{
 				in_fd = ft_infile_redir(new, in_fd);
@@ -71,5 +70,4 @@ void    exec_redir(int in_fd, int out_fd)
 		if (out_flag)
 			dup2(out_fd, 1);
 	}
-	printf("vetbv\n");
 }

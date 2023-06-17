@@ -6,7 +6,7 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 08:21:35 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/17 06:16:09 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/17 16:45:45 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,5 +146,6 @@ void	exec_redir();
 void	exec_redir(int in_fd, int out_fd);
 void	fork_exec(int fd_in, int fd_out);
 int check_built_in(t_shell *shell);
+void    ft_pipes();
 
 #endif

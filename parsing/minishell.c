@@ -6,7 +6,7 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 00:51:14 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/17 03:29:47 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/17 18:16:44 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int	main(int argc, char **argv, char **env)
 		}
 		ft_parse(full);
 		fork_exec(in, out);
+		// ft_pipes();
 		// execute(&g_data);
 		// exec_redir(g_data, in, out);
 		// ft_append();

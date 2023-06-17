@@ -6,7 +6,7 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 15:47:54 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/16 17:04:50 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/17 22:07:34 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,28 @@ int open_here_doc()
 {
 	int i;
 	char *line;
+	t_vdata	*tmp;
 	size_t buffer_len = 0;
 	char buffer[BUFFER_SIZE];
 	size_t line_len;
 
 	i = 0;
-	while (g_data.ms)
+	tmp = g_data.ms;
+	while (tmp)
 	{
-		while (g_data.ms->rd)
+		while (tmp->rd)
 		{
-			if (g_data.ms->rd && g_data.ms->rd->type == HEREDOC)
+			if (tmp->rd && tmp->rd->type == HEREDOC)
 			{
 				line = readline(YELLOW " >" RESET);
-				if (!line || (!ft_strncmp(g_data.ms->rd->file, line, ft_strlen(g_data.ms->rd->file) + 1)))
+				if (!line || (!ft_strncmp(tmp->rd->file, line, ft_strlen(tmp->rd->file) + 1)))
 				{
-					if (!g_data.ms->rd->next)
+					if (!tmp->rd->next)
 					{
 						free(line);
 						break;
 					}
-					g_data.ms->rd = g_data.ms->rd->next;
+					tmp->rd = tmp->rd->next;
 						free(line);
 					continue;
 				}
@@ -54,9 +56,9 @@ int open_here_doc()
 					free(line);
 				}
 			}
-			g_data.ms->rd = g_data.ms->rd->next;
+			tmp->rd = tmp->rd->next;
 		}
-		g_data.ms = g_data.ms->next;
+		tmp = tmp->next;
 	}
 	buffer[buffer_len] = '\0';
 	ft_dprintf(1, buffer);

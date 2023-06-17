@@ -6,7 +6,7 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 10:23:08 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/17 06:20:27 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/17 22:09:44 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ void    fork_exec(int fd_in, int fd_out)
 {
     int pid;
     int end[2];
-    (void)fd_in;
-    (void)fd_out;
 
     fd_in = STDIN_FILENO;
     if (pipe(end) == -1)
@@ -46,7 +44,7 @@ void    fork_exec(int fd_in, int fd_out)
     {
         if (g_data.ms)
         {
-		    exec_redir(fd_in, fd_out);
+		exec_redir(fd_in, fd_out);
             if (!check_built_in(&g_data))
                 exec_command();
         }
@@ -57,7 +55,6 @@ void    fork_exec(int fd_in, int fd_out)
         if(check_built_in(&g_data))
 	    	execute(&g_data);
 		wait(0);
-		// dup_2(end[0], 0);
 	}
 }
 
@@ -113,9 +110,10 @@ void exec_command()
 		g_data.exit_s = 127;
         exit(g_data.exit_s);
     }
+    if(!g_data.ms->cmd)
+        exit(0);
     command = &g_data.ms->stack[0];
     tmp = split_path(path, command[0]);
-	// printf("%s\n", tmp);
     free(path);
     if (execve(tmp, command, g_data.env) == -1)
     {

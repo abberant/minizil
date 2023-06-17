@@ -6,7 +6,7 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 17:04:07 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/17 06:43:18 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/17 16:22:37 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,15 +234,11 @@ void ft_export(t_shell *shell)
         if (ft_alpha(tmp->ms->stack[i][0]))
         {
             if (!ft_does_it_exist(tmp->env, tmp->ms->stack[i]))
-            {
-                
                 tmp->env = ft_add_str_to_tab(tmp->env, tmp->ms->stack[i]);
-                
-            }
             else
                 tmp->env = ft_replace_env(tmp->env, tmp->ms->stack[i]);
         }
-        else
+        else      
             printf("minishell: export: `%s': not a valid identifier\n", tmp->ms->stack[i]);
         g_data.exit_s = 1;
         i++;

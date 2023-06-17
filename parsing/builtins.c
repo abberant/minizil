@@ -6,7 +6,7 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:17:46 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/17 05:54:34 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/17 16:42:30 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,11 @@
 
 void execute(t_shell *shell)
 {
-    int i;
-    t_shell temp = *shell;
-    // puts("here");
-    // printf("%s\n", temp.ms->cmd);
+    t_shell temp;
+	
+	temp = *shell;
     while (temp.ms && temp.ms->cmd)
     {
-        i = 0;
         if (!ft_strcmp(temp.ms->cmd, "pwd"))
             ft_pwd(shell);
         if (!ft_strcmp(temp.ms->cmd, "echo"))
@@ -40,12 +38,11 @@ void execute(t_shell *shell)
 }
 int check_built_in(t_shell *shell)
 {
-    int i;
-    t_shell temp = *shell;
+    t_shell temp;
+	
+	temp = *shell;
     while (temp.ms && temp.ms->cmd)
     {
-    // puts("dkhelt");
-        i = 0;
         if (!ft_strcmp(temp.ms->cmd, "pwd"))
             return (1);
         if (!ft_strcmp(temp.ms->cmd, "echo"))
