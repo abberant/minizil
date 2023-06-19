@@ -6,7 +6,7 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 08:21:35 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/17 16:45:45 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/19 03:22:40 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,24 +127,24 @@ void	ft_cleanse();
 void	exec_command();
 char	*split_path(char *path, char *argv);
 char	*get_path(char **envp);
-void	execute(t_shell *shell);
+int		execute(t_shell *shell);
 int		ft_lentab(char *tab);
 int 	ft_alpha(char c);
 int		ft_len_env(char **str);
-void	ft_cd(t_shell *shell);
-void	ft_pwd();
-void	ft_export(t_shell *shell);
-void	ft_env(t_shell *g_data);
-void	ft_echo(t_shell *shell);
-void	ft_unset(t_shell *shell);
-void	ft_exit(t_shell *shell);
+int		ft_cd(t_shell *shell);
+int		ft_pwd();
+int		ft_export(t_shell *shell);
+int		ft_env(t_shell *g_data);
+int		ft_echo(t_shell *shell);
+int		ft_unset(t_shell *shell);
+int		ft_exit(t_shell *shell);
 void	here_doc();
 int		open_here_doc(); 
 char	*get_next_line(int fd);
 void	ft_append();
-void	exec_redir();
-void	exec_redir(int in_fd, int out_fd);
-void	fork_exec(int fd_in, int fd_out);
+// void	exec_redir();
+int	exec_redir(int in_fd, int out_fd);
+int	fork_exec(int fd_in, int fd_out);
 int check_built_in(t_shell *shell);
 void    ft_pipes();
 

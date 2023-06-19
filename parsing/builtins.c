@@ -6,13 +6,13 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:17:46 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/17 16:42:30 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/19 00:11:33 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void execute(t_shell *shell)
+int execute(t_shell *shell)
 {
     t_shell temp;
 	
@@ -20,21 +20,22 @@ void execute(t_shell *shell)
     while (temp.ms && temp.ms->cmd)
     {
         if (!ft_strcmp(temp.ms->cmd, "pwd"))
-            ft_pwd(shell);
+            return (ft_pwd(shell));
         if (!ft_strcmp(temp.ms->cmd, "echo"))
-            ft_echo(shell);
+            return(ft_echo(shell));
         if (!ft_strcmp(temp.ms->cmd, "env"))
-            ft_env(shell);
+            return (ft_env(shell));
         if (!ft_strcmp(temp.ms->cmd, "cd"))
-            ft_cd(shell);
+            return (ft_cd(shell));
         if(!ft_strcmp(temp.ms->cmd, "export"))
-        	ft_export(shell);
+        	return (ft_export(shell));
         if (!ft_strcmp(temp.ms->cmd, "unset"))
-        	ft_unset(shell);
+        	return (ft_unset(shell));
         if(!ft_strcmp(temp.ms->cmd, "exit"))
-        	ft_exit(shell);
+        	return (ft_exit(shell));
         temp.ms = temp.ms->next;
     }
+    return (0);
 }
 int check_built_in(t_shell *shell)
 {

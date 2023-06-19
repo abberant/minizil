@@ -6,7 +6,7 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 13:35:16 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/07 14:20:33 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/18 08:16:47 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int ft_is_num(char *str)
     }
     return (1);
 }
-void	ft_exit(t_shell *shell)
+int	ft_exit(t_shell *shell)
 {
     t_shell *tmp = shell;
     int i = 1;
@@ -46,35 +46,35 @@ void	ft_exit(t_shell *shell)
             printf("exit\n");
             ft_putstrr_fd("minishell : exit : too many arguments\n", 2);
             g_data.exit_s = 1;
-            return;
+            return 0;
         }
 		else if (nb > 256)
 		{
 			printf("exit\n");
 			g_data.exit_s = nb % 256;
-			exit(g_data.exit_s);
+			return (g_data.exit_s);
 		}
 		else if(nb < 0)
 		{
 			printf("exit\n");
         	g_data.exit_s = 256 + nb;
-        	exit(g_data.exit_s);
+        	return (g_data.exit_s);
 		}
 		else if(nb == 255)
 		{
 			printf("exit\n");
 			g_data.exit_s = 255;
-        	exit(g_data.exit_s);
+        	return (g_data.exit_s);
 		}
         printf("exit\n");
         g_data.exit_s = 0;
-        exit(g_data.exit_s);
+        return (g_data.exit_s);
     }
     else
     {
         printf("exit\n");
         ft_putstrr_fd("minishell : exit : numeric argument required\n", 2);
         g_data.exit_s = 255;
-        exit(g_data.exit_s);
+        return (g_data.exit_s);
     }
 }

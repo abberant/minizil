@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 02:51:27 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/10 16:06:25 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/18 07:17:22 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,20 @@ int ft_look(char **stack)
     return (-1);
 }
 
-void ft_echo(t_shell *shell)
+int ft_echo(t_shell *shell)
 {
     t_shell *tmp = shell;
 
     int i;
-    // printf("here\n");
     i = ft_look(tmp->ms->stack);
-    // printf("dkhlt \n");
-    // printf("%d\n", i);
     if (i == -1)
     {
         printf("\n");
-        return;
+        g_data.exit_s = 0;
+        return (g_data.exit_s);
     }
     if (i == 0)
-        return;
+        return(0);
     while (tmp->ms->stack[i])
     {
         printf("%s", tmp->ms->stack[i]);
@@ -62,9 +60,7 @@ void ft_echo(t_shell *shell)
         if (tmp->ms->stack[i])
             printf(" ");
     }
-    // printf("%d", g_data.flag);
     if (g_data.flag)
         printf("\n");
-    // free(tmp->ms->stack);
-    // printf("HelloNewLine!\n");
+    return (0);
 }

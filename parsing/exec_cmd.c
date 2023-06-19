@@ -6,7 +6,7 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 10:23:08 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/17 22:09:44 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/19 04:29:21 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,32 +31,69 @@ void	dup_ends(int *ends, int fd_in)
 	if (ends[0] > 2)
 		close(ends[0]);
 }
-void    fork_exec(int fd_in, int fd_out)
+void close_ends(int *ends, int fd_in)
 {
-    int pid;
-    int end[2];
+	if (ends[1] > 2)
+		close(ends[1]);
+	if (fd_in != STDIN_FILENO)
+		close(fd_in);
+}
+// dup_ends(ends, fd_in);
+int   fork_exec(int fd_in, int fd_out)
+{
+    // (void)fd_out;
+    int fd[2];
 
     fd_in = STDIN_FILENO;
-    if (pipe(end) == -1)
-        perror("pipe");
-    pid = fork();
-    if (!pid)
+    // fd_out = STDOUT_FILENO;
+    if (g_data.ms)
     {
-        if (g_data.ms)
+        while(g_data.ms->next->cmd)
         {
-		exec_redir(fd_in, fd_out);
-            if (!check_built_in(&g_data))
-                exec_command();
+		    pipe(fd);
+		    if (fork() == 0)
+		    {
+		    	if (fd_in != 0)
+		    		dup2(fd_in, 0);
+		    	dup2(fd[1], 1);
+                puts("llll");
+		    	// if (fd[0] > 2)
+		    	// 	close(fd[0]);
+                exec_redir(fd_in, fd_out);
+                if (!check_built_in(&g_data))
+                    exec_command();
+                exit(0);
+            }
+            else
+                wait(0);
+            g_data.ms->cmd = g_data.ms->next->cmd;
         }
-		exit (0);
+		// if(fd[1] > 2)
+		// 	close(fd[1]);
+		// if(fd_in != 0)
+		// 	close(fd_in);
+    // }
+    // while(g_data.ms->next->cmd)
+    // {
+    //     printf("%s\n", g_data.ms->next->cmd);
+    //     g_data.ms->cmd = g_data.ms->next->cmd;
     }
-    else
-	{
-        if(check_built_in(&g_data))
-	    	execute(&g_data);
-		wait(0);
-	}
+    if(check_built_in(&g_data))
+    {
+        // printf("%d\n", fd_in);
+        // if(fd_in != 0)
+        // {
+        //     puts("mok");
+            // dup2(fd_out, 1);
+        // }
+        exec_redir(fd_in, fd_out);
+        execute(&g_data);
+    }
+    return 0;
 }
+
+
+
 
 char *get_path(char **envp)
 {
@@ -85,7 +122,7 @@ char *split_path(char *path, char *argv)
     while (minipath[i])
     {
         tmp = minipath[i];
-        minipath[i] = ft_strjoin(tmp, "/");
+        minipath[i] = s_concatinate(tmp, '/');
         // free(tmp);
         tmp = minipath[i];
         minipath[i] = ft_strjoin(tmp, argv);

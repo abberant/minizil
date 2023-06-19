@@ -6,7 +6,7 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 17:04:07 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/17 16:22:37 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/18 07:32:53 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,12 +220,11 @@ int ft_does_it_exist(char **str, char *new)
     return (0);
 }
 
-void ft_export(t_shell *shell)
+int ft_export(t_shell *shell)
 {
     int i = 1;
     t_shell *tmp = shell;
 
-    // tmp->new_env = clone_env(tmp->env);
     sort_env(tmp->env);
     if (!tmp->ms->stack[i])
         tmp->exp = print_export(tmp->env);
@@ -243,4 +242,6 @@ void ft_export(t_shell *shell)
         g_data.exit_s = 1;
         i++;
     }
+    // g_data.exit_s = 0;
+    return (g_data.exit_s);
 }

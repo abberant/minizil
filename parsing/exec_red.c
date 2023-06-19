@@ -6,7 +6,7 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 16:09:50 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/17 22:03:00 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/19 03:21:44 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ int	ft_outfile_redir(t_redir *redir, int out)
 	if (out != 1)
 		close(out);
 	if (redir->type == REDIR_OUT)
-		return (open(redir->file, O_CREAT | O_RDWR | O_TRUNC, 0644));
+		return (open(redir->file, O_CREAT | O_TRUNC | O_RDWR, 0644));
 	if (redir->type == APPEND)
-			return (open(redir->file, O_CREAT | O_RDWR | O_APPEND, 0644));
+		return (open(redir->file, O_CREAT | O_APPEND | O_RDWR, 0644));
 	return (out);
 }
 
-void    exec_redir(int in_fd, int out_fd)
+int    exec_redir(int in_fd, int out_fd)
 {
 	t_redir *new;
 	int	in_flag = 0;
@@ -61,7 +61,7 @@ void    exec_redir(int in_fd, int out_fd)
 			{
 				ft_putstrr_fd(": no such file or directory ", 2);
 				g_data.exit_s = 127;
-				exit(g_data.exit_s);
+				// exit(g_data.exit_s);
 			}
 			new = new->next;
 		}
@@ -70,4 +70,6 @@ void    exec_redir(int in_fd, int out_fd)
 		if (out_flag)
 			dup2(out_fd, 1);
 	}
+	g_data.exit_s = 0;
+	return (g_data.exit_s);
 }

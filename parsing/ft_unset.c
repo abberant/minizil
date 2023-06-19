@@ -6,7 +6,7 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 20:30:11 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/06 16:38:21 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/18 07:43:43 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ char **ft_remove(char **env, int k)
         return NULL;
     while (env[i])
     {
-        // printf("k = sgf \n");
         if (i != k)
         {
             tmp[j++] = ft_strdup(env[i]);
@@ -41,7 +40,7 @@ char **ft_remove(char **env, int k)
     return (tmp);
 }
 
-void ft_unset(t_shell *shell)
+int	ft_unset(t_shell *shell)
 {
     int i = 0;
     int k = 0;
@@ -49,12 +48,11 @@ void ft_unset(t_shell *shell)
 
     tmp = shell;
     if (tmp->ms->stack[1] == NULL)
-        return;
+        return (0);
     i = 1;
     while (tmp->ms->stack[i])
     {
         k = 0;
-        printf("stack = %s\n", tmp->ms->stack[i]);
         if (ft_alpha(tmp->ms->stack[i][0]))
         {
             while (tmp->env[k])
@@ -70,7 +68,10 @@ void ft_unset(t_shell *shell)
             ft_putstrr_fd(tmp->ms->stack[i], 2);
             ft_putstrr_fd("': not a valid identifier\n", 2);
             g_data.exit_s = 1;
+            return (g_data.exit_s);
         }
         i++;
     }
+    g_data.exit_s = 0;
+    return (g_data.exit_s);
 }
