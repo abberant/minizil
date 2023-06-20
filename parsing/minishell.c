@@ -6,7 +6,7 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 00:51:14 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/17 18:16:44 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/20 10:10:44 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ int	main(int argc, char **argv, char **env)
 {
 	char	**full;
 	char	*load;
-	int out = 0;
+	int out = 1;
 	int in = 0;
 
 	// int i = 1;
 	initialize_shell(argc, argv, env);
 	while (1)
 	{
-		load = readline(RED "dkhol 3lih$ " RESET);
+		load = readline("MiniShell💩$ ");
 		if (!load)
 			exit(EXIT_FAILURE);
 		if (ft_strlen(load))

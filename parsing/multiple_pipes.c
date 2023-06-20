@@ -6,7 +6,7 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 00:45:42 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/17 18:17:48 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/19 23:57:28 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@
 // 		// give_birth(fd, fd_in, fd_out);
 // 		global = global->next;
 // 	}
-// 	if(check_built_in(&g_data))
+	// if(check_built_in(&g_data))
 // 		execute(&g_data);
 // }
 // void	give_birth(int *fd, int fd_out, int fd_in)

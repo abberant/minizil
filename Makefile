@@ -6,7 +6,7 @@
 #    By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/24 08:21:48 by aanouari          #+#    #+#              #
-#    Updated: 2023/06/17 16:16:36 by lsadiq           ###   ########.fr        #
+#    Updated: 2023/06/20 06:46:55 by lsadiq           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ ITALIC		=	'\033[3m'
 
 
 CC 	=		cc
-CFLAGS =	-Wall -Wextra -Werror -fsanitize=address -g3
+CFLAGS =	#-Wall -Wextra -Werror #sanitize=address -g3
 RM =		rm -rf
 
 _SRCS =		minishell.c lexical_analysis.c structure.c aesthetic.c \

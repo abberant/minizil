@@ -6,7 +6,7 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 16:09:50 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/19 03:21:44 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/20 10:19:20 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,26 +49,36 @@ int    exec_redir(int in_fd, int out_fd)
 		{
 			if(new->type == HEREDOC || new->type == REDIR_IN)
 			{
+				if (in_fd != 0)
+					close (in_fd);
 				in_fd = ft_infile_redir(new, in_fd);
 				in_flag = 1;
 			}
 			else if(new->type == APPEND || new->type == REDIR_OUT)
 			{
+				if (out_fd != 1)
+					close(out_fd);
 				out_fd = ft_outfile_redir(new, out_fd);
 				out_flag = 1;
 			}
 			if (in_fd < 0 || out_fd < 0)
 			{
-				ft_putstrr_fd(": no such file or directory ", 2);
-				g_data.exit_s = 127;
+				ft_putstrr_fd(": no such file or directory \n", 2);
+				exit(1);
 				// exit(g_data.exit_s);
 			}
 			new = new->next;
 		}
 		if (in_flag)
+		{
 			dup2(in_fd, 0);
+			close(in_fd);
+		}
 		if (out_flag)
+		{
 			dup2(out_fd, 1);
+			close(out_fd);
+		}
 	}
 	g_data.exit_s = 0;
 	return (g_data.exit_s);

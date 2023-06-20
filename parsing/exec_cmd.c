@@ -6,7 +6,7 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 10:23:08 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/19 04:29:21 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/20 10:19:12 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,62 +38,81 @@ void close_ends(int *ends, int fd_in)
 	if (fd_in != STDIN_FILENO)
 		close(fd_in);
 }
-// dup_ends(ends, fd_in);
+
+
+int launch(int *fd, int in, int out)
+{
+    (void) out;
+    int pid;
+    pid = fork();
+    if (pid == 0)
+    {
+        if (in != 0)
+        {
+            dup2(in, 0);
+            close(in);
+        }
+        if (fd[1] != 1)
+        {
+            dup2(fd[1], 1);
+            close(fd[1]);
+        }
+        if (fd[0] != 0)
+            close(fd[0]);
+        // if (fd[0] > 2)
+        // 	close(fd[0]);
+        exec_redir(in, out);
+        if (!check_built_in(&g_data))
+            exec_command();
+        else
+            execute(&g_data);
+        exit(0);
+    }
+    return pid;
+}
 int   fork_exec(int fd_in, int fd_out)
 {
-    // (void)fd_out;
     int fd[2];
+    fd[0] = 0;
+    fd[1] = 1;
+    int pid = -1;
 
     fd_in = STDIN_FILENO;
-    // fd_out = STDOUT_FILENO;
+    fd_out = STDOUT_FILENO; 
+    // if(check_built_in(&g_data))
+    // {
+    //     if (fd_out != 1)
+    //     {
+    //         dup2(fd_out, 1);
+    //         close(fd_out);
+    //     }
+    //     exec_redir(fd_in, fd_out);
+    //     execute(&g_data);
+    //     if (fd_out != 1)
+    //         close(fd_out);
+    // }
+    
     if (g_data.ms)
     {
-        while(g_data.ms->next->cmd)
+        while(g_data.ms)
         {
-		    pipe(fd);
-		    if (fork() == 0)
-		    {
-		    	if (fd_in != 0)
-		    		dup2(fd_in, 0);
-		    	dup2(fd[1], 1);
-                puts("llll");
-		    	// if (fd[0] > 2)
-		    	// 	close(fd[0]);
-                exec_redir(fd_in, fd_out);
-                if (!check_built_in(&g_data))
-                    exec_command();
-                exit(0);
-            }
-            else
-                wait(0);
-            g_data.ms->cmd = g_data.ms->next->cmd;
+            if (g_data.ms->next)
+		        pipe(fd);
+		    launch(fd, fd_in ,fd_out);
+		    if(fd[1] > 2)
+			    close(fd[1]);
+            fd[1] = 1;
+		    if(fd_in != 0)
+			    close(fd_in);
+            fd_in = fd[0];
+            fd[0] = 0;
+        g_data.ms = g_data.ms->next;
         }
-		// if(fd[1] > 2)
-		// 	close(fd[1]);
-		// if(fd_in != 0)
-		// 	close(fd_in);
-    // }
-    // while(g_data.ms->next->cmd)
-    // {
-    //     printf("%s\n", g_data.ms->next->cmd);
-    //     g_data.ms->cmd = g_data.ms->next->cmd;
-    }
-    if(check_built_in(&g_data))
-    {
-        // printf("%d\n", fd_in);
-        // if(fd_in != 0)
-        // {
-        //     puts("mok");
-            // dup2(fd_out, 1);
-        // }
-        exec_redir(fd_in, fd_out);
-        execute(&g_data);
+        waitpid(pid, NULL, 0);
+        while (waitpid(-1, NULL, 0) != -1);
     }
     return 0;
 }
-
-
-
 
 char *get_path(char **envp)
 {
