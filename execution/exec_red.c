@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec_red.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 16:09:50 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/21 06:26:48 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/21 11:08:25 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 int	ft_infile_redir(t_redir *redir, int in)
 {

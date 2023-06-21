@@ -6,11 +6,11 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:27:01 by aanouari          #+#    #+#             */
-/*   Updated: 2023/05/15 00:20:49 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/21 11:10:52 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 t_vdata	*vdata_new(char **stack, int separator)
 {

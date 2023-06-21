@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+         #
+#    By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/24 08:21:48 by aanouari          #+#    #+#              #
-#    Updated: 2023/06/21 04:22:42 by lsadiq           ###   ########.fr        #
+#    Updated: 2023/06/21 11:28:59 by aanouari         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,27 +24,39 @@ CC 	=		cc
 CFLAGS =	-Wall -Wextra -Werror -fsanitize=address -g3
 RM =		rm -rf
 
-_SRCS =		minishell.c lexical_analysis.c structure.c aesthetic.c \
+PSRCS	=	lexical_analysis.c structure.c aesthetic.c \
 			joiners.c utils.c parsing.c redir.c errors.c expand.c \
-			expand_2.c debug.c exec_cmd.c builtins.c ft_cd.c ft_pwd.c \
-			ft_export.c ft_env.c ft_echo.c ft_unset.c ft_exit.c here_doc.c \
-			clean.c exec_red.c multiple_pipes.c
-SRCS =		$(addprefix parsing/, $(_SRCS))
-OBJS =		$(SRCS:.c=.o)
+			expand_2.c debug.c clean.c
+P_SRCS	=		$(addprefix parsing/, $(PSRCS))
+
+BSRCS	=	ft_cd.c ft_pwd.c ft_export.c ft_env.c ft_echo.c \
+			ft_unset.c ft_exit.c
+B_SRCS	=		$(addprefix builtins/, $(BSRCS))
+
+ESRCS	=	builtins.c exec_cmd.c exec_red.c multiple_pipes.c \
+			here_doc.c
+E_SRCS	=		$(addprefix execution/, $(ESRCS))
+
+MAIN	=	minishell.c
+
+OBJS	=	$(P_SRCS:.c=.o) $(B_SRCS:.c=.o) $(E_SRCS:.c=.o) $(MAIN:.c=.o)
 
 
 READLINE =	${HOME}/Desktop/brew/opt/readline/lib
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
-	@printf "$(RED)\r LOADING...⏳$(NO_COLOR)"
+	@printf "$(RED)\r YOUR SHELL IS LOADING...⏳$(NO_COLOR)"
+	@sleep 0.03
+	@printf "$(RED)\r YOUR SHELL IS LOADING...⌛️$(NO_COLOR)"
+	@sleep 0.03
 	
 all:		$(NAME)
 
 $(NAME):$(OBJS)
 		@make -C libft/
 		@$(CC) $(CFLAGS) -L libft/ -lft -lreadline -L $(READLINE) $(OBJS) -o $(NAME)
-		@printf "$(GREEN)\r YOUR MINISHELL IS READY!!\n$(NO_COLOR)"
+		@printf "$(GREEN)\r YOUR SHELL IS READY!!\n$(NO_COLOR)"
 		
 clean:
 				@$(RM) $(OBJS)

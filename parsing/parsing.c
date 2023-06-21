@@ -6,11 +6,11 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 17:38:12 by aanouari          #+#    #+#             */
-/*   Updated: 2023/05/15 01:40:07 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/21 11:10:52 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 int	get_separator(char **stack, int i)
 {

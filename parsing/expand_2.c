@@ -6,11 +6,11 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 05:09:00 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/11 00:43:58 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/21 11:10:52 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 char	*cancel_quotes(char	*file)
 {

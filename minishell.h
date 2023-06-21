@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 08:21:35 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/21 00:47:55 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/21 11:23:45 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@
 # include <fcntl.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "../libft/libft.h"
+# include "libft/libft.h"
 
 # define RED	"\x1B[31m"
 # define GREEN	"\e[01;32m"
 # define RESET	"\x1B[0m"
-#define YELLOW "\033[0;33m"
-#define BUFFER_SIZE 1024
+# define YELLOW "\033[0;33m"
+# define BUFFER_SIZE 1024
 
 # define ERR_PERMISSION "minishell: %s: Permission denied\n"
 # define ERR_NO_SUCH_FILE "minishell: %s: No such file or directory\n"
