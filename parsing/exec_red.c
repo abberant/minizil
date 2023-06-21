@@ -6,7 +6,7 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 16:09:50 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/20 10:19:20 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/21 06:26:48 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,11 @@ int	ft_infile_redir(t_redir *redir, int in)
 	if (redir->type == REDIR_IN)
 		return (open(redir->file, O_RDONLY, 0644));
 	if (redir->type == HEREDOC)
-		open_here_doc();
+	{
+		// redir->fd = open_here_doc(redir->file, in);
+		in = redir->fd;
+		
+	}
 	return (in);
 }
 
@@ -78,6 +82,7 @@ int    exec_redir(int in_fd, int out_fd)
 		{
 			dup2(out_fd, 1);
 			close(out_fd);
+			printf("OUT");
 		}
 	}
 	g_data.exit_s = 0;

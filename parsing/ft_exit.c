@@ -6,7 +6,7 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 13:35:16 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/18 08:16:47 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/20 21:35:49 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	ft_exit(t_shell *shell)
     int nb;
 
     if (tmp->ms->stack[1] == NULL)
-        exit(0);
+        exit(127);
     if (!ft_is_num(tmp->ms->stack[i]))
     {
         nb = ft_atoi(tmp->ms->stack[i]);
@@ -67,6 +67,7 @@ int	ft_exit(t_shell *shell)
         	return (g_data.exit_s);
 		}
         printf("exit\n");
+        // check it after
         g_data.exit_s = 0;
         return (g_data.exit_s);
     }

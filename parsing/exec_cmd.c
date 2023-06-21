@@ -6,7 +6,7 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 10:23:08 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/20 10:19:12 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/21 05:37:41 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void close_ends(int *ends, int fd_in)
 
 int launch(int *fd, int in, int out)
 {
-    (void) out;
+    // puts("dkhelt22222");
     int pid;
     pid = fork();
     if (pid == 0)
@@ -59,14 +59,12 @@ int launch(int *fd, int in, int out)
         }
         if (fd[0] != 0)
             close(fd[0]);
-        // if (fd[0] > 2)
-        // 	close(fd[0]);
         exec_redir(in, out);
         if (!check_built_in(&g_data))
             exec_command();
         else
             execute(&g_data);
-        exit(0);
+         exit(g_data.exit_s);
     }
     return pid;
 }
@@ -91,7 +89,7 @@ int   fork_exec(int fd_in, int fd_out)
     //     if (fd_out != 1)
     //         close(fd_out);
     // }
-    
+    // t_vdata *new = g_data.ms;
     if (g_data.ms)
     {
         while(g_data.ms)
@@ -173,9 +171,10 @@ void exec_command()
     free(path);
     if (execve(tmp, command, g_data.env) == -1)
     {
-        ft_putstrr_fd("minishell : command not found: ", 2);
+        ft_putstrr_fd("minishell--- : command not found: ", 2);
         ft_putstrr_fd(*g_data.ms->stack, 2);
         ft_putchar_fd('\n', 2);
         g_data.exit_s = 127;
+        exit(127);
     } 
 }

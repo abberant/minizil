@@ -6,7 +6,7 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 08:21:35 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/20 10:16:06 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/21 00:47:55 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,10 +139,9 @@ int		ft_echo(t_shell *shell);
 int		ft_unset(t_shell *shell);
 int		ft_exit(t_shell *shell);
 void	here_doc();
-void		open_here_doc(); 
-char	*get_next_line(int fd);
+int open_here_doc(char *file, int fd);
+ char *get_next_line(int fd);
 void	ft_append();
-// void	exec_redir();
 int	exec_redir(int in_fd, int out_fd);
 int	fork_exec(int fd_in, int fd_out);
 int check_built_in(t_shell *shell);

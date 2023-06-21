@@ -6,7 +6,7 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 00:51:14 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/20 10:10:44 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/21 06:17:43 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	main(int argc, char **argv, char **env)
 {
 	char	**full;
 	char	*load;
+	// t_redir *redi;
 	int out = 1;
 	int in = 0;
 
@@ -70,12 +71,24 @@ int	main(int argc, char **argv, char **env)
 			continue ;
 		}
 		ft_parse(full);
+		t_vdata *tmp = g_data.ms;
+		t_redir *new;
+		while(tmp)
+		{
+			new = tmp->rd;
+			// printf("%d\n", ->type);
+			while(new)
+			{
+				if(new->type == HEREDOC)
+				{
+				// 	printf("%d\n", new->fd);				
+					new->fd = open_here_doc(new->file, in);
+				}
+				new = new->next;
+			}
+			tmp = tmp->next;
+		}
 		fork_exec(in, out);
-		// ft_pipes();
-		// execute(&g_data);
-		// exec_redir(g_data, in, out);
-		// ft_append();
-		// debug_struct();
 		ft_cleanse();
 		ft_free2d(full);
 		free (load);
