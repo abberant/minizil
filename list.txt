@@ -1,1 +1,5 @@
 export p g g ; if export repeeaeted double free 
+<< "" | delimiter is an empty string sholdnt segfault
+exit(idk whata going on in there)
+export += dddd
+ambguous redirection

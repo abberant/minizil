@@ -6,7 +6,7 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 10:23:08 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/21 05:37:41 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/21 07:49:57 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,18 +77,18 @@ int   fork_exec(int fd_in, int fd_out)
 
     fd_in = STDIN_FILENO;
     fd_out = STDOUT_FILENO; 
-    // if(check_built_in(&g_data))
-    // {
-    //     if (fd_out != 1)
-    //     {
-    //         dup2(fd_out, 1);
-    //         close(fd_out);
-    //     }
-    //     exec_redir(fd_in, fd_out);
-    //     execute(&g_data);
-    //     if (fd_out != 1)
-    //         close(fd_out);
-    // }
+    if(check_built_in(&g_data))
+    {
+        // if (fd_out != 1)
+        // {
+        //     dup2(fd_out, 1);
+        //     close(fd_out);
+        // }
+        // exec_redir(fd_in, fd_out);
+        execute(&g_data);
+        // if (fd_out != 1)
+        //     close(fd_out);
+    }
     // t_vdata *new = g_data.ms;
     if (g_data.ms)
     {
@@ -106,8 +106,11 @@ int   fork_exec(int fd_in, int fd_out)
             fd[0] = 0;
         g_data.ms = g_data.ms->next;
         }
-        waitpid(pid, NULL, 0);
-        while (waitpid(-1, NULL, 0) != -1);
+        waitpid(pid, &g_data.exit_s, 0);
+        while (waitpid(-1, &g_data.exit_s, 0) != -1);
+        	// waitpid(pid, &exec->env.exit_value, 0);
+	    WIFEXITED(g_data.exit_s);
+        g_data.exit_s %= 255;
     }
     return 0;
 }
@@ -171,10 +174,9 @@ void exec_command()
     free(path);
     if (execve(tmp, command, g_data.env) == -1)
     {
-        ft_putstrr_fd("minishell--- : command not found: ", 2);
+        ft_putstrr_fd("minishell : command not found: ", 2);
         ft_putstrr_fd(*g_data.ms->stack, 2);
         ft_putchar_fd('\n', 2);
-        g_data.exit_s = 127;
         exit(127);
     } 
 }
