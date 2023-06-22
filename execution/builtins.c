@@ -20,13 +20,13 @@ int execute(t_shell *shell)
     while (temp.ms && temp.ms->cmd)
     {
         if (!ft_strcmp(temp.ms->cmd, "pwd"))
-            return (ft_pwd(shell));
+            return (ft_pwd());
         if (!ft_strcmp(temp.ms->cmd, "echo"))
             return(ft_echo(shell));
         if (!ft_strcmp(temp.ms->cmd, "env"))
             return (ft_env(shell));
         if (!ft_strcmp(temp.ms->cmd, "cd"))
-            return (ft_cd(shell));
+            return (ft_cd());
         if(!ft_strcmp(temp.ms->cmd, "export"))
         	return (ft_export(shell));
         if (!ft_strcmp(temp.ms->cmd, "unset"))

@@ -108,7 +108,6 @@ int   fork_exec(int fd_in, int fd_out)
         }
         waitpid(pid, &g_data.exit_s, 0);
         while (waitpid(-1, &g_data.exit_s, 0) != -1);
-        	// waitpid(pid, &exec->env.exit_value, 0);
 	    WIFEXITED(g_data.exit_s);
         g_data.exit_s %= 255;
     }

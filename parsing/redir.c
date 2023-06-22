@@ -60,7 +60,6 @@ void	set_redir_ll(t_vdata *tmp, char ***buffer)
 		i++;
 	}
 }
-
 void	file_expansion(void)
 {
 	t_redir	*v_base;
@@ -69,7 +68,10 @@ void	file_expansion(void)
 	while (v_base)
 	{
 		v_base->file = expand(v_base->file);
-		if (ft_strchr(v_base->file, '\'') || ft_strchr(v_base->file, '"'))
+		// qad hadi yal 3ettay 
+		if (ft_strcmp(v_base->file, "\"\"") == 0 || ft_strcmp(v_base->file, "\'\'") == 0)
+			v_base->file = ft_strdup("");
+		else if (ft_strchr(v_base->file, '\'') || ft_strchr(v_base->file, '"'))
 			v_base->file = cancel_quotes(v_base->file);
 		v_base = v_base->next;
 	}

@@ -43,9 +43,7 @@ char *get_my_env(t_shell shell, char *str)
 int ft_go_home()
 {
 	t_shell	tmp;
-	int		i;
 
-	i = 0;
 	tmp = g_data;
 	if (get_my_env(tmp, "HOME"))
 	{
@@ -67,32 +65,46 @@ int ft_go_home()
 int go_old_pwd()
 {
 	t_shell tmp;
-	int i;
+	char	*holder;
 
-	i = 0;
 	tmp = g_data;
-	// printf("%s\n", get_my_env(tmp, "OLDPWD"));
-	if(get_my_env(tmp, "OLDPWD"))
+	holder = get_my_env(tmp, "OLDPWD");
+	if(holder)
 	{
-		if (chdir(get_my_env(tmp, "OLDPWD")) < 0)
+		if (chdir(holder) < 0)
 		{
 			perror("cd");
 			return (1);
 		}
 		return 0;
 	}
-	else
-	{
-		ft_dprintf(2, "Minishell : cd : OLDPWD not set\n");
-		return 0;
-	}
+	ft_dprintf(2, "Minishell : cd : OLDPWD not set\n");
+	return 0;
 }
 
-void reset_pwd(t_shell *shell)
+char *ft_hardcode()
 {
-	t_shell *tmp = shell;
-	char *cwd = getcwd(NULL, 0);
+	char	*pwd;
+	int		i;
 
+	i = 0;
+	pwd = malloc(5);
+	while (i < 4)
+	{
+		pwd[i] = "PWD="[i];
+		i++;
+	}
+	return (pwd);
+}
+
+void reset_pwd()
+{
+	t_shell *tmp = &g_data;
+	char *cwd = getcwd(NULL, 0);
+	char	*pwd;
+
+	pwd = ft_hardcode();
+	// ft_strlcpy
 	if (!cwd)
 		return;
 	int i = 0;
@@ -100,8 +112,9 @@ void reset_pwd(t_shell *shell)
 	{
 		if (!ft_strncmp(tmp->env[i], "PWD=", 4))
 		{
-			tmp->env[i] = ft_strjoin("PWD=", cwd);
-			// printf("PWD = %s\n", cwd);
+			tmp->env[i] = ft_strjoin(pwd, cwd);
+			free(pwd);
+			free(cwd);
 			return;
 		}
 		i++;
@@ -109,10 +122,12 @@ void reset_pwd(t_shell *shell)
 	free(cwd);
 }
 
-void reset_oldpwd(t_shell *shell)
+void reset_oldpwd()
 {
 	int i = 0;
-	t_shell *tmp = shell;
+	t_shell *tmp;
+	
+	tmp = &g_data;
 	char *cwd = getcwd(NULL, 0);
 
 	if (!cwd)
@@ -122,7 +137,7 @@ void reset_oldpwd(t_shell *shell)
 		if (!ft_strncmp(tmp->env[i], "OLDPWD=", 6))
 		{
 			tmp->env[i] = ft_strjoin("OLDPWD=", cwd);
-			// printf("PLDPWD = %s\n", cwd);
+			free(cwd);
 			return;
 		}
 		i++;
@@ -134,46 +149,43 @@ void	ft_go_to(char **str)
 {
 	if (!str[1] || !ft_strncmp(str[1], "~", 1))
 	{
-		reset_oldpwd(&g_data);
+		reset_oldpwd();
 		ft_go_home();
-		reset_pwd(&g_data);
+		reset_pwd();
 	}
 	else if (!ft_strncmp(str[1], "-", 1))
 	{
 		go_old_pwd();
-		reset_pwd(&g_data);
+		reset_pwd();
 	}
 	else if (!ft_strncmp(str[1], "..", 1))
 	{
-		reset_oldpwd(&g_data);
+		reset_oldpwd();
 		if (chdir("..") < 0)
 		{
 			perror("cd");
 			exit(2);
 		}
-		reset_pwd(&g_data);
+		reset_pwd();
 	}
 	else
 	{
-		reset_oldpwd(&g_data);
+		reset_oldpwd();
 		if (chdir(str[1]) < 0)
 		{
 			perror("cd");
 			g_data.exit_s = 1;
 			return;
 		}
-		reset_pwd(&g_data);
+		reset_pwd();
 	}
 }
 
-int ft_cd(t_shell *shell)
+int ft_cd()
 {
-	char *cwd;
-	t_shell *tmp = shell;
+	t_vdata *tmp = g_data.ms;
 
-	cwd = getcwd(NULL, 0);
-	ft_go_to(tmp->ms->stack);
-	free(cwd);
+	ft_go_to(tmp->stack);
 	g_data.exit_s = 0;
 	return (g_data.exit_s);
 }

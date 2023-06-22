@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 15:47:54 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/21 11:10:52 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/22 02:09:53 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,9 @@
 int open_here_doc(char *file, int fd)
 {
 	char	*line;
-	t_vdata	*tmp;
-
-	tmp = g_data.ms;
+	// t_vdata	*tmp;
 	fd = -1;
 
-	printf("PASSED\n");
 	if (fd != -1)
 		close(fd);
 	int end[2];
@@ -80,7 +77,9 @@ int open_here_doc(char *file, int fd)
 		while (1)
 		{
 			line = readline(YELLOW " >" RESET);
-			if (!line || strcmp(file, line) == 0)
+			// if(!file)
+			// 	break ;
+			if (!line || ft_strcmp(file, line) == 0)
 			{
 				if (line)
 					free(line);
@@ -99,7 +98,6 @@ int open_here_doc(char *file, int fd)
 	else
 		wait(0);
 	close (end[1]);
-	// dup2(fd, 0);
 	fd = end[0];
 	// close(fd);
 	if (fd != -1)

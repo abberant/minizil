@@ -1,5 +1,15 @@
-export p g g ; if export repeeaeted double free 
-<< "" | delimiter is an empty string sholdnt segfault
 exit(idk whata going on in there)
 export += dddd
+
+ABDELLAh
 ambguous redirection
+expand flag 
+a="ls -l"
+handele quotes : empty string "" and ''
+don't expand the delimiter.
+expandi 3ad tokenizi exmpl : export h="      hh      bb     jjj     "
+                            echo $h ==> hh bb jjj
+                            our case would give 
+                                  hh      bb     jjj     
+redo the env (split the env : name and the value)
+

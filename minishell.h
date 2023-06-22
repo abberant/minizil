@@ -131,7 +131,7 @@ int		execute(t_shell *shell);
 int		ft_lentab(char *tab);
 int 	ft_alpha(char c);
 int		ft_len_env(char **str);
-int		ft_cd(t_shell *shell);
+int		ft_cd();
 int		ft_pwd();
 int		ft_export(t_shell *shell);
 int		ft_env(t_shell *g_data);
