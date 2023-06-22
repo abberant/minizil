@@ -2,5 +2,5 @@ exit(idk whats going on in there)
 export += dddd
 
 ABDELLAH
-ambiguous redirection
+ambiguous redirection (added error f rd, check if error == 1 display AMBIGUOUS_REDIR message)
 redo the env (split the env : name and the value)
