@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 00:51:14 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/22 15:49:53 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/22 23:32:01 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,14 @@ void	get_cmd_reset_stack()
 	i = 0;
 	ct = NULL;
 	data = g_data.ms;
-	if (data)
+	while (data)
 	{
-		if (ft_strchr(data->stack[0], 32))
+		if (!data->stack)
+		{
+			data = data->next;
+			continue ;
+		}
+		else if (ft_strchr(data->stack[0], 32))
 		{
 			data->cmd = ft_split(data->stack[0], 32)[0];
 			ct = ft_split(data->stack[0], 32);
@@ -44,6 +49,7 @@ void	get_cmd_reset_stack()
 		}
 		else
 			data->cmd = data->stack[0];
+		data = data->next;
 	}
 }
 
@@ -57,12 +63,9 @@ void	ft_parse(char **full)
 	while (tmp)
 	{
 		quote_expansion(tmp);
-		if (!tmp->stack)
-			tmp = tmp->next;
-		else
-			get_cmd_reset_stack();
 		tmp = tmp->next;
 	}
+	get_cmd_reset_stack();
 }
 
 int	main(int argc, char **argv, char **env)
@@ -94,7 +97,7 @@ int	main(int argc, char **argv, char **env)
 		}
 		ft_parse(full);
 		t_vdata *tmp = g_data.ms;
-		debug_struct();
+		// debug_struct();
 		t_redir *new;
 		while(tmp)
 		{

@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 15:47:54 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/22 13:12:01 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/22 23:45:15 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int open_here_doc(char *file, int fd)
 					free(line);
 				break;
 			}
-			else
+			else if (ft_strlen(line) > 0)
 			{
 				line = expand(line, 0);
 				ft_dprintf(fd, line);

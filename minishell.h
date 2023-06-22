@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 08:21:35 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/22 15:50:01 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/22 23:21:35 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,6 @@ void	exec_command();
 char	*split_path(char *path, char *argv);
 char	*get_path(char **envp);
 int		execute(t_shell *shell);
-// rah 3ndi arrsize f libft 7ydi lentab
 int		ft_lentab(char *tab);
 int 	ft_alpha(char c);
 int		ft_len_env(char **str);

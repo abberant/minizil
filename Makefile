@@ -6,7 +6,7 @@
 #    By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/24 08:21:48 by aanouari          #+#    #+#              #
-#    Updated: 2023/06/22 12:58:52 by aanouari         ###   ########.fr        #
+#    Updated: 2023/06/22 23:19:23 by aanouari         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ ITALIC		=	'\033[3m'
 
 
 CC 	=		cc
-CFLAGS =	-Wall -Wextra -Werror -fsanitize=address -g3
+CFLAGS =	-Wall -Wextra -Werror #-fsanitize=address -g3
 RM =		rm -rf
 
 PSRCS	=	lexical_analysis.c structure.c aesthetic.c \

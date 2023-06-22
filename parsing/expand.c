@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 01:21:25 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/22 13:35:19 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/22 23:20:53 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ char	*expand(char *str, bool quote)
 	forum = NULL;
 	while (str[i])
 	{
-		//here
 		if (quote)
 			do_quotes(str, i, &index);
 		if (str[i] == '$' && str[i + 1] && index != 3)
