@@ -4,3 +4,4 @@ export += dddd
 ABDELLAH
 ambiguous redirection (added error f rd, check if error == 1 display AMBIGUOUS_REDIR message)
 redo the env (split the env : name and the value)
+ila redoit env b7al hakak ghaykhssni nrj3o ***pointer aka expand.c o expand2.c ghady ykhssni n3awdhom mn lwl wghadi nzido nt3tlo
