@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 15:47:54 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/22 02:09:53 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/22 13:12:01 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int open_here_doc(char *file, int fd)
 			}
 			else
 			{
+				line = expand(line, 0);
 				ft_dprintf(fd, line);
 				ft_dprintf(fd, "\n");
 				free(line);

@@ -6,11 +6,9 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 01:48:10 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/21 11:10:52 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/22 14:19:58 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #include "../minishell.h"
 
@@ -52,6 +50,8 @@ void	debug_struct()
 				printf("\n");
 				printf("File name is : [%s]\n", new->file);
 				printf("\n");
+				if (new->error)
+					printf("Error : [Ambiguous]\n"); 
 				printf("---------------------------------------------\n");
 				printf("\n");
 				new = new->next;

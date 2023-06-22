@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 18:20:27 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/21 11:10:52 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/22 14:38:41 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,19 +60,19 @@ void	set_redir_ll(t_vdata *tmp, char ***buffer)
 		i++;
 	}
 }
-void	file_expansion(void)
+void	file_expansion(t_vdata *ms)
 {
 	t_redir	*v_base;
 
-	v_base = g_data.ms->rd;
+	v_base = ms->rd;
 	while (v_base)
 	{
-		v_base->file = expand(v_base->file);
-		// qad hadi yal 3ettay 
-		if (ft_strcmp(v_base->file, "\"\"") == 0 || ft_strcmp(v_base->file, "\'\'") == 0)
-			v_base->file = ft_strdup("");
+		if (v_base->type != HEREDOC)
+			v_base->file = expand(v_base->file, 1);
 		else if (ft_strchr(v_base->file, '\'') || ft_strchr(v_base->file, '"'))
 			v_base->file = cancel_quotes(v_base->file);
+		if (!ft_strcmp(v_base->file, ""))
+			v_base->error = 1;
 		v_base = v_base->next;
 	}
 }
@@ -94,7 +94,7 @@ void	init_redir(void)
 		}
 		else
 			tmp->rd = NULL;
-		file_expansion();
+		file_expansion(tmp);
 		tmp = tmp->next;
 	}
 }

@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 00:51:14 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/21 22:05:08 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/22 15:31:17 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "minishell.h"
+
 
 void	initialize_shell(int argc, char **argv, char **env)
 {
@@ -21,6 +21,30 @@ void	initialize_shell(int argc, char **argv, char **env)
 	g_data.env = env;
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, sig_handler);
+}
+
+void	get_cmd_reset_stack()
+{
+	int		i;
+	char	**ct;
+	t_vdata	*data;
+
+	i = 0;
+	ct = NULL;
+	data = g_data.ms;
+	if (data)
+	{
+		if (ft_strchr(data->stack[0], 32))
+		{
+			data->cmd = ft_split(data->stack[0], 32)[0];
+			ct = ft_split(data->stack[0], 32);
+			while (data->stack[++i])
+				ct = a_concatinate(ct, data->stack[i]);
+			data->stack = ct;
+		}
+		else
+			data->cmd = data->stack[0];
+	}
 }
 
 void	ft_parse(char **full)
@@ -36,10 +60,8 @@ void	ft_parse(char **full)
 		if (!tmp->stack)
 			tmp = tmp->next;
 		else
-		{
-			tmp->cmd = tmp->stack[0];
-			tmp = tmp->next;
-		}
+			get_cmd_reset_stack();
+		tmp = tmp->next;
 	}
 }
 
@@ -72,6 +94,7 @@ int	main(int argc, char **argv, char **env)
 		}
 		ft_parse(full);
 		t_vdata *tmp = g_data.ms;
+		debug_struct();
 		t_redir *new;
 		while(tmp)
 		{

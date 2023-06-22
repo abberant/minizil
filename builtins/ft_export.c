@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 17:04:07 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/21 11:10:52 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/22 15:11:37 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int ft_len_env(char **str)
         i++;
     return (i);
 }
+
 char **ft_add_str_to_tab(char **tab, char *str)
 {
     int i = 0;
@@ -185,7 +186,7 @@ char **ft_replace_env(char **str, char *new)
         if (ft_strncmp(str[j], new, i) == 0)
         {
             tmp[j] = ft_strdup(new);
-            free(str[j]);
+            // free(str[j]);
             // free(new);
         }
         else
@@ -193,7 +194,7 @@ char **ft_replace_env(char **str, char *new)
         j++;
     }
     tmp[j] = NULL;
-    free(str);
+    // free(str);
     return (tmp);
 }
 

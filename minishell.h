@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 08:21:35 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/21 11:23:45 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/22 14:45:55 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <limits.h>
 # include <fcntl.h>
+# include <stdbool.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "libft/libft.h"
@@ -37,11 +38,13 @@
 # define ERR_TOO_MANY_ARGS "minishell: exit: too many arguments\n"
 # define UNEXPECTED_TOKEN "minishell: syntax error near unexpected token `%s'\n"
 # define UNCLOSED_QUOTE "minishell: syntax error near unclosed quotation mark\n"
+# define AMBIGUOUS_REDIR "minishell: ambiguous redirect\n"
 
 typedef struct s_redir
 {
 	int				type;
 	int				fd;
+	int				error;
 	char			*file;
 	struct s_redir	*next;
 	int				in_fd;
@@ -54,7 +57,6 @@ typedef struct s_vdata
 	char			**stack;
 	char			*cmd;
 	int				sep;
-	int				error;
 	struct s_redir	*rd;
 	struct s_vdata	*previous;
 	struct s_vdata	*next;
@@ -102,7 +104,6 @@ int		metachar_check(char c);
 int		arrow_check(char *str);
 void	sig_handler(int sig);
 
-void	reset_pivot(char *pivot);
 int		token_error(char **stack);
 int		unspecial(char c);
 
@@ -111,7 +112,7 @@ void	init_tree(char **stack);
 void	init_redir(void);
 void	rl_replace_line(const char *s, int comp);
 
-char	*expand(char *str);
+char	*expand(char *str, bool quote);
 char	*cancel_quotes(char	*file);
 void	quote_expansion(t_vdata *ms);
 
@@ -128,6 +129,7 @@ void	exec_command();
 char	*split_path(char *path, char *argv);
 char	*get_path(char **envp);
 int		execute(t_shell *shell);
+// rah 3ndi arrsize f libft 7ydi lentab
 int		ft_lentab(char *tab);
 int 	ft_alpha(char c);
 int		ft_len_env(char **str);
@@ -139,12 +141,11 @@ int		ft_echo(t_shell *shell);
 int		ft_unset(t_shell *shell);
 int		ft_exit(t_shell *shell);
 void	here_doc();
-int open_here_doc(char *file, int fd);
- char *get_next_line(int fd);
+int		open_here_doc(char *file, int fd);
 void	ft_append();
-int	exec_redir(int in_fd, int out_fd);
-int	fork_exec(int fd_in, int fd_out);
-int check_built_in(t_shell *shell);
-void    ft_pipes();
+int		exec_redir(int in_fd, int out_fd);
+int		fork_exec(int fd_in, int fd_out);
+int		check_built_in(t_shell *shell);
+void	ft_pipes();
 
 #endif

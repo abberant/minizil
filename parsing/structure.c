@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:27:01 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/21 11:10:52 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/22 14:20:35 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ t_vdata	*vdata_new(char **stack, int separator)
 	tab->stack = stack;
 	tab->cmd = NULL;
 	tab->sep = separator;
-	tab->error = 0;
 	tab->rd = NULL;
 	tab->previous = NULL;
 	tab->next = NULL;
@@ -60,6 +59,7 @@ t_redir	*redir_new(char *file, int type)
 	tab = (t_redir *) ft_calloc(1, sizeof(t_redir));
 	tab->file = ft_strdup(file);
 	tab->fd = -1;
+	tab->error = 0;
 	tab->type = type;
 	tab->next = NULL;
 	tab->previous = NULL;

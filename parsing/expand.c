@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 01:21:25 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/21 11:10:52 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/22 13:35:19 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	do_quotes(char *str, int i, int *index)
 	}
 }
 
-char	*expand(char *str)
+char	*expand(char *str, bool quote)
 {
 	char	*forum;
 	int		index;
@@ -94,9 +94,11 @@ char	*expand(char *str)
 	i = 0;
 	index = 1;
 	forum = NULL;
-	while (str && str[i])
+	while (str[i])
 	{
-		do_quotes(str, i, &index);
+		//here
+		if (quote)
+			do_quotes(str, i, &index);
 		if (str[i] == '$' && str[i + 1] && index != 3)
 			env_value(&forum, str, &i);
 		else
