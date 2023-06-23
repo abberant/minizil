@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 08:21:35 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/22 23:21:35 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/23 13:51:53 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,14 @@ typedef struct s_vdata
 	struct s_vdata	*previous;
 	struct s_vdata	*next;
 }	t_vdata;
+
 typedef struct s_env
 {
 	char *name;
 	char *value;
 	void *next;
 } t_env;
+
 typedef struct s_shell
 {
 	int		flag;
@@ -118,7 +120,7 @@ void	init_redir(void);
 void	rl_replace_line(const char *s, int comp);
 
 char	*expand(char *str, bool quote);
-char	*cancel_quotes(char	*file);
+char	*cancel_quotes(char	*file, bool free_file);
 void	quote_expansion(t_vdata *ms);
 
 t_vdata	*vdata_new(char **stack, int separator);

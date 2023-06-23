@@ -1,6 +1,0 @@
-================================================================================
-ABDELLAH
-+ handel expand fl heredoc + leaks f expand
-ME
-+ leaks 
-+ 

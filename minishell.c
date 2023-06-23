@@ -6,12 +6,11 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 00:51:14 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/22 23:32:01 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/24 00:19:12 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 void	initialize_shell(int argc, char **argv, char **env)
 {
@@ -30,6 +29,7 @@ void	initialize_shell(int argc, char **argv, char **env)
 // 	env->name = ;
 // 	env->value
 // }
+
 void	get_cmd_reset_stack()
 {
 	int		i;
@@ -103,8 +103,8 @@ int	main(int argc, char **argv, char **env)
 			continue ;
 		}
 		ft_parse(full);
+		debug_struct();
 		t_vdata *tmp = g_data.ms;
-		// debug_struct();
 		t_redir *new;
 		while(tmp)
 		{

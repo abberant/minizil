@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 12:23:21 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/21 11:10:52 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/23 11:52:59 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	sig_handler(int sig)
 	if (sig == SIGINT)
 	{
 		printf("\n");
-		// rl_replace_line("", 0);
-		// rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_on_new_line();
 		rl_redisplay();
 	}
 }

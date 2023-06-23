@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 18:20:27 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/22 23:43:21 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/23 13:52:36 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	file_expansion(t_vdata *ms)
 		{
 			v_base->file = expand(v_base->file, 1);
 			if (ft_strchr(v_base->file, '\'') || ft_strchr(v_base->file, '"'))
-				v_base->file = cancel_quotes(v_base->file);
+				v_base->file = cancel_quotes(v_base->file, 1);
 		}
 		if (!ft_strcmp(v_base->file, ""))
 			v_base->error = 1;

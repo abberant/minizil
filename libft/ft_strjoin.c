@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 01:18:21 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/06 11:45:59 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/23 14:26:13 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ char *ft_strjoin(char *s1, char *s2)
 			s[i] = s1[i];
 	while (s2[j])
 		s[i++] = s2[j++];
-	// free(s1);
+	free(s1);
 	return (s);
 }

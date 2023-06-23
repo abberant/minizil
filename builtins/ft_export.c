@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 17:04:07 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/22 15:11:37 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/23 13:52:21 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ t_env   *ft_set(char *str)
         }
         i++;
     }
-    env->name = cancel_quotes(ft_substr(str, 0, j));
-    env->value = cancel_quotes(ft_substr(str, i + 1, ft_strlen(str) - i - 1));
+    env->name = cancel_quotes(ft_substr(str, 0, j), 1);
+    env->value = cancel_quotes(ft_substr(str, i + 1, ft_strlen(str) - i - 1), 1);
     env->next = NULL;
     return (env);
 }
