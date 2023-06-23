@@ -61,7 +61,12 @@ typedef struct s_vdata
 	struct s_vdata	*previous;
 	struct s_vdata	*next;
 }	t_vdata;
-
+typedef struct s_env
+{
+	char *name;
+	char *value;
+	void *next;
+} t_env;
 typedef struct s_shell
 {
 	int		flag;

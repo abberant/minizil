@@ -12,58 +12,9 @@
 
 #include "../minishell.h"
 
-// void open_here_doc()
-// {
-// 	int i;
-// 	char *line;
-// 	t_vdata	*tmp;
-// 	char *last;
-// 	char *file;
-
-// 	i = 1;
-// 	tmp = g_data.ms;
-// 	int fd = open(file , O_CREAT | O_RDWR | O_TRUNC, 0644);
-// 	while (tmp)
-// 	{
-// 		// t_redir *k = tmp->rd; 
-// 		// while (k)
-// 		// {
-// 		// 	count++;
-// 		// 	k = k->next ;
-// 		// }
-// 		while (tmp->rd)
-// 		{
-// 			if (tmp->rd && tmp->rd->type == HEREDOC)
-// 			{
-// 				while(1)
-// 				{
-// 					line = readline(YELLOW " >" RESET);
-// 					if (!line || (!ft_strncmp(tmp->rd->file, line, ft_strlen(tmp->rd->file) + 1)))
-// 					{ 
-// 						if (line)
-// 							free(line);
-// 						break ;
-// 					}
-// 					else{
-						
-// 						write(fd, line, ft_strlen(line) + 1);
-// 						free (line);
-// 					}
-// 				}
-// 				// close (fd);
-// 				last = ft_strdup(file);
-// 				printf("%s-------------\n", last);
-// 				// free(file);
-// 			}
-// 			tmp->rd = tmp->rd->next;
-// 		}
-// 		tmp = tmp->next;
-// 	}
-// }
 int open_here_doc(char *file, int fd)
 {
 	char	*line;
-	// t_vdata	*tmp;
 	fd = -1;
 
 	if (fd != -1)
@@ -76,16 +27,17 @@ int open_here_doc(char *file, int fd)
 		fd = end[1];
 		while (1)
 		{
+			signal(SIGINT, sig_handler);
+			signal(SIGQUIT, SIG_IGN);
 			line = readline(YELLOW " >" RESET);
-			// if(!file)
-			// 	break ;
 			if (!line || ft_strcmp(file, line) == 0)
 			{
 				if (line)
-					free(line);
+					// free(line);
 				break;
 			}
-			else if (ft_strlen(line) > 0)
+			// else if (ft_strlen(line) > 0)
+			else
 			{
 				line = expand(line, 0);
 				ft_dprintf(fd, line);

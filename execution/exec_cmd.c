@@ -70,6 +70,8 @@ int launch(int *fd, int in, int out)
 }
 int   fork_exec(int fd_in, int fd_out)
 {
+    (void) fd_in;
+    (void) fd_out;
     int fd[2];
     fd[0] = 0;
     fd[1] = 1;

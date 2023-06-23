@@ -23,6 +23,13 @@ void	initialize_shell(int argc, char **argv, char **env)
 	signal(SIGINT, sig_handler);
 }
 
+// void	ft_set_env()
+// {
+// 	t_env *env;
+
+// 	env->name = ;
+// 	env->value
+// }
 void	get_cmd_reset_stack()
 {
 	int		i;

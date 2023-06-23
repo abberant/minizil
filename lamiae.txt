@@ -1,0 +1,7 @@
+leaks in export 
+leaks in cd
+double check for leaks 
+handle uppercase built-ins 
+signal in heredoc
+norm
+ambiguous
