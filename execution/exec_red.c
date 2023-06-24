@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 16:09:50 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/21 11:08:25 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/24 14:23:32 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,12 @@ int    exec_redir(int in_fd, int out_fd)
 			}
 			if (g_data.ms->rd->error)
 			{
-				ft_dprintf(2, "%s : ambiguous redirect\n", g_data.ms->rd->file);
+				ft_dprintf(2, AMBIGUOUS_REDIR, g_data.ms->rd->error_file);
 				exit(1);
 			}
 			if (in_fd < 0 || out_fd < 0)
 			{
-				ft_dprintf(2, "%s : no such file or directory\n", g_data.ms->rd->file);
+				ft_dprintf(2, ERR_NO_SUCH_FILE, g_data.ms->rd->file);
 				exit(1);
 			}
 			new = new->next;

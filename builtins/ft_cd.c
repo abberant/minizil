@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 01:19:27 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/21 11:10:52 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/24 14:46:11 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,15 +89,17 @@ void reset_pwd()
 {
 	int i = 0;
 	char	*holder;
+	char	*pwd;
 	char *cwd = getcwd(NULL, 0);
 	if (!cwd)
 		return;
+	pwd = ft_strdup("PWD=");
 	while (g_data.env && g_data.env[i])
 	{
 		if (!ft_strncmp(g_data.env[i], "PWD=", 4))
 		{
 			holder = g_data.env[i];
-			g_data.env[i] = ft_strjoin("PWD=", cwd);
+			g_data.env[i] = ft_strjoin(pwd, cwd);
 			free(cwd);
 			free(holder);
 			return;
@@ -112,15 +114,17 @@ void reset_oldpwd()
 	int i = 0;
 	char	*holder;
 	char *cwd = getcwd(NULL, 0);
+	char	*old_pwd;
 
 	if (!cwd)
 		return;
+	old_pwd = ft_strdup("OLDPWD=");
 	while (g_data.env && g_data.env[i])
 	{
 		if (!ft_strncmp(g_data.env[i], "OLDPWD=", 6))
 		{
 			holder = g_data.env[i];
-			g_data.env[i] = ft_strjoin("OLDPWD=", cwd);
+			g_data.env[i] = ft_strjoin(old_pwd, cwd);
 			free(cwd);
 			free(holder);
 			return;

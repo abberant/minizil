@@ -6,7 +6,7 @@
 #    By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/24 08:21:48 by aanouari          #+#    #+#              #
-#    Updated: 2023/06/22 23:19:23 by aanouari         ###   ########.fr        #
+#    Updated: 2023/06/24 16:42:32 by aanouari         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ ITALIC		=	'\033[3m'
 
 
 CC 	=		cc
-CFLAGS =	-Wall -Wextra -Werror
+CFLAGS =	-Wall -Wextra -Werror -g3 -fsanitize=address
 RM =		rm -rf
 
 PSRCS	=	lexical_analysis.c structure.c aesthetic.c \
@@ -75,4 +75,4 @@ re:				fclean all
 leaks :
 	while true ; do leaks minishell ; sleep 1 ; done 
 
-.PHONY	:		all get_brew get_readline install clean fclean re bonus
+.PHONY	:		all clean fclean re bonus

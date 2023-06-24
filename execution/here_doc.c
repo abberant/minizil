@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 15:47:54 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/23 13:57:48 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/24 17:51:52 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int open_here_doc(char *file, int fd)
 		close(fd);
 	int end[2];
 	pipe(end);
-	if (fork() == 0)
+	if (file && fork() == 0)
 	{
 		q_file = cancel_quotes(file, 0);
 		close(end[0]);

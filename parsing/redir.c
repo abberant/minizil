@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 18:20:27 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/23 13:52:36 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/24 14:30:21 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,27 +63,24 @@ void	set_redir_ll(t_vdata *tmp, char ***buffer)
 void	file_expansion(t_vdata *ms)
 {
 	t_redir	*v_base;
-	char	*holder;
+	char	*if_no;
 
-	// ra zedt dak l holder tansavi fih file bach nprintih fl error msg o tanfreeyh flkhr
 	v_base = ms->rd;
-	holder = ft_strdup(v_base->file);
 	while (v_base)
 	{
+		if (v_base->file)
+			if_no = ft_strdup(v_base->file);
 		if (v_base->type != HEREDOC)
 		{
 			v_base->file = expand(v_base->file, 1);
 			if (ft_strchr(v_base->file, '\'') || ft_strchr(v_base->file, '"'))
 				v_base->file = cancel_quotes(v_base->file, 1);
 		}
-		if (!ft_strcmp(v_base->file, ""))
+		if (!ft_strcmp(v_base->file, "") || ft_strchr(v_base->file, ' '))
 		{
-			free(v_base->file);
-			v_base->file = holder;
+			v_base->error_file = if_no;
 			v_base->error = 1;
 		}
-		else
-			free(holder);
 		v_base = v_base->next;
 	}
 }

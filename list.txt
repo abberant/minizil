@@ -1,4 +1,0 @@
-echo $PWD ==>>> prints garbage value
-if syntax error all the heredocs before should be opened but not used .. to be fixed
-endk double free fl multiple heredoc
-double free f redictions  

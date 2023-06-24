@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 21:38:00 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/11 18:21:53 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/24 16:35:20 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ int		ft_isascii(int a);
 int		ft_isprint(int c);
 int		ft_toupper(int c);
 int		ft_tolower(int c);
-void ft_putchar_fd(char c, int fd);
-void ft_putstrr_fd(char *s, int fd);
-    size_t ft_strlen(char *str);
+void	ft_putchar_fd(char c, int fd);
+void	ft_putstrr_fd(char *s, int fd);
+size_t	ft_strlen(char *str);
 void	*ft_memset(void *b, int c, size_t len);
 void	ft_bzero(void *s, size_t n);
 void	*ft_memcpy(void *dst, void *src, size_t n);
@@ -44,8 +44,9 @@ char	*ft_strchr(char *s, int c);
 char	*ft_strrchr(char *s, int c);
 void	ft_free2d(char **tab);
 int		ft_arrsize(char **tab);
-size_t		ft_strncmp(char *s1, char *s2, size_t n);
+size_t	ft_strncmp(char *s1, char *s2, size_t n);
 void	*ft_memchr(void *s, int c, size_t n);
+char	*ft_strjoinf(char *s1, char *s2);
 int		ft_memcmp(void *s1, void *s2, size_t n);
 int		ft_strnstr(char *haystack, char *needle, size_t len);
 char	*ft_strstr(char *haystack, char *needle);

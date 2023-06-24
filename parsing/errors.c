@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 01:49:28 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/21 11:10:52 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/24 18:08:25 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,15 @@ int	redirection_error(char **stack, int i)
 int	token_error(char **stack)
 {
 	int	i;
+	int	hdoc;
 
-	i = 0;
-	while (stack && stack[i])
+	i = -1;
+	hdoc = -1;
+	while (stack && stack[++hdoc])
+		if (ft_strstr(stack[hdoc], "<<")
+			&& !(redirection_error(stack, hdoc)))
+			return(open_here_doc(stack[hdoc + 1], 0));
+	while (stack && stack[++i])
 	{
 		if (quote_error(stack[i]))
 			return (g_data.exit_s = 258, 1);
@@ -96,7 +102,6 @@ int	token_error(char **stack)
 			return (g_data.exit_s = 258, 1);
 		else if (redirection_error(stack, i))
 			return (g_data.exit_s = 258, 1);
-		i++;
 	}
 	return (0);
 }

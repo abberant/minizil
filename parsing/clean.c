@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 16:41:00 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/22 14:22:18 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/24 14:35:05 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void clear_lists(void)
 		{
 			tmp2 = tmp->rd;
 			tmp->rd = tmp->rd->next;
+			if (tmp2->error_file)
+				free(tmp2->error_file);
 			free(tmp2);
 			tmp2 = NULL;
 		}

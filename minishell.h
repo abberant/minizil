@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 08:21:35 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/23 13:51:53 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/24 17:48:26 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,15 @@
 # define ERR_TOO_MANY_ARGS "minishell: exit: too many arguments\n"
 # define UNEXPECTED_TOKEN "minishell: syntax error near unexpected token `%s'\n"
 # define UNCLOSED_QUOTE "minishell: syntax error near unclosed quotation mark\n"
-# define AMBIGUOUS_REDIR "minishell: ambiguous redirect\n"
+# define AMBIGUOUS_REDIR "minishell: %s: ambiguous redirect\n"
+# define UNSET_UNVALID "minishell: unset: `%s': not a valid identifier\n"
 
 typedef struct s_redir
 {
 	int				type;
 	int				fd;
 	int				error;
+	char 			*error_file;
 	char			*file;
 	struct s_redir	*next;
 	int				in_fd;
@@ -110,13 +112,14 @@ void	skip_spaces(char *str, int *i);
 int		metachar_check(char c);
 int		arrow_check(char *str);
 void	sig_handler(int sig);
-
+int		get_separator(char **stack, int i);
 int		token_error(char **stack);
 int		unspecial(char c);
 
 char	**lexer(char *load);
 void	init_tree(char **stack);
 void	init_redir(void);
+int		ft_parse(char **full, char *load);
 void	rl_replace_line(const char *s, int comp);
 
 char	*expand(char *str, bool quote);

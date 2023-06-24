@@ -2,6 +2,6 @@ leaks in export ===> done
 leaks in cd =====> done 
 double check for leaks ====> done
 signal in heredoc ===> done 
-ambiguous =====> done 
+ambiguous =====> done
 handle uppercase built-ins 
 norm
