@@ -17,32 +17,9 @@ void dup_2(int fd_1, int fd_2)
     dup2(fd_1, fd_2);
     close(fd_1);
 }
-void	dupfd2fd(int fd, int othe_fd)
-{
-	dup2(fd, othe_fd);
-	close(fd);
-}
-
-void	dup_ends(int *ends, int fd_in)
-{
-	if (fd_in != STDIN_FILENO)
-		dupfd2fd(fd_in, STDIN_FILENO);
-	dupfd2fd(ends[1], STDOUT_FILENO);
-	if (ends[0] > 2)
-		close(ends[0]);
-}
-void close_ends(int *ends, int fd_in)
-{
-	if (ends[1] > 2)
-		close(ends[1]);
-	if (fd_in != STDIN_FILENO)
-		close(fd_in);
-}
-
 
 int launch(int *fd, int in, int out)
 {
-    // puts("dkhelt22222");
     int pid;
     pid = fork();
     if (pid == 0)
@@ -76,23 +53,14 @@ int   fork_exec(int fd_in, int fd_out)
     fd[0] = 0;
     fd[1] = 1;
     int pid = -1;
+    t_vdata *new;
 
+    new = g_data.ms;
     fd_in = STDIN_FILENO;
-    fd_out = STDOUT_FILENO; 
-    if(check_built_in(&g_data))
-    {
-        // if (fd_out != 1)
-        // {
-        //     dup2(fd_out, 1);
-        //     close(fd_out);
-        // }
-        // exec_redir(fd_in, fd_out);
+    fd_out = STDOUT_FILENO;
+    if (!g_data.ms->next && check_built_in(&g_data) && !g_data.ms->rd)
         execute(&g_data);
-        // if (fd_out != 1)
-        //     close(fd_out);
-    }
-    // t_vdata *new = g_data.ms;
-    if (g_data.ms)
+    else
     {
         while(g_data.ms)
         {
@@ -106,8 +74,9 @@ int   fork_exec(int fd_in, int fd_out)
 			    close(fd_in);
             fd_in = fd[0];
             fd[0] = 0;
-        g_data.ms = g_data.ms->next;
+            g_data.ms = g_data.ms->next;
         }
+        g_data.ms = new;
         waitpid(pid, &g_data.exit_s, 0);
         while (waitpid(-1, &g_data.exit_s, 0) != -1);
 	    WIFEXITED(g_data.exit_s);

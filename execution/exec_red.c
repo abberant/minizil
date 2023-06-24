@@ -19,11 +19,7 @@ int	ft_infile_redir(t_redir *redir, int in)
 	if (redir->type == REDIR_IN)
 		return (open(redir->file, O_RDONLY, 0644));
 	if (redir->type == HEREDOC)
-	{
-		// redir->fd = open_here_doc(redir->file, in);
 		in = redir->fd;
-		
-	}
 	return (in);
 }
 
@@ -65,11 +61,15 @@ int    exec_redir(int in_fd, int out_fd)
 				out_fd = ft_outfile_redir(new, out_fd);
 				out_flag = 1;
 			}
+			if (g_data.ms->rd->error)
+			{
+				ft_dprintf(2, "%s : ambiguous redirect\n", g_data.ms->rd->file);
+				exit(1);
+			}
 			if (in_fd < 0 || out_fd < 0)
 			{
-				ft_putstrr_fd(": no such file or directory \n", 2);
+				ft_dprintf(2, "%s : no such file or directory\n", g_data.ms->rd->file);
 				exit(1);
-				// exit(g_data.exit_s);
 			}
 			new = new->next;
 		}
@@ -82,7 +82,6 @@ int    exec_redir(int in_fd, int out_fd)
 		{
 			dup2(out_fd, 1);
 			close(out_fd);
-			printf("OUT");
 		}
 	}
 	g_data.exit_s = 0;

@@ -12,6 +12,8 @@
 
 #include "../minishell.h"
 
+// EXPORT EXIT UNSET not working if uppercase
+
 int execute(t_shell *shell)
 {
     t_shell temp;

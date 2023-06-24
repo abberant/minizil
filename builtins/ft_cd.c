@@ -43,12 +43,15 @@ char *get_my_env(t_shell shell, char *str)
 int ft_go_home()
 {
 	t_shell	tmp;
+	char	*holder;
 
 	tmp = g_data;
-	if (get_my_env(tmp, "HOME"))
+	holder = get_my_env(tmp, "HOME");
+	if (holder)
 	{
-		if (chdir(get_my_env(tmp, "HOME")) < 0)
+		if (chdir(holder) < 0)
 		{
+			free(holder);
 			perror("cd");
 			return 1;
 		}
@@ -82,39 +85,21 @@ int go_old_pwd()
 	return 0;
 }
 
-char *ft_hardcode()
-{
-	char	*pwd;
-	int		i;
-
-	i = 0;
-	pwd = malloc(5);
-	while (i < 4)
-	{
-		pwd[i] = "PWD="[i];
-		i++;
-	}
-	return (pwd);
-}
-
 void reset_pwd()
 {
-	t_shell *tmp = &g_data;
+	int i = 0;
+	char	*holder;
 	char *cwd = getcwd(NULL, 0);
-	char	*pwd;
-
-	pwd = ft_hardcode();
-	// ft_strlcpy
 	if (!cwd)
 		return;
-	int i = 0;
-	while (tmp->env && tmp->env[i])
+	while (g_data.env && g_data.env[i])
 	{
-		if (!ft_strncmp(tmp->env[i], "PWD=", 4))
+		if (!ft_strncmp(g_data.env[i], "PWD=", 4))
 		{
-			tmp->env[i] = ft_strjoin(pwd, cwd);
-			free(pwd);
+			holder = g_data.env[i];
+			g_data.env[i] = ft_strjoin("PWD=", cwd);
 			free(cwd);
+			free(holder);
 			return;
 		}
 		i++;
@@ -125,19 +110,19 @@ void reset_pwd()
 void reset_oldpwd()
 {
 	int i = 0;
-	t_shell *tmp;
-	
-	tmp = &g_data;
+	char	*holder;
 	char *cwd = getcwd(NULL, 0);
 
 	if (!cwd)
 		return;
-	while (tmp->env && tmp->env[i])
+	while (g_data.env && g_data.env[i])
 	{
-		if (!ft_strncmp(tmp->env[i], "OLDPWD=", 6))
+		if (!ft_strncmp(g_data.env[i], "OLDPWD=", 6))
 		{
-			tmp->env[i] = ft_strjoin("OLDPWD=", cwd);
+			holder = g_data.env[i];
+			g_data.env[i] = ft_strjoin("OLDPWD=", cwd);
 			free(cwd);
+			free(holder);
 			return;
 		}
 		i++;

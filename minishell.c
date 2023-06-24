@@ -17,7 +17,7 @@ void	initialize_shell(int argc, char **argv, char **env)
 	(void) argc, (void) argv;
 	// banner();
 	ft_bzero(&g_data, sizeof(t_shell));
-	g_data.env = env;
+	g_data.env = clone_env(env);
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, sig_handler);
 }
@@ -103,7 +103,7 @@ int	main(int argc, char **argv, char **env)
 			continue ;
 		}
 		ft_parse(full);
-		debug_struct();
+		// debug_struct();
 		t_vdata *tmp = g_data.ms;
 		t_redir *new;
 		while(tmp)
@@ -117,7 +117,8 @@ int	main(int argc, char **argv, char **env)
 			}
 			tmp = tmp->next;
 		}
-		fork_exec(in, out);
+		if (g_data.ms)
+			fork_exec(in, out);
 		ft_cleanse();
 		ft_free2d(full);
 		free (load);

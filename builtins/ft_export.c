@@ -66,13 +66,14 @@ char **ft_add_str_to_tab(char **tab, char *str)
     tmp = malloc(sizeof(char *) * (ft_len_env(tab) + 2));
     while (tab[i])
     {
-        tmp[i] = ft_strdup(tab[i]);
+        tmp[i] = tab[i];
         i++;
     }
     env = ft_set(str);
     holder = ft_strjoin(env->name, "=");
     tmp[i] = ft_strjoin(holder, env->value);
     free(holder);
+    free(tab);
     ft_free_env(env);
     tmp[i + 1] = NULL;
     return (tmp);

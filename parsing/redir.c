@@ -63,8 +63,11 @@ void	set_redir_ll(t_vdata *tmp, char ***buffer)
 void	file_expansion(t_vdata *ms)
 {
 	t_redir	*v_base;
+	char	*holder;
 
+	// ra zedt dak l holder tansavi fih file bach nprintih fl error msg o tanfreeyh flkhr
 	v_base = ms->rd;
+	holder = ft_strdup(v_base->file);
 	while (v_base)
 	{
 		if (v_base->type != HEREDOC)
@@ -74,7 +77,13 @@ void	file_expansion(t_vdata *ms)
 				v_base->file = cancel_quotes(v_base->file, 1);
 		}
 		if (!ft_strcmp(v_base->file, ""))
+		{
+			free(v_base->file);
+			v_base->file = holder;
 			v_base->error = 1;
+		}
+		else
+			free(holder);
 		v_base = v_base->next;
 	}
 }

@@ -24,17 +24,16 @@ void	heredoc_sig(int signal)
 int open_here_doc(char *file, int fd)
 {
 	char	*line;
-	char	*q_file ;
-	fd = -1;
+	char	*q_file;
 
-	q_file = cancel_quotes(file, 0);
+	fd = -1;
 	if (fd != -1)
 		close(fd);
 	int end[2];
 	pipe(end);
-
 	if (fork() == 0)
 	{
+		q_file = cancel_quotes(file, 0);
 		close(end[0]);
 		fd = end[1];
 		signal(SIGQUIT, SIG_IGN);
@@ -54,8 +53,8 @@ int open_here_doc(char *file, int fd)
 					line = expand(line, 0);
 				ft_dprintf(fd, line);
 				ft_dprintf(fd, "\n");
-				free(line);
 			}
+			free(line);
 		}
 		free(q_file);
 		close(fd);
@@ -65,5 +64,5 @@ int open_here_doc(char *file, int fd)
 		wait(0);
 	close (end[1]);
 	fd = end[0];
-	return fd;
+	return (fd);
 }

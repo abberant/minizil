@@ -21,7 +21,7 @@ ITALIC		=	'\033[3m'
 
 
 CC 	=		cc
-CFLAGS =	-Wall -Wextra -Werror #-fsanitize=address -g3
+CFLAGS =	-Wall -Wextra -Werror
 RM =		rm -rf
 
 PSRCS	=	lexical_analysis.c structure.c aesthetic.c \
@@ -70,5 +70,9 @@ fclean:			clean
 
 
 re:				fclean all
+
+
+leaks :
+	while true ; do leaks minishell ; sleep 1 ; done 
 
 .PHONY	:		all get_brew get_readline install clean fclean re bonus
