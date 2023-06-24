@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+         #
+#    By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/24 08:21:48 by aanouari          #+#    #+#              #
-#    Updated: 2023/06/24 23:27:38 by aanouari         ###   ########.fr        #
+#    Updated: 2023/06/24 23:58:47 by lsadiq           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ ITALIC		=	'\033[3m'
 
 
 CC 	=		cc
-CFLAGS =	-Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS =	-Wall -Wextra -Werror #-g3 -fsanitize=address
 RM =		rm -rf
 
 PSRCS	=	lexical_analysis.c structure.c aesthetic.c \
@@ -71,8 +71,5 @@ fclean:			clean
 
 re:				fclean all
 
-
-leaks :
-	while true ; do leaks minishell ; sleep 1 ; done 
 
 .PHONY	:		all clean fclean re bonus

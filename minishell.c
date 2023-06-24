@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 00:51:14 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/24 23:05:34 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/24 23:51:04 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	main(int argc, char **argv, char **env)
 {
 	char	**full;
 	char	*load;
-	// t_redir *redi;
 	int out = 1;
 	int in = 0;
 
@@ -41,7 +40,6 @@ int	main(int argc, char **argv, char **env)
 		full = lexer(load);
 		if	(ft_parse(full, load))
 			continue ;
-		// debug_struct();
 		t_vdata *tmp = g_data.ms;
 		t_redir *new;
 		while(tmp)
