@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 16:47:05 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/24 17:43:13 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/24 23:31:07 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,24 @@ int	get_separator(char **stack, int i)
 	else if (!ft_strcmp(stack[i], "|"))
 		separator = PIPE;
 	return (separator);
+}
+
+char	*delete_spaces(char *forum)
+{
+	int		i;
+	char	*n_forum;
+	char	**spc;
+
+	i = 0;
+	spc = ft_split(forum, ' ');
+	n_forum = ft_strdup("");
+	while(spc && spc[i])
+	{
+		if (i > 0)
+			n_forum = s_concatinate(n_forum, ' ');
+		n_forum = ft_strjoin(n_forum, spc[i]);
+		i++;
+	}
+	free(forum);
+	return (n_forum);
 }

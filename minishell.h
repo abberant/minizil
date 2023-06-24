@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 08:21:35 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/24 17:48:26 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/24 23:26:02 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ void	rl_replace_line(const char *s, int comp);
 char	*expand(char *str, bool quote);
 char	*cancel_quotes(char	*file, bool free_file);
 void	quote_expansion(t_vdata *ms);
+char	*delete_spaces(char *forum);
 
 t_vdata	*vdata_new(char **stack, int separator);
 void	vdata_addback(t_vdata **vdata, t_vdata *_new);

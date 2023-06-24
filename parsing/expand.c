@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 01:21:25 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/23 14:25:42 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/24 23:46:12 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,18 @@ char	*expand(char *str, bool quote)
 	i = 0;
 	index = 1;
 	forum = NULL;
-	while (str[i])
+	while (str && str[i])
 	{
 		if (quote)
 			do_quotes(str, i, &index);
 		if (str[i] == '$' && str[i + 1] && index != 3)
 			env_value(&forum, str, &i);
+		// else if (str[i] == ' ')
+		// {
+		// 	skip_spaces(str, &i);
+		// 	forum = s_concatinate(forum, ' ');
+		// 	forum = s_concatinate(forum, str[i++]);
+		// }
 		else
 			forum = s_concatinate(forum, str[i++]);
 	}
