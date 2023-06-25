@@ -12,12 +12,12 @@
 
 #include "../minishell.h"
 
-int	ft_env(t_shell *g_data)
+int	ft_env()
 {
 	int	i;
 	t_shell	*tmp;
 
-	tmp = g_data;	
+	tmp = &g_data;	
 	i = -1;
 	while (tmp->env[++i])
 	{
@@ -25,6 +25,6 @@ int	ft_env(t_shell *g_data)
 			continue;
 		ft_dprintf(1, "%s\n", tmp->env[i]);
 	}
-	g_data->exit_s = 0;
-	return (g_data->exit_s);
+	g_data.exit_s = 0;
+	return (g_data.exit_s);
 }

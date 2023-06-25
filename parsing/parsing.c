@@ -49,11 +49,14 @@ void	get_cmd_reset_stack()
 		}
 		else if (ft_strchr(data->stack[0], 32))
 		{
-			data->cmd = ft_split(data->stack[0], 32)[0];
 			ct = ft_split(data->stack[0], 32);
 			while (data->stack[++i])
 				ct = a_concatinate(ct, data->stack[i]);
+			// lamiae
+			ft_free2d(data->stack);
 			data->stack = ct;
+			// lamiae
+			data->cmd = data->stack[0];
 		}
 		else
 			data->cmd = data->stack[0];

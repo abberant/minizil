@@ -39,12 +39,12 @@ int ft_look(char **stack)
     return (-1);
 }
 
-int ft_echo(t_shell *shell)
+int ft_echo()
 {
-    t_shell *tmp = shell;
+    t_vdata *tmp = g_data.ms;
 
     int i;
-    i = ft_look(tmp->ms->stack);
+    i = ft_look(tmp->stack);
     if (i == -1)
     {
         printf("\n");
@@ -53,11 +53,11 @@ int ft_echo(t_shell *shell)
     }
     if (i == 0)
         return(0);
-    while (tmp->ms->stack[i])
+    while (tmp->stack[i])
     {
-        printf("%s", tmp->ms->stack[i]);
+        printf("%s", tmp->stack[i]);
         i++;
-        if (tmp->ms->stack[i])
+        if (tmp->stack[i])
             printf(" ");
     }
     if (g_data.flag)

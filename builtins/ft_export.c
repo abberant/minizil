@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-t_env	*ft_set(char *str)
+t_env *ft_set(char *str)
 {
 	t_env *env;
 	int i;
@@ -21,9 +21,9 @@ t_env	*ft_set(char *str)
 	i = 0;
 	j = 0;
 	env = malloc(sizeof(t_env));
-	while(str[i])
+	while (str[i])
 	{
-		if(str[i] == '=')
+		if (str[i] == '=')
 		{
 			if (str[i - 1] == '+')
 				j = i - 1;
@@ -39,7 +39,7 @@ t_env	*ft_set(char *str)
 	return (env);
 }
 
-void	ft_free_env(t_env *env)
+void ft_free_env(t_env *env)
 {
 	free(env->name);
 	free(env->value);
@@ -48,23 +48,27 @@ void	ft_free_env(t_env *env)
 
 char **ft_add_str_to_tab(char **tab, char *str)
 {
-	int i = 0;
+	int i;
 	char **tmp;
-	t_env   *env;
-	char	*holder;
+	t_env *env;
+	char *holder;
 
+	i = 0;
 	tmp = malloc(sizeof(char *) * (ft_arrsize(tab) + 2));
 	while (tab[i])
+		tmp[i++] = tab[i];
+	if (!ft_strcmp(str, "="))
 	{
-		tmp[i] = tab[i];
-		i++;
+		env = ft_set(str);
+		holder = ft_strjoinf(env->name, "=");
+		tmp[i] = ft_strjoinf(holder, env->value);
+		free(holder);
+		ft_free_env(env);
 	}
-	env = ft_set(str);
-	holder = ft_strjoinf(env->name, "=");
-	tmp[i] = ft_strjoinf(holder, env->value);
-	free(holder);
+	else
+		tmp[i++] = ft_strdup(str);
+
 	free(tab);
-	ft_free_env(env);
 	tmp[i + 1] = NULL;
 	return (tmp);
 }
@@ -112,8 +116,10 @@ void sort_env(char **str)
 
 char **print_export(char **str)
 {
-	int i = 0;
-	int j = 0;
+	int i;
+	int j;
+	i = 0;
+	j = 0;
 
 	while (str[i])
 	{
@@ -149,9 +155,9 @@ char *ft_replace_env(char *str, char *new)
 {
 	t_env *env;
 	t_env *env2;
-	char	*holder;
-	char	*holder2;
-		
+	char *holder;
+	char *holder2;
+
 	env = ft_set(str);
 	env2 = ft_set(new);
 	holder = ft_strjoinf(env->name, "=");
@@ -165,8 +171,9 @@ char *ft_replace_env(char *str, char *new)
 
 int ft_does_it_exist(char **str, char *new)
 {
-	int i = 0;
+	int i;
 
+	i = 0;
 	while (new[i])
 	{
 		if (new[i] == '=' || new[i] == '+')
@@ -189,7 +196,7 @@ int ft_check(char *str)
 {
 	int i = 0;
 
-	while(str[i])
+	while (str[i])
 	{
 		if (str[i] == '+' && str[i + 1] == '=')
 			return (1);
@@ -199,13 +206,13 @@ int ft_check(char *str)
 			return (2);
 		}
 		if (str[i] == '=')
-			break ;
+			break;
 		i++;
 	}
 	return (0);
 }
 
-char	*ft_exp_append(char *old, char *new, char *holder, char *holder2)
+char *ft_exp_append(char *old, char *new, char *holder, char *holder2)
 {
 	char *holder3;
 	t_env *env;
@@ -221,15 +228,15 @@ char	*ft_exp_append(char *old, char *new, char *holder, char *holder2)
 	free(old);
 	ft_free_env(env);
 	ft_free_env(env2);
-	return(holder3);
+	return (holder3);
 }
-int ft_export(t_shell *shell)
+int ft_export()
 {
-	int i = 1;
+	int i;
 	int j;
 
-	t_shell *tmp = shell;
-
+	i = 1;
+	t_shell *tmp = &g_data;
 	sort_env(tmp->env);
 	if (!tmp->ms->stack[i])
 		tmp->exp = print_export(tmp->env);
@@ -245,7 +252,7 @@ int ft_export(t_shell *shell)
 			else
 				tmp->env[j - 1] = ft_replace_env(tmp->env[j - 1], tmp->ms->stack[i]);
 		}
-		else	  
+		else
 			printf("minishell: export: `%s': not a valid identifier\n", tmp->ms->stack[i]);
 		g_data.exit_s = 1;
 		i++;

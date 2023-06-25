@@ -12,54 +12,75 @@
 
 #include "../minishell.h"
 
-int	execute(t_shell *shell)
+int	ft_tolower(int c)
 {
-	t_shell	temp;
+	if (c >= 'A' && c <= 'Z')
+		return (c + 32);
+	return (c);
+}
 
-	temp = *shell;
-	while (temp.ms && temp.ms->cmd)
+int    ft_strcmp_case_safe(char *str, char *str2)
+{
+    int i;
+
+    i = 0;
+    while ((str[i] || str2[i]))
+    {
+        if (ft_tolower(str[i]) != ft_tolower(str2[i]))
+			return (str[i] - str2[i]);
+        i++;
+    }
+    return (0);
+}
+
+int	execute()
+{
+	t_vdata	*temp;
+
+	temp = g_data.ms;
+	while (temp && temp->cmd)
 	{
-		if (!ft_strcmp(temp.ms->cmd, "pwd") || ft_strcmp(temp.ms->cmd, "PWD"))
+		if (!ft_strcmp_case_safe(temp->cmd, "pwd"))
 			return (ft_pwd());
-		if (!ft_strcmp(temp.ms->cmd, "echo") || ft_strcmp(temp.ms->cmd, "ECHO"))
-			return (ft_echo(shell));
-		if (!ft_strcmp(temp.ms->cmd, "env") || ft_strcmp(temp.ms->cmd, "ENV"))
-			return (ft_env(shell));
-		if (!ft_strcmp(temp.ms->cmd, "cd"))
+		if (!ft_strcmp_case_safe(temp->cmd, "echo"))
+			return (ft_echo());
+		if (!ft_strcmp_case_safe(temp->cmd, "env"))
+			return (ft_env());
+		if (!ft_strcmp(temp->cmd, "cd"))
 			return (ft_cd());
-		if (!ft_strcmp(temp.ms->cmd, "export"))
-			return (ft_export(shell));
-		if (!ft_strcmp(temp.ms->cmd, "unset"))
-			return (ft_unset(shell));
-		if (!ft_strcmp(temp.ms->cmd, "exit"))
-			return (ft_exit(shell));
-		temp.ms = temp.ms->next;
+		if (!ft_strcmp(temp->cmd, "export"))
+			return (ft_export());
+		if (!ft_strcmp(temp->cmd, "unset"))
+			return (ft_unset());
+		if (!ft_strcmp(temp->cmd, "exit"))
+			return (ft_exit());
+		temp = temp->next;
 	}
 	return (0);
 }
 
-int	check_built_in(t_shell *shell)
+int	check_built_in()
 {
-	t_shell	temp;
+	t_vdata	*temp;
 
-	temp = *shell;
-	while (temp.ms && temp.ms->cmd)
+	temp = g_data.ms;
+	while (temp && temp->cmd)
 	{
-		if (!ft_strcmp(temp.ms->cmd, "pwd") || ft_strcmp(temp.ms->cmd, "PWD"))
+		if (!ft_strcmp_case_safe(temp->cmd, "pwd"))
 			return (1);
-		if (!ft_strcmp(temp.ms->cmd, "echo") || ft_strcmp(temp.ms->cmd, "ECHO"))
+		if (!ft_strcmp_case_safe(temp->cmd, "echo"))
 			return (1);
-		if (!ft_strcmp(temp.ms->cmd, "env") || ft_strcmp(temp.ms->cmd, "ENV"))
+		if (!ft_strcmp_case_safe(temp->cmd, "env"))
 			return (1);
-		if (!ft_strcmp(temp.ms->cmd, "cd"))
+		if (!ft_strcmp(temp->cmd, "cd"))
 			return (1);
-		if (!ft_strcmp(temp.ms->cmd, "export"))
+		if (!ft_strcmp(temp->cmd, "export"))
 			return (1);
-		if (!ft_strcmp(temp.ms->cmd, "unset"))
+		if (!ft_strcmp(temp->cmd, "unset"))
 			return (1);
-		if (!ft_strcmp(temp.ms->cmd, "exit"))
+		if (!ft_strcmp(temp->cmd, "exit"))
 			return (1);
-		temp.ms = temp.ms->next;
+		temp = temp->next;
 	}
 	return (0);
 }

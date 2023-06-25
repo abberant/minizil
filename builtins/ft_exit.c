@@ -57,25 +57,24 @@ int	ft_invalid_exit(char *str)
 	return (0);
 }
 
-int	ft_exit(t_shell *shell)
+int	ft_exit()
 {
-    t_shell *tmp = shell;
+    t_vdata *tmp = g_data.ms;
     int i = 1;
-    // int nb;
     char c;
 
     c = 0;
-    if (tmp->ms->stack[1] == NULL)
+    if (tmp->stack[1] == NULL)
         exit(127);
-    if (!ft_is_num(tmp->ms->stack[i]))
+    if (!ft_is_num(tmp->stack[i]))
     {
-        if (ft_invalid_exit(tmp->ms->stack[i]))
+        if (ft_invalid_exit(tmp->stack[i]))
         {
-            printf("minishell : exit %s: numeric argument required\n", tmp->ms->stack[i]);
+            printf("minishell : exit %s: numeric argument required\n", tmp->stack[i]);
             exit(255);
         }
-        c = ft_atoi(tmp->ms->stack[i]);
-		if (tmp->ms->stack[1] && tmp->ms->stack[2])
+        c = ft_atoi(tmp->stack[i]);
+		if (tmp->stack[1] && tmp->stack[2])
 		{
             printf("exit\n");
             ft_putstrr_fd("minishell : exit : too many arguments\n", 2);

@@ -3,5 +3,8 @@ leaks in cd =====> done
 double check for leaks ====> done
 signal in heredoc ===> done 
 ambiguous =====> done
-handle uppercase built-ins 
+handle uppercase built-ins  ======> done
+
+very special cases :
+- export empty variable "export o" ==> export o
 norm

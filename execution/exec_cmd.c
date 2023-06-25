@@ -37,18 +37,16 @@ int	launch(int *fd, int in, int out)
 		if (fd[0] != 0)
 			close(fd[0]);
 		exec_redir(in, out);
-		if (!check_built_in(&g_data))
+		if (!check_built_in())
 			exec_command();
 		else
-			execute(&g_data);
+			execute();
 		 exit(g_data.exit_s);
 	}
 	return pid;
 }
 int   fork_exec(int fd_in, int fd_out)
 {
-	(void) fd_in;
-	(void) fd_out;
 	int fd[2];
 	fd[0] = 0;
 	fd[1] = 1;
@@ -58,8 +56,8 @@ int   fork_exec(int fd_in, int fd_out)
 	new = g_data.ms;
 	fd_in = STDIN_FILENO;
 	fd_out = STDOUT_FILENO;
-	if (!g_data.ms->next && check_built_in(&g_data) && !g_data.ms->rd)
-		execute(&g_data);
+	if (!g_data.ms->next && check_built_in() && !g_data.ms->rd)
+		execute();
 	else
 	{
 		while(g_data.ms)
@@ -113,12 +111,10 @@ char *split_path(char *path, char *argv)
 	{
 		tmp = minipath[i];
 		minipath[i] = s_concatinate(tmp, '/');
-		// free(tmp);
 		tmp = minipath[i];
 		minipath[i] = ft_strjoin(tmp, argv);
 		if (!access(minipath[i], F_OK))
 			return (minipath[i]);
-		// free(tmp);
 		i++;
 	}
 	return (0);
