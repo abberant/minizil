@@ -3,65 +3,65 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 02:51:27 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/21 11:10:52 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/26 14:20:29 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int ft_look(char **stack)
+int	ft_look(char **stack)
 {
-    int i;
-    int j;
+	int	i;
+	int	j;
 
-    i = 1;
-    j = 0;
-    g_data.flag = 1;
-    while (stack[i])
-    {
-        if (stack[i][0] != '-' || stack[i][1] != 'n')
-            return i;
-        j = 0;
-        while (stack[i][j])
-        {
-            if (stack[i][0] == '-' && j == 0)
-                j++;
-            if (stack[i][j] != 'n')
-                return i;
-            j++;
-        }
-        g_data.flag = 0;
-        i++;
-    }
-    return (-1);
+	i = 1;
+	j = 0;
+	g_data.flag = 1;
+	while (stack[i])
+	{
+		if (stack[i][0] != '-' || stack[i][1] != 'n')
+			return (i);
+		j = 0;
+		while (stack[i][j])
+		{
+			if (stack[i][0] == '-' && j == 0)
+				j++;
+			if (stack[i][j] != 'n')
+				return (i);
+			j++;
+		}
+		g_data.flag = 0;
+		i++;
+	}
+	return (-1);
 }
 
-int ft_echo()
+int	ft_echo(void)
 {
-    t_vdata *tmp;
-    int i;
+	t_vdata	*tmp;
+	int		i;
 
-    tmp = g_data.ms;
-    i = ft_look(tmp->stack);
-    if (i == -1)
-    {
-        printf("\n");
-        g_data.exit_s = 0;
-        return (g_data.exit_s);
-    }
-    if (i == 0)
-        return(0);
-    while (tmp->stack[i])
-    {
-        printf("%s", tmp->stack[i]);
-        i++;
-        if (tmp->stack[i])
-            printf(" ");
-    }
-    if (g_data.flag)
-        printf("\n");
-    return (0);
+	tmp = g_data.ms;
+	i = ft_look(tmp->stack);
+	if (i == -1)
+	{
+		printf("\n");
+		g_data.exit_s = 0;
+		return (g_data.exit_s);
+	}
+	if (i == 0)
+		return (0);
+	while (tmp->stack[i])
+	{
+		printf("%s", tmp->stack[i]);
+		i++;
+		if (tmp->stack[i])
+			printf(" ");
+	}
+	if (g_data.flag)
+		printf("\n");
+	return (0);
 }

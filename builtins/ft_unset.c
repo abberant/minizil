@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 20:30:11 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/24 15:54:45 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/26 14:42:18 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char **ft_remove(char **env, int k)
+char	**ft_remove(char **env, int k)
 {
 	int		i;
-	int 	j;
+	int		j;
 	char	**tmp;
 
 	i = -1;
@@ -31,7 +31,7 @@ char **ft_remove(char **env, int k)
 	return (tmp);
 }
 
-int ft_unset(int i, int k, t_shell *tmp)
+int	ft_unset(int i, int k, t_shell *tmp)
 {
 	tmp = &g_data;
 	if (tmp->ms->stack[1] == NULL)
@@ -43,7 +43,7 @@ int ft_unset(int i, int k, t_shell *tmp)
 			while (tmp->env[++k])
 			{
 				if (!ft_strncmp(tmp->ms->stack[i], tmp->env[k],
-					ft_strlen(tmp->ms->stack[i])))
+						ft_strlen(tmp->ms->stack[i])))
 				{
 					tmp->env = ft_remove(tmp->env, k);
 					break ;

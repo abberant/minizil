@@ -1,2 +1,0 @@
----> no such file or directory ---> exit_status = 1;
----> command not found ---> exit_status = 127;

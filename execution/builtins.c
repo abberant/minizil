@@ -6,7 +6,7 @@
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:17:46 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/25 00:27:54 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/26 14:52:43 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,21 @@ int	ft_tolower(int c)
 	return (c);
 }
 
-int    ft_strcmp_case_safe(char *str, char *str2)
+int	ft_strcmp_case_safe(char *str, char *str2)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while ((str[i] || str2[i]))
-    {
-        if (ft_tolower(str[i]) != ft_tolower(str2[i]))
+	i = 0;
+	while ((str[i] || str2[i]))
+	{
+		if (ft_tolower(str[i]) != ft_tolower(str2[i]))
 			return (str[i] - str2[i]);
-        i++;
-    }
-    return (0);
+		i++;
+	}
+	return (0);
 }
 
-int	execute()
+int	execute(void)
 {
 	t_vdata	*temp;
 
@@ -59,7 +59,7 @@ int	execute()
 	return (0);
 }
 
-int	check_built_in()
+int	check_built_in(void)
 {
 	t_vdata	*temp;
 

@@ -6,7 +6,7 @@
 #    By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/24 08:21:48 by aanouari          #+#    #+#              #
-#    Updated: 2023/06/24 23:58:47 by lsadiq           ###   ########.fr        #
+#    Updated: 2023/06/26 15:11:33 by lsadiq           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ ITALIC		=	'\033[3m'
 
 
 CC 	=		cc
-CFLAGS =	-Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS =	-Wall -Wextra -Werror #-g3 -fsanitize=address
 RM =		rm -rf
 
 PSRCS	=	lexical_analysis.c structure.c aesthetic.c \
@@ -30,11 +30,12 @@ PSRCS	=	lexical_analysis.c structure.c aesthetic.c \
 P_SRCS	=		$(addprefix parsing/, $(PSRCS))
 
 BSRCS	=	ft_cd.c ft_pwd.c ft_export.c ft_env.c ft_echo.c \
-			ft_unset.c ft_exit.c
+			ft_unset.c ft_exit.c cd_helper.c export_helper1.c \
+			export_helper2.c
 B_SRCS	=		$(addprefix builtins/, $(BSRCS))
 
-ESRCS	=	builtins.c exec_cmd.c exec_red.c multiple_pipes.c \
-			here_doc.c
+ESRCS	=	builtins.c exec_cmd.c exec_red.c exec_helper.c \
+			here_doc.c exec_1.c  
 E_SRCS	=		$(addprefix execution/, $(ESRCS))
 
 MAIN	=	minishell.c

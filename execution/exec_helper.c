@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   exec_helper.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/06 16:21:49 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/26 14:40:38 by lsadiq           ###   ########.fr       */
+/*   Created: 2023/06/26 15:05:27 by lsadiq            #+#    #+#             */
+/*   Updated: 2023/06/26 15:09:57 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ft_pwd(void)
+int	ft_reverse_fd(int *end, int index)
 {
-	char	*holder;
+	close(end[index]);
+	return (end[!index]);
+}
 
-	holder = NULL;
-	holder = getcwd(NULL, 0);
-	if (!holder)
-	{
-		ft_putstrr_fd("Minishell : pwd : No such file or directory\n", 2);
-		g_data.exit_s = 1;
-		return (g_data.exit_s);
-	}
-	ft_dprintf(1, "%s\n", holder);
-	free(holder);
-	g_data.exit_s = 0;
-	return (g_data.exit_s);
+void	ft_here_sig(void)
+{
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 }

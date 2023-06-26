@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_red.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 16:09:50 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/24 14:23:32 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/26 15:00:28 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,16 @@ void	ft_red(int *in_fd, int *out_fd, int *in_flag, int *out_flag)
 	t_redir	*new;
 
 	new = g_data.ms->rd;
-	while(new)
+	while (new)
 	{
-		if(new->type == HEREDOC || new->type == REDIR_IN)
+		if (new->type == HEREDOC || new->type == REDIR_IN)
 		{
 			if (*in_fd != 0)
-				close (*in_fd);
+				close(*in_fd);
 			*in_fd = ft_infile_redir(new, *in_fd);
 			*in_flag = 1;
 		}
-		else if(new->type == APPEND || new->type == REDIR_OUT)
+		else if (new->type == APPEND || new->type == REDIR_OUT)
 		{
 			if (*out_fd != 1)
 				close(*out_fd);
@@ -73,7 +73,8 @@ void	ft_red(int *in_fd, int *out_fd, int *in_flag, int *out_flag)
 		new = new->next;
 	}
 }
-int    exec_redir(int in_fd, int out_fd)
+
+int	exec_redir(int in_fd, int out_fd)
 {
 	int	in_flag;
 	int	out_flag;
@@ -93,4 +94,3 @@ int    exec_redir(int in_fd, int out_fd)
 	g_data.exit_s = 0;
 	return (g_data.exit_s);
 }
-
