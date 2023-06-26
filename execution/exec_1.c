@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:53:58 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/26 20:54:10 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/26 21:56:11 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	fork_exec(int fd_in, int fd_out)
 	t_vdata	*new;
 	int		fd[2];
 	int		pid;
-	int status;
+	int		status;
 
 	if (!g_data.ms)
 		return ;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:21:49 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/26 20:48:33 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/26 21:22:47 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,20 @@
 int	ft_pwd(void)
 {
 	char	*holder;
+	t_env	*env;
+	int		i;
 
+	i = 0;
 	holder = NULL;
 	holder = getcwd(NULL, 0);
+	while (!holder && g_data.env[i])
+	{
+		env = ft_set(g_data.env[i]);
+		if (ft_strcmp(env->name, "PWD") == 0)
+			holder = ft_strdup(env->value);
+		ft_free_env(env);
+		i++;
+	}
 	if (!holder)
 	{
 		ft_dprintf(2, ERR_NO_SUCH_FILE, "pwd");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 00:51:14 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/26 20:34:49 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/26 21:58:15 by lsadiq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	initialize_shell(int argc, char **argv, char **env)
 {
-	(void) argc, (void) argv;
+	(void) argc;
+	(void) argv;
 	// banner();
 	ft_bzero(&g_data, sizeof(t_shell));
 	g_data.env = clone_env(env);
