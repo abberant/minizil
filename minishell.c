@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 00:51:14 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/26 21:58:15 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/26 22:37:31 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,22 @@
 
 void	initialize_shell(int argc, char **argv, char **env)
 {
+	char	*tmp;
+
 	(void) argc;
 	(void) argv;
-	// banner();
 	ft_bzero(&g_data, sizeof(t_shell));
-	g_data.env = clone_env(env);
+	if (!env[0])
+	{
+		tmp = getcwd(NULL, PATH_MAX);
+		g_data.env = ft_calloc(4, sizeof(char *));
+		g_data.env[0] = ft_strjoinf("PWD=", tmp);
+		g_data.env[1] = ft_strdup("SHLVL=1");
+		g_data.env[2] = ft_strdup("OLDPWD");
+		free(tmp);
+	}
+	else
+		g_data.env = clone_env(env);
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, sig_handler);
 }
@@ -75,6 +86,6 @@ int	main(int argc, char **argv, char **env)
 		ft_exec(in, out);
 		ft_cleanse();
 		ft_free2d(full);
-		free (load);
+		free(load);
 	}
 }
