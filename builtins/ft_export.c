@@ -33,8 +33,10 @@ t_env *ft_set(char *str)
 		}
 		i++;
 	}
+	if (j == 0)
+		j = i;
 	env->name = cancel_quotes(ft_substr(str, 0, j), 1);
-	env->value = cancel_quotes(ft_substr(str, i + 1, ft_strlen(str) - i - 1), 1);
+	env->value = ft_substr(str, i + 1, ft_strlen(str) - i - 1);
 	env->next = NULL;
 	return (env);
 }
@@ -54,10 +56,13 @@ char **ft_add_str_to_tab(char **tab, char *str)
 	char *holder;
 
 	i = 0;
-	tmp = malloc(sizeof(char *) * (ft_arrsize(tab) + 2));
+	tmp = ft_calloc((ft_arrsize(tab) + 2), sizeof(char *));
 	while (tab[i])
-		tmp[i++] = tab[i];
-	if (!ft_strcmp(str, "="))
+	{
+		tmp[i] = tab[i];
+		i++;
+	}
+	if (ft_strchr(str, '='))
 	{
 		env = ft_set(str);
 		holder = ft_strjoinf(env->name, "=");
@@ -66,10 +71,8 @@ char **ft_add_str_to_tab(char **tab, char *str)
 		ft_free_env(env);
 	}
 	else
-		tmp[i++] = ft_strdup(str);
-
+		tmp[i] = ft_strdup(str);
 	free(tab);
-	tmp[i + 1] = NULL;
 	return (tmp);
 }
 
@@ -118,9 +121,8 @@ char **print_export(char **str)
 {
 	int i;
 	int j;
-	i = 0;
-	j = 0;
 
+	i = 0;
 	while (str[i])
 	{
 		if (!ft_strchr(str[i], '='))
@@ -172,6 +174,7 @@ char *ft_replace_env(char *str, char *new)
 int ft_does_it_exist(char **str, char *new)
 {
 	int i;
+	int j;
 
 	i = 0;
 	while (new[i])
@@ -180,7 +183,7 @@ int ft_does_it_exist(char **str, char *new)
 			break;
 		i++;
 	}
-	int j = 0;
+	j = 0;
 	while (str[j])
 	{
 		if (!ft_strncmp(str[j], new, i))
@@ -192,10 +195,12 @@ int ft_does_it_exist(char **str, char *new)
 	}
 	return 0;
 }
+
 int ft_check(char *str)
 {
-	int i = 0;
+	int i;
 
+	i = 0;
 	while (str[i])
 	{
 		if (str[i] == '+' && str[i + 1] == '=')
@@ -230,33 +235,42 @@ char *ft_exp_append(char *old, char *new, char *holder, char *holder2)
 	ft_free_env(env2);
 	return (holder3);
 }
+
+void	ft_exp(t_shell *tmp, int j, int i)
+{
+	if (!j)
+		tmp->env = ft_add_str_to_tab(tmp->env, tmp->ms->stack[i]);
+	else if (ft_check(tmp->ms->stack[i]))
+		tmp->env[j - 1] = ft_exp_append(tmp->env[j - 1],
+			tmp->ms->stack[i], NULL, NULL);
+	else
+		tmp->env[j - 1] = ft_replace_env(tmp->env[j - 1],
+			tmp->ms->stack[i]);
+}
+
 int ft_export()
 {
-	int i;
-	int j;
+	t_shell	*tmp;
+	int	i;
+	int	j;
 
 	i = 1;
-	t_shell *tmp = &g_data;
+	tmp = &g_data;
 	sort_env(tmp->env);
 	if (!tmp->ms->stack[i])
 		tmp->exp = print_export(tmp->env);
 	while (tmp->ms->stack[i])
 	{
-		if (ft_alpha(tmp->ms->stack[i][0]) && ft_check(tmp->ms->stack[i]) != 2)
+		if (ft_alpha(tmp->ms->stack[i][0]) 
+			&& ft_check(tmp->ms->stack[i]) != 2)
 		{
 			j = ft_does_it_exist(tmp->env, tmp->ms->stack[i]);
-			if (!j)
-				tmp->env = ft_add_str_to_tab(tmp->env, tmp->ms->stack[i]);
-			else if (ft_check(tmp->ms->stack[i]))
-				tmp->env[j - 1] = ft_exp_append(tmp->env[j - 1], tmp->ms->stack[i], NULL, NULL);
-			else
-				tmp->env[j - 1] = ft_replace_env(tmp->env[j - 1], tmp->ms->stack[i]);
+			ft_exp(tmp, j, i);
 		}
 		else
-			printf("minishell: export: `%s': not a valid identifier\n", tmp->ms->stack[i]);
+			printf(EXPORT_INVALID, tmp->ms->stack[i]);
 		g_data.exit_s = 1;
 		i++;
 	}
-	// g_data.exit_s = 0;
 	return (g_data.exit_s);
 }

@@ -78,7 +78,7 @@ void	file_expansion(t_vdata *ms)
 		}
 		if (!ft_strcmp(v_base->file, "") || ft_strchr(v_base->file, ' '))
 		{
-			v_base->error_file = if_no;
+			v_base->error_file = ft_strdup(if_no);
 			v_base->error = 1;
 		}
 		free(if_no);

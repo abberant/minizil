@@ -6,5 +6,5 @@ ambiguous =====> done
 handle uppercase built-ins  ======> done
 
 very special cases :
-- export empty variable "export o" ==> export o
+- export empty variable "export o" ==> export o ======> done 
 norm

@@ -51,7 +51,7 @@ int	execute()
 		if (!ft_strcmp(temp->cmd, "export"))
 			return (ft_export());
 		if (!ft_strcmp(temp->cmd, "unset"))
-			return (ft_unset());
+			return (ft_unset(0, -1, NULL));
 		if (!ft_strcmp(temp->cmd, "exit"))
 			return (ft_exit());
 		temp = temp->next;

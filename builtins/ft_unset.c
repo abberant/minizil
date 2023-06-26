@@ -12,13 +12,11 @@
 
 #include "../minishell.h"
 
-// used dprintf instead and reduced line (whiles nqsst fihom lines dial i++)
-
 char **ft_remove(char **env, int k)
 {
-	int i;
-	int j;
-	char **tmp;
+	int		i;
+	int 	j;
+	char	**tmp;
 
 	i = -1;
 	j = 0;
@@ -33,25 +31,24 @@ char **ft_remove(char **env, int k)
 	return (tmp);
 }
 
-int ft_unset()
+int ft_unset(int i, int k, t_shell *tmp)
 {
-	int i;
-	int k;
-	t_shell *tmp;
-
 	tmp = &g_data;
 	if (tmp->ms->stack[1] == NULL)
 		return (0);
-	i = 0;
 	while (tmp->ms->stack[++i])
 	{
-		k = -1;
 		if (ft_alpha(tmp->ms->stack[i][0]))
 		{
 			while (tmp->env[++k])
+			{
 				if (!ft_strncmp(tmp->ms->stack[i], tmp->env[k],
-								ft_strlen(tmp->ms->stack[i])))
+					ft_strlen(tmp->ms->stack[i])))
+				{
 					tmp->env = ft_remove(tmp->env, k);
+					break ;
+				}
+			}
 		}
 		else
 		{

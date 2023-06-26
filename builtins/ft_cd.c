@@ -57,11 +57,7 @@ int ft_go_home()
 		}
 	}
 	else
-	{
 		ft_dprintf(2, "Minishell : cd : HOME not set\n");
-		return 0;
-	}
-
 	return 0;
 }
 
@@ -87,10 +83,13 @@ int go_old_pwd()
 
 void reset_pwd()
 {
-	int i = 0;
+	int		i;
 	char	*holder;
 	char	*pwd;
-	char *cwd = getcwd(NULL, 0);
+	char	*cwd;
+
+	i = 0;
+	cwd = getcwd(NULL, 0);
 	if (!cwd)
 		return;
 	pwd = ft_strdup("PWD=");
@@ -111,11 +110,13 @@ void reset_pwd()
 
 void reset_oldpwd()
 {
-	int i = 0;
+	int		i;
 	char	*holder;
-	char *cwd = getcwd(NULL, 0);
+	char	*cwd;
 	char	*old_pwd;
 
+	i = 0;
+	cwd = getcwd(NULL, 0);
 	if (!cwd)
 		return;
 	old_pwd = ft_strdup("OLDPWD=");
@@ -133,30 +134,26 @@ void reset_oldpwd()
 	}
 	free(cwd);
 }
-
+void	ft_go_to_prv()
+{
+	reset_oldpwd();
+	if (chdir("..") < 0)
+	{
+		perror("cd");
+		exit(2);
+	}
+}
 void	ft_go_to(char **str)
 {
 	if (!str[1] || !ft_strncmp(str[1], "~", 1))
 	{
 		reset_oldpwd();
 		ft_go_home();
-		reset_pwd();
 	}
 	else if (!ft_strncmp(str[1], "-", 1))
-	{
 		go_old_pwd();
-		reset_pwd();
-	}
 	else if (!ft_strncmp(str[1], "..", 1))
-	{
-		reset_oldpwd();
-		if (chdir("..") < 0)
-		{
-			perror("cd");
-			exit(2);
-		}
-		reset_pwd();
-	}
+		ft_go_to_prv();
 	else
 	{
 		reset_oldpwd();
@@ -166,14 +163,15 @@ void	ft_go_to(char **str)
 			g_data.exit_s = 1;
 			return;
 		}
-		reset_pwd();
 	}
+	reset_pwd();
 }
 
 int ft_cd()
 {
-	t_vdata *tmp = g_data.ms;
+	t_vdata *tmp;
 
+	tmp = g_data.ms;
 	ft_go_to(tmp->stack);
 	g_data.exit_s = 0;
 	return (g_data.exit_s);

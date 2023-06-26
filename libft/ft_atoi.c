@@ -18,12 +18,12 @@ void	ft_kill(char *reason)
 	exit(0);
 }
 
-void	norm(char s)
+void	norm(char s, char *str)
 {
 	if (s)
 	{
-		ft_dprintf(2, "Error");
-		exit (1);
+		ft_dprintf(2, "Exit : %s : numeric argument required\n", str);
+		exit (255);
 	}
 }
 
@@ -51,6 +51,6 @@ int	ft_atoi(char *str)
 		else if (num > 9223372036854775807 && sign == -1)
 			return (0);
 	}
-	norm(str[i]);
+	norm(str[i], str);
 	return (num * sign);
 }

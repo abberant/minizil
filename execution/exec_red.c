@@ -34,56 +34,63 @@ int	ft_outfile_redir(t_redir *redir, int out)
 	return (out);
 }
 
+void	throw_error(int err, int in_fd, int out_fd)
+{
+	if (err)
+	{
+		ft_dprintf(2, AMBIGUOUS_REDIR, g_data.ms->rd->error_file);
+		exit(1);
+	}
+	if (in_fd < 0 || out_fd < 0)
+	{
+		ft_dprintf(2, ERR_NO_SUCH_FILE, g_data.ms->rd->file);
+		exit(1);
+	}
+}
+
+void	ft_red(int *in_fd, int *out_fd, int *in_flag, int *out_flag)
+{
+	t_redir	*new;
+
+	new = g_data.ms->rd;
+	while(new)
+	{
+		if(new->type == HEREDOC || new->type == REDIR_IN)
+		{
+			if (*in_fd != 0)
+				close (*in_fd);
+			*in_fd = ft_infile_redir(new, *in_fd);
+			*in_flag = 1;
+		}
+		else if(new->type == APPEND || new->type == REDIR_OUT)
+		{
+			if (*out_fd != 1)
+				close(*out_fd);
+			*out_fd = ft_outfile_redir(new, *out_fd);
+			*out_flag = 1;
+		}
+		throw_error(g_data.ms->rd->error, *in_fd, *out_fd);
+		new = new->next;
+	}
+}
 int    exec_redir(int in_fd, int out_fd)
 {
-	t_redir *new;
-	int	in_flag = 0;
-	int	out_flag = 0;
+	int	in_flag;
+	int	out_flag;
 
+	in_flag = 0;
+	out_flag = 0;
 	in_fd = STDIN_FILENO;
 	out_fd = STDOUT_FILENO;
 	if (g_data.ms->rd)
 	{
-		new = g_data.ms->rd;
-		while(new)
-		{
-			if(new->type == HEREDOC || new->type == REDIR_IN)
-			{
-				if (in_fd != 0)
-					close (in_fd);
-				in_fd = ft_infile_redir(new, in_fd);
-				in_flag = 1;
-			}
-			else if(new->type == APPEND || new->type == REDIR_OUT)
-			{
-				if (out_fd != 1)
-					close(out_fd);
-				out_fd = ft_outfile_redir(new, out_fd);
-				out_flag = 1;
-			}
-			if (g_data.ms->rd->error)
-			{
-				ft_dprintf(2, AMBIGUOUS_REDIR, g_data.ms->rd->error_file);
-				exit(1);
-			}
-			if (in_fd < 0 || out_fd < 0)
-			{
-				ft_dprintf(2, ERR_NO_SUCH_FILE, g_data.ms->rd->file);
-				exit(1);
-			}
-			new = new->next;
-		}
+		ft_red(&in_fd, &out_fd, &in_flag, &out_flag);
 		if (in_flag)
-		{
-			dup2(in_fd, 0);
-			close(in_fd);
-		}
+			dup_2(in_fd, 0);
 		if (out_flag)
-		{
-			dup2(out_fd, 1);
-			close(out_fd);
-		}
+			dup_2(out_fd, 1);
 	}
 	g_data.exit_s = 0;
 	return (g_data.exit_s);
 }
+

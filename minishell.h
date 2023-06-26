@@ -39,7 +39,8 @@
 # define UNEXPECTED_TOKEN "minishell: syntax error near unexpected token `%s'\n"
 # define UNCLOSED_QUOTE "minishell: syntax error near unclosed quotation mark\n"
 # define AMBIGUOUS_REDIR "minishell: %s: ambiguous redirect\n"
-# define UNSET_UNVALID "minishell: unset: `%s': not a valid identifier\n"
+# define UNSET_UNVALID "minishell: unset: `%s' : not a valid identifier\n"
+# define EXPORT_INVALID "minishell: export: `%s': not a valid identifier\n"
 
 typedef struct s_redir
 {
@@ -49,8 +50,8 @@ typedef struct s_redir
 	char 			*error_file;
 	char			*file;
 	struct s_redir	*next;
-	int				in_fd;
-	int 			out_fd;
+	int	in_flag;
+	int	out_flag;
 	struct s_redir	*previous;
 }	t_redir;
 
@@ -148,16 +149,16 @@ int		ft_pwd();
 int		ft_export();
 int		ft_env();
 int		ft_echo();
-int		ft_unset();
+int		ft_unset(int i, int k, t_shell *tmp);
 int		ft_exit();
 void	here_doc();
-int		open_here_doc(char *file, int fd);
+int 	open_here_doc(char *file, int fd, int status, char *line);
 void	ft_append();
 int		exec_redir(int in_fd, int out_fd);
-int		fork_exec(int fd_in, int fd_out);
+void		fork_exec(int fd_in, int fd_out);
 int		check_built_in();
 void	ft_pipes();
 char	 **clone_env(char **str);
-
+void	dup_2(int fd_1, int fd_2);
 
 #endif

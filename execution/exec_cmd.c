@@ -21,19 +21,14 @@ void	dup_2(int fd_1, int fd_2)
 int	launch(int *fd, int in, int out)
 {
 	int pid;
+
 	pid = fork();
 	if (pid == 0)
 	{
 		if (in != 0)
-		{
-			dup2(in, 0);
-			close(in);
-		}
+			dup_2(in, 0);
 		if (fd[1] != 1)
-		{
-			dup2(fd[1], 1);
-			close(fd[1]);
-		}
+			dup_2(fd[1], 1);
 		if (fd[0] != 0)
 			close(fd[0]);
 		exec_redir(in, out);
@@ -43,16 +38,48 @@ int	launch(int *fd, int in, int out)
 			execute();
 		 exit(g_data.exit_s);
 	}
-	return pid;
+	return (pid);
 }
-int   fork_exec(int fd_in, int fd_out)
+
+void ft_pipeline(int fd[2], int in, int out)
 {
+	while(g_data.ms)
+	{
+		if (g_data.ms->next)
+			pipe(fd);
+		launch(fd, in ,out);
+		if(fd[1] > 2)
+			close(fd[1]);
+		fd[1] = 1;
+		if(in != 0)
+			close(in);
+		in = fd[0];
+		fd[0] = 0;
+		g_data.ms = g_data.ms->next;
+	}
+}
+
+void	exit_status()
+{
+	if (WTERMSIG(g_data.exit_s) == SIGINT)
+		g_data.exit_s = 130;
+	else if (WTERMSIG(g_data.exit_s) == SIGQUIT)
+		g_data.exit_s = 131;
+	else if(WIFEXITED(g_data.exit_s))
+		g_data.exit_s %= 255;
+}
+
+void   fork_exec(int fd_in, int fd_out)
+{
+	t_vdata *new;
 	int fd[2];
+	int pid;
+
+	if (!g_data.ms)
+		return ;
 	fd[0] = 0;
 	fd[1] = 1;
-	int pid = -1;
-	t_vdata *new;
-
+	pid = -1;
 	new = g_data.ms;
 	fd_in = STDIN_FILENO;
 	fd_out = STDOUT_FILENO;
@@ -60,27 +87,13 @@ int   fork_exec(int fd_in, int fd_out)
 		execute();
 	else
 	{
-		while(g_data.ms)
-		{
-			if (g_data.ms->next)
-				pipe(fd);
-			launch(fd, fd_in ,fd_out);
-			if(fd[1] > 2)
-				close(fd[1]);
-			fd[1] = 1;
-			if(fd_in != 0)
-				close(fd_in);
-			fd_in = fd[0];
-			fd[0] = 0;
-			g_data.ms = g_data.ms->next;
-		}
+		ft_pipeline(fd, fd_in, fd_out);
 		g_data.ms = new;
 		waitpid(pid, &g_data.exit_s, 0);
-		while (waitpid(-1, &g_data.exit_s, 0) != -1);
-		WIFEXITED(g_data.exit_s);
-		g_data.exit_s %= 255;
+		while (waitpid(-1, &g_data.exit_s, 0) != -1)
+			;
+		exit_status();
 	}
-	return 0;
 }
 
 char *get_path(char **envp)

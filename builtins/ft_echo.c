@@ -14,8 +14,11 @@
 
 int ft_look(char **stack)
 {
-    int i = 1;
-    int j = 0;
+    int i;
+    int j;
+
+    i = 1;
+    j = 0;
     g_data.flag = 1;
     while (stack[i])
     {
@@ -27,10 +30,7 @@ int ft_look(char **stack)
             if (stack[i][0] == '-' && j == 0)
                 j++;
             if (stack[i][j] != 'n')
-            {
-                // printf("%d\n", i);
                 return i;
-            }
             j++;
         }
         g_data.flag = 0;
@@ -41,9 +41,10 @@ int ft_look(char **stack)
 
 int ft_echo()
 {
-    t_vdata *tmp = g_data.ms;
-
+    t_vdata *tmp;
     int i;
+
+    tmp = g_data.ms;
     i = ft_look(tmp->stack);
     if (i == -1)
     {

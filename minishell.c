@@ -21,13 +21,40 @@ void	initialize_shell(int argc, char **argv, char **env)
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, sig_handler);
 }
+void	ft_exec(int in, int out)
+{
+	int efd;
+	t_vdata	*tmp;
+	t_redir	*new;
 
+	efd = 0;
+	tmp = g_data.ms;
+	while(tmp && !efd)
+	{
+		new = tmp->rd;
+		while(new && !efd)
+		{
+			if(new->type == HEREDOC)
+			{
+				new->fd = open_here_doc(new->file, -1, 0, NULL);
+				if (new->fd == -1)
+					efd = 1;
+			}
+			new = new->next;
+		}
+		tmp = tmp->next;
+	}
+	if (efd)
+		g_data.exit_s = 1;
+	else
+		fork_exec(in, out);
+}
 int	main(int argc, char **argv, char **env)
 {
 	char	**full;
 	char	*load;
-	int out = 1;
-	int in = 0;
+	int 	out = 1;
+	int 	in = 0;
 
 	initialize_shell(argc, argv, env);
 	while (1)
@@ -40,22 +67,30 @@ int	main(int argc, char **argv, char **env)
 		full = lexer(load);
 		if	(ft_parse(full, load))
 			continue ;
-		t_vdata *tmp = g_data.ms;
-		t_redir *new;
-		while(tmp)
-		{
-			new = tmp->rd;
-			while(new)
-			{
-				if(new->type == HEREDOC)
-					new->fd = open_here_doc(new->file, in);
-				new = new->next;
-			}
-			tmp = tmp->next;
-		}
-		if (g_data.ms)
-			fork_exec(in, out);
+		ft_exec(in, out);
+		// t_vdata	*tmp = g_data.ms;
+		// t_redir	*new;
+		// while(tmp && !efd)
+		// {
+		// 	new = tmp->rd;
+		// 	while(new && !efd)
+		// 	{
+		// 		if(new->type == HEREDOC)
+		// 		{
+		// 			new->fd = open_here_doc(new->file, in);
+		// 			if (new->fd == -1)
+		// 				efd = 1;
+		// 		}
+		// 		new = new->next;
+		// 	}
+		// 	tmp = tmp->next;
+		// }
+		// if (efd)
+		// 	g_data.exit_s = 1;
+		// else
+		// 	fork_exec(in, out);
 		ft_cleanse();
+		// efd = 0;
 		ft_free2d(full);
 		free (load);
 	}
