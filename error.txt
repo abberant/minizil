@@ -1,0 +1,2 @@
+<minishell.h <<jd  >out2  <dsjk << o ls >out1
+env -i ./minishell

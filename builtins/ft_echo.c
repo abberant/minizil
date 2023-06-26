@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 02:51:27 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/26 14:20:29 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/26 20:45:16 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ int	ft_echo(void)
 	t_vdata	*tmp;
 	int		i;
 
+	g_data.exit_s = 0;
 	tmp = g_data.ms;
 	i = ft_look(tmp->stack);
 	if (i == -1)
 	{
 		printf("\n");
-		g_data.exit_s = 0;
-		return (g_data.exit_s);
+		return (0);
 	}
 	if (i == 0)
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 18:20:27 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/24 23:04:35 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/26 17:32:29 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	set_redir_ll(t_vdata *tmp, char ***buffer)
 		i++;
 	}
 }
+
 void	file_expansion(t_vdata *ms)
 {
 	t_redir	*v_base;
@@ -79,9 +80,9 @@ void	file_expansion(t_vdata *ms)
 		if (!ft_strcmp(v_base->file, "") || ft_strchr(v_base->file, ' '))
 		{
 			v_base->error_file = ft_strdup(if_no);
+			free(if_no);
 			v_base->error = 1;
 		}
-		free(if_no);
 		v_base = v_base->next;
 	}
 }

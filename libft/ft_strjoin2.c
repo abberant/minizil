@@ -6,17 +6,17 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 16:34:18 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/24 16:34:32 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/26 16:22:02 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char *ft_strjoinf(char *s1, char *s2)
+char	*ft_strjoinf(char *s1, char *s2)
 {
-	int i;
-	int j;
-	char *s;
+	int		i;
+	int		j;
+	char	*s;
 
 	i = -1;
 	j = 0;

@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 17:38:12 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/24 23:05:24 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/26 15:33:55 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	init_tree(char **stack)
 	}
 }
 
-void	get_cmd_reset_stack()
+void	get_cmd_reset_stack(void)
 {
 	int		i;
 	char	**ct;
@@ -52,14 +52,10 @@ void	get_cmd_reset_stack()
 			ct = ft_split(data->stack[0], 32);
 			while (data->stack[++i])
 				ct = a_concatinate(ct, data->stack[i]);
-			// lamiae
 			ft_free2d(data->stack);
 			data->stack = ct;
-			// lamiae
-			data->cmd = data->stack[0];
 		}
-		else
-			data->cmd = data->stack[0];
+		data->cmd = data->stack[0];
 		data = data->next;
 	}
 }

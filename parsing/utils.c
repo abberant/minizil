@@ -6,7 +6,7 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 16:47:05 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/24 23:31:07 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/26 15:34:35 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*delete_spaces(char *forum)
 	i = 0;
 	spc = ft_split(forum, ' ');
 	n_forum = ft_strdup("");
-	while(spc && spc[i])
+	while (spc && spc[i])
 	{
 		if (i > 0)
 			n_forum = s_concatinate(n_forum, ' ');

@@ -6,13 +6,13 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 16:41:00 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/24 14:35:05 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/26 15:31:41 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void clear_lists(void)
+void	clear_lists(void)
 {
 	t_vdata	*tmp;
 	t_redir	*tmp2;

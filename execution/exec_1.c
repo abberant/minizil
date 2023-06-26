@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:53:58 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/26 15:15:25 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/26 20:54:10 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,13 @@ void	ft_pipeline(int fd[2], int in, int out)
 	}
 }
 
-void	exit_status(void)
+void	exit_status(int status)
 {
-	if (WTERMSIG(g_data.exit_s) == SIGINT)
+	if (WTERMSIG(status) == SIGINT)
 		g_data.exit_s = 130;
-	else if (WTERMSIG(g_data.exit_s) == SIGQUIT)
+	else if (WTERMSIG(status) == SIGQUIT)
 		g_data.exit_s = 131;
-	if (WIFEXITED(g_data.exit_s))
+	else if (WIFEXITED(status))
 		g_data.exit_s %= 255;
 }
 
@@ -74,6 +74,7 @@ void	fork_exec(int fd_in, int fd_out)
 	t_vdata	*new;
 	int		fd[2];
 	int		pid;
+	int status;
 
 	if (!g_data.ms)
 		return ;
@@ -90,8 +91,8 @@ void	fork_exec(int fd_in, int fd_out)
 		ft_pipeline(fd, fd_in, fd_out);
 		g_data.ms = new;
 		waitpid(pid, &g_data.exit_s, 0);
-		while (waitpid(-1, &g_data.exit_s, 0) != -1)
+		while (waitpid(-1, &status, 0) != -1)
 			;
-		exit_status();
+		exit_status(status);
 	}
 }

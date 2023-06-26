@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+         #
+#    By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/24 08:21:48 by aanouari          #+#    #+#              #
-#    Updated: 2023/06/26 15:11:33 by lsadiq           ###   ########.fr        #
+#    Updated: 2023/06/26 16:23:33 by aanouari         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,12 +21,12 @@ ITALIC		=	'\033[3m'
 
 
 CC 	=		cc
-CFLAGS =	-Wall -Wextra -Werror #-g3 -fsanitize=address
+CFLAGS =	-Wall -Wextra -Werror
 RM =		rm -rf
 
 PSRCS	=	lexical_analysis.c structure.c aesthetic.c \
 			joiners.c utils.c parsing.c redir.c errors.c expand.c \
-			expand_2.c debug.c clean.c
+			expand_2.c clean.c
 P_SRCS	=		$(addprefix parsing/, $(PSRCS))
 
 BSRCS	=	ft_cd.c ft_pwd.c ft_export.c ft_env.c ft_echo.c \

@@ -6,17 +6,17 @@
 /*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 01:18:21 by aanouari          #+#    #+#             */
-/*   Updated: 2023/06/24 14:40:15 by aanouari         ###   ########.fr       */
+/*   Updated: 2023/06/26 16:21:50 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char *ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	int i;
-	int j;
-	char *s;
+	int		i;
+	int		j;
+	char	*s;
 
 	i = -1;
 	j = 0;

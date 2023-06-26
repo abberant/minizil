@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_red.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 16:09:50 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/26 15:00:28 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/26 18:25:54 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,16 @@ int	ft_outfile_redir(t_redir *redir, int out)
 	return (out);
 }
 
-void	throw_error(int err, int in_fd, int out_fd)
+void	throw_error(t_redir *new, int in_fd, int out_fd)
 {
-	if (err)
+	if (new->error)
 	{
-		ft_dprintf(2, AMBIGUOUS_REDIR, g_data.ms->rd->error_file);
+		ft_dprintf(2, AMBIGUOUS_REDIR, new->error_file);
 		exit(1);
 	}
 	if (in_fd < 0 || out_fd < 0)
 	{
-		ft_dprintf(2, ERR_NO_SUCH_FILE, g_data.ms->rd->file);
+		ft_dprintf(2, ERR_NO_SUCH_FILE, new->file);
 		exit(1);
 	}
 }
@@ -69,7 +69,7 @@ void	ft_red(int *in_fd, int *out_fd, int *in_flag, int *out_flag)
 			*out_fd = ft_outfile_redir(new, *out_fd);
 			*out_flag = 1;
 		}
-		throw_error(g_data.ms->rd->error, *in_fd, *out_fd);
+		throw_error(new, *in_fd, *out_fd);
 		new = new->next;
 	}
 }

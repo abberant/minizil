@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsadiq <lsadiq@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aanouari <aanouari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:21:49 by lsadiq            #+#    #+#             */
-/*   Updated: 2023/06/26 14:40:38 by lsadiq           ###   ########.fr       */
+/*   Updated: 2023/06/26 20:48:33 by aanouari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_pwd(void)
 	holder = getcwd(NULL, 0);
 	if (!holder)
 	{
-		ft_putstrr_fd("Minishell : pwd : No such file or directory\n", 2);
+		ft_dprintf(2, ERR_NO_SUCH_FILE, "pwd");
 		g_data.exit_s = 1;
 		return (g_data.exit_s);
 	}
